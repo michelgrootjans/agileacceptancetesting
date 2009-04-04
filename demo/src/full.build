@@ -1,0 +1,72 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="CI" ToolsVersion="3.5">
+  <PropertyGroup>
+    <ToolsDir>..\tools</ToolsDir>
+    <ResultsDir>$(MSBuildProjectDirectory)</ResultsDir>
+    <BuildServer>\\BuildServer\Share\Latest</BuildServer>
+    <BuildServerWebSite>$(BuildServer)\web</BuildServerWebSite>
+    <BuildServerFitTests>$(BuildServer)\fit</BuildServerFitTests>
+    <BuildServerMigrations>$(BuildServer)\migrations</BuildServerMigrations>
+  </PropertyGroup>
+  
+  <Import Project="$(ToolsDir)\MSBuild\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets" />
+  <UsingTask AssemblyFile="$(ToolsDir)\AsyncExec\bin\AsyncExec.dll" TaskName="AsyncExec.AsyncExec" />    
+
+  <Target Name="Compile">
+    <MSBuild Projects="DKVExpertiseSysteem.sln" />
+  </Target>
+
+  <Target Name="RecreateDatabase">
+    <Exec Command="RecreateDatabase.bat" />
+  </Target>
+  
+  <Target Name="Test">
+    <ItemGroup>
+      <TestAssemblies Include="**\Tests.*.dll" Exclude="**\obj\**;**\Tests.Functional.dll" />
+    </ItemGroup>
+
+    <Message Text="Running unit tests: @(TestAssemblies)"/>
+    <NUnit Assemblies="@(TestAssemblies)" ToolPath="$(ToolsDir)\NUnit\" DisableShadowCopy="true" />
+  </Target>
+  
+  <Target Name="FitNesse">
+    <Message Text="##teamcity[progressStart name='Fitnesse']" />
+    <PropertyGroup>
+      <FitNesseDir>..\FitNesse</FitNesseDir>
+      <TestRunner>$(FitNesseDir)\dotnet2\TestRunner.exe</TestRunner>
+    </PropertyGroup>
+
+    <!--If FitNesse is running from a previous session, stop it-->
+    <!--<Exec WorkingDirectory="$(FitNesseDir)" Command="Stop.bat" ContinueOnError="true" />-->
+    <Copy SourceFiles="$(FitNesseDir)\dotnet2\DEV-RENAME-TO hibernate.cfg.xml" DestinationFiles="$(FitNesseDir)\Dotnet2\hibernate.cfg.xml" />
+
+    <Copy SourceFiles="$(FitNesseDir)\FitnesseRoot\RENAME TO-properties" DestinationFiles="$(FitNesseDir)\FitnesseRoot\properties" />
+    <AsyncExec WorkingDirectory="$(FitNesseDir)" Command="run.bat" />
+    <!--<Exec ContinueOnError="false" Command="$(TestRunner) -results $(ResultsDir)\FitNesseRegressionTests.htm localhost 8888 ExpertiseSysteem.RegressieTesten" />-->
+    <Exec ContinueOnError="true" Command="$(TestRunner) -results $(ResultsDir)\FitNesseWorkInProgress.htm localhost 8888 ExpertiseSysteem" />
+    <Exec WorkingDirectory="$(FitNesseDir)" Command="Stop.bat" ContinueOnError="true" />
+
+    <!--<Message Text="##teamcity[publishArtifacts '$(ResultsDir)\FitNesseRegressionTests.htm']" />-->
+    <Message Text="##teamcity[publishArtifacts '$(ResultsDir)\FitNesseWorkInProgress.htm']" />
+    <Message Text="##teamcity[progressFinish name='Fitnesse']" />
+  </Target>
+
+  <Target Name="MigrateTestDB">
+    <Exec Command="MigrateTestDB.bat" />
+  </Target>
+  
+  <Target Name="Deploy">
+    <ItemGroup>
+      <ProductionFiles Include="UI\**\*.*" Exclude="**\*.cs;**\*.csproj;**\*.user;**\obj\**;**\.svn\**;**\*.pdb;**\App_data" />
+      <FitNesseFiles Include="..\Fitnesse\DKV\*.dll" Exclude="**\fit.dll" />
+      <MigrationFiles Include="Migrations\bin\**\*.dll;Migrations\bin\**\*.exe" Exclude="" />
+    </ItemGroup>
+
+    <Copy SourceFiles="@(ProductionFiles)" DestinationFiles="@(ProductionFiles->'$(BuildServerWebSite)\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(FitNesseFiles)" DestinationFolder="$(BuildServerFitTests)" />
+    <Copy SourceFiles="@(MigrationFiles)" DestinationFolder="$(BuildServerMigrations)" />
+
+    <Message Text="Wohoo" />
+  </Target>
+
+  <Target Name="CI" DependsOnTargets="Compile;RecreateDatabase;Test;FitNesse;MigrateTestDB;Deploy" />
+</Project>
