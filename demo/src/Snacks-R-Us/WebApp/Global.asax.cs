@@ -9,6 +9,7 @@ namespace Snacks_R_Us.WebApp
         protected void Application_Start()
         {
             RegisterRoutes(RouteTable.Routes);
+            ApplicationStartup.Run();
         }
 
         private static void RegisterRoutes(RouteCollection routes)

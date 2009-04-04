@@ -1,0 +1,17 @@
+!contents
+
+'''Caution:''' Don't remove or modify these path statements unless you know what you are doing!
+
+!path classes
+!path fitnesse.jar
+!path fitlibrary.jar
+
+!path dotnet2\*.dll
+!path SnakcsRUs\*.dll
+
+!define COMMAND_PATTERN {%m %p}
+!define TEST_RUNNER {dotnet2\FitServer.exe}
+!define PATH_SEPARATOR {;}
+
+!define COLLAPSE_SETUP {true}
+!define COLLAPSE_TEARDOWN {true}
