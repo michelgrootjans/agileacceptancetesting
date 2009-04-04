@@ -21,13 +21,12 @@ namespace Snacks_R_Us.UnitTests.Services
         protected override void Arrange()
         {
             id = 654;
-            order = new Order();
+            order = new Order{Id = id};
             dto = new CreateOrderDto();
             mapper = RegisterDependencyInContainer<IMapper<CreateOrderDto, Order>>();
             repository = Dependency<IRepository>();
 
             When(mapper).IsToldTo(m => m.Map(dto)).Return(order);
-            When(repository).IsToldTo(r => r.Save(order)).Return(id);
         }
 
         protected override IOrderService CreateSystemUnderTest()
@@ -36,7 +35,7 @@ namespace Snacks_R_Us.UnitTests.Services
 
         protected override void Act()
         {
-            id = sut.Order(dto);
+            result = sut.Order(dto);
         }
 
         [Test]

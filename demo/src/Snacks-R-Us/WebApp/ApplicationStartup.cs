@@ -29,7 +29,7 @@ namespace Snacks_R_Us.WebApp
             //This is where you can switch your IoC container of choice
             var services = new List<object>();
 
-            IRepository repository = new InMemoryDatabase();
+            IRepository repository = new NHibernateRepository();
             services.Add(new OrderService(repository));
 
             return new DictionaryContainer(services);
