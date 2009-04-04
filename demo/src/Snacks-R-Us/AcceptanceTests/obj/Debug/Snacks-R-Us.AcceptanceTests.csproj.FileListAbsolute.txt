@@ -1,5 +1,0 @@
-C:\projects\agileacceptancetesting\demo\Snacks-R-Us\Snacks-R-Us.AcceptanceTests\bin\Debug\Snacks-R-Us.AcceptanceTests.dll
-C:\projects\agileacceptancetesting\demo\Snacks-R-Us\Snacks-R-Us.AcceptanceTests\bin\Debug\Snacks-R-Us.AcceptanceTests.pdb
-C:\projects\agileacceptancetesting\demo\Snacks-R-Us\Snacks-R-Us.AcceptanceTests\obj\Debug\ResolveAssemblyReference.cache
-C:\projects\agileacceptancetesting\demo\Snacks-R-Us\Snacks-R-Us.AcceptanceTests\obj\Debug\Snacks-R-Us.AcceptanceTests.dll
-C:\projects\agileacceptancetesting\demo\Snacks-R-Us\Snacks-R-Us.AcceptanceTests\obj\Debug\Snacks-R-Us.AcceptanceTests.pdb
