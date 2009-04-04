@@ -1,0 +1,6 @@
+!|import|
+|Snacks_R_Us.AcceptanceTests|
+
+!|Order snack|
+|Qty|Snack Name|Unit Price|Fault?|
+|1|Pizza Hawai|10|null|
