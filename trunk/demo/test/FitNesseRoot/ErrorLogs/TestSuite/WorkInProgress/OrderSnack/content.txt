@@ -1,6 +1,0 @@
-!3 !-fit-!
-|'''Date: '''|!-5:29:37 PM (CEST) on zaterdag, april 4, 2009-!|
-|'''Test Page: '''|.TestSuite.WorkInProgress.OrderSnack|
-|'''Command: '''|!-dotnet2\FitServer.exe classes;fitnesse.jar;fitlibrary.jar;C:\projects\agileacceptancetesting\demo\test\dotnet2\fit.dll;C:\projects\agileacceptancetesting\demo\test\dotnet2\FitLibrary.dll;C:\projects\agileacceptancetesting\demo\test\SnakcsRUs\fit.dll;C:\projects\agileacceptancetesting\demo\test\SnakcsRUs\Snacks-R-Us.AcceptanceTests.dll;C:\projects\agileacceptancetesting\demo\test\SnakcsRUs\Snacks-R-Us.WebApp.dll michel-a51ae3b4 8888 7-!|
-|'''Exit code: '''|!-1-!|
-|'''Time elapsed: '''|!-1.047 seconds-!|
