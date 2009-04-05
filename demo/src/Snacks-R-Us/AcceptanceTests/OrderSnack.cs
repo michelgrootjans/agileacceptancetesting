@@ -1,16 +1,17 @@
 using System;
+using System.Collections.Generic;
 using fit;
+using Snacks_R_Us.Domain.DataTransfer;
+using Snacks_R_Us.Domain.IoC;
+using Snacks_R_Us.Domain.Services;
 using Snacks_R_Us.WebApp;
-using Snacks_R_Us.WebApp.IoC;
-using Snacks_R_Us.WebApp.Models;
-using Snacks_R_Us.WebApp.Services;
 
 namespace Snacks_R_Us.AcceptanceTests
 {
     public class OrderSnack : ColumnFixture
     {
         public double Qty { get; set; }
-        public string SnackName { get; set; }
+        public long SnackId { get; set; }
         public double UnitPrice { get; set; }
         protected double TotalPrice { get; set; }
         public string Fault { get; set; }
@@ -21,8 +22,10 @@ namespace Snacks_R_Us.AcceptanceTests
             var orderService = Container.GetImplementationOf<IOrderService>();
             try
             {
-                var orderId = orderService.Order(new CreateOrderDto{Qty = Qty, SnackName = SnackName});
-                var order = orderService.GetOrder(orderId);
+                orderService.Order(new CreateOrderDto{Qty = Qty.ToString(), SnackId = SnackId.ToString()});
+                var myOrders = orderService.GetMyOrders();
+
+                var order = GetItem(myOrders, 0);
 
                 UnitPrice = order.UnitPrice;
                 TotalPrice = order.TotalPrice;
@@ -33,6 +36,17 @@ namespace Snacks_R_Us.AcceptanceTests
             {
                 Fault = e.Message;
             }
+        }
+
+        private static T GetItem<T>(IEnumerable<T> list, int index)
+        {
+            var i = 0;
+            foreach (var t in list)
+            {
+                if (i == index) return t;
+                i++;
+            }
+            return default(T);
         }
     }
 }
