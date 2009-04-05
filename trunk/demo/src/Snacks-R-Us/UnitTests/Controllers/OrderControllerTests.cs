@@ -96,7 +96,7 @@ namespace Snacks_R_Us.UnitTests.Controllers
         [Test]
         public void should_put_my_orders_in_the_model()
         {
-            sut.Model.ShouldBeOfType<MyOrdersDto>()
+            sut.ViewData.Model.ShouldBeOfType<MyOrdersDto>()
                 .Orders.ShouldBeSameAs(orders);
         }
     }

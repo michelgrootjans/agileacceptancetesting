@@ -1,16 +1,13 @@
-using System;
-using System.Collections.Generic;
 using System.Web.Mvc;
 using Snacks_R_Us.Domain.DataTransfer;
+using Snacks_R_Us.Domain.IoC;
 using Snacks_R_Us.Domain.Services;
-using Snacks_R_Us.WebApp.Extensions;
-using Container=Snacks_R_Us.Domain.IoC.Container;
 
 namespace Snacks_R_Us.WebApp.Controllers
 {
     public interface IOrderController
     {
-        object Model { get; }
+        ViewDataDictionary ViewData { get; }
         ActionResult Order(CreateOrderDto order);
         ActionResult MyOrders();
     }
@@ -42,9 +39,5 @@ namespace Snacks_R_Us.WebApp.Controllers
             return View();
         }
 
-        public object Model
-        {
-            get { return ViewData.Model; }
-        }
     }
 }
