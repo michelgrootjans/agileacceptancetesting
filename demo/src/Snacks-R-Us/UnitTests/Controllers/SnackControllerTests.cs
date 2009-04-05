@@ -47,7 +47,7 @@ namespace Snacks_R_Us.UnitTests.Controllers
         [Test]
         public void should_put_the_snacks_into_the_view()
         {
-            sut.Model.ShouldBeSameAs(snacks);
+            sut.ViewData.Model.ShouldBeSameAs(snacks);
         }
     }
 

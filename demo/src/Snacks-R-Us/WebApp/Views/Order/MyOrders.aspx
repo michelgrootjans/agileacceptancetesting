@@ -6,16 +6,16 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-
-    <h2>MyOrders</h2>
-    <% foreach (var order in Model.Orders) { %>
-        <% Html.RenderPartial("Order", order); %>
-    <% } %>
-
     <h2>Order new snack</h2>
     <% using (Html.BeginForm("Order", "Order")){ %>
         <%= Html.DropDownList("SnackId", Model.Snacks) %>
         <%= Html.TextBox("Qty", "1") %>
         <input type="submit" value="Plaats bestelling" />
     <% } %>
+
+    <h2>Current Orders</h2>
+    <% foreach (var order in Model.Orders) { %>
+        <% Html.RenderPartial("Order", order); %> <br />
+    <% } %>
+
 </asp:Content>
