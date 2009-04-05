@@ -1,51 +1,27 @@
+using System.Collections.Generic;
 using System.Web.Mvc;
 using NUnit.Framework;
 using Rhino.Mocks;
+using Snacks_R_Us.Domain.DataTransfer;
+using Snacks_R_Us.Domain.Services;
 using Snacks_R_Us.UnitTests.Utilities;
 using Snacks_R_Us.WebApp.Controllers;
-using Snacks_R_Us.WebApp.Models;
-using Snacks_R_Us.WebApp.Services;
 
 namespace Snacks_R_Us.UnitTests.Controllers
 {
-    public class when_OrderController_is_told_to_prepare_an_order :  InstanceContextSpecification<IOrderController>
-    {
-        private ActionResult result;
-        protected override void Arrange()
-        {
-            RegisterDependencyInContainer<IOrderService>();
-        }
-
-        protected override IOrderController CreateSystemUnderTest()
-        {
-            return new OrderController();
-        }
-
-        protected override void Act()
-        {
-            result = sut.New();
-        }
-
-        [Test]
-        public void should_show_New_view()
-        {
-            result.ShouldShowView();
-        }
-    }
-
-    public class when_OrderController_is_told_to_order_one_pizza_for_10_euro : InstanceContextSpecification<IOrderController>
+    public class when_OrderController_is_told_to_order_one_pizza : InstanceContextSpecification<IOrderController>
     {
         private long orderId;
-        private CreateOrderDto order;
+        private CreateOrderDto createOrderDto;
         private IOrderService service;
         private ActionResult result;
 
         protected override void Arrange()
         {
             orderId = 8765;
-            order = new CreateOrderDto{Qty = 1, SnackName = "Pizza Hawaii"};
+            createOrderDto = new CreateOrderDto{Qty = "1", SnackId = "2"};
+
             service = RegisterDependencyInContainer<IOrderService>();
-            When(service).IsToldTo(s => s.Order(order)).Return(orderId);
         }
 
         protected override IOrderController CreateSystemUnderTest()
@@ -55,37 +31,40 @@ namespace Snacks_R_Us.UnitTests.Controllers
 
         protected override void Act()
         {
-            result = sut.Order(order);
+            result = sut.Order(createOrderDto);
         }
 
         [Test]
         public void should_tell_the_service_to_place_the_order()
         {
-            service.AssertWasCalled(s => s.Order(order));
+            service.AssertWasCalled(s => s.Order(createOrderDto));
         }
 
         [Test]
         public void should_redirect_to_ViewOrder_view()
         {
-            result.ShouldRedirectToAction("Detail")
-                .ShouldHaveIdInRoute(orderId.ToString());
+            result.ShouldRedirectToAction("MyOrders");
         }
     }
 
-    public class when_OrderController_is_told_to_show_an_Order_detail : InstanceContextSpecification<IOrderController>
+    public class when_OrderController_is_told_to_show_MyOrders : InstanceContextSpecification<IOrderController>
     {
-        private IOrderService service;
-        private long orderId;
+        private IOrderService orderService;
+        private ISnackService snackService;
         private ActionResult result;
-        private ViewOrderDto orderDto;
+        private IEnumerable<OrderDto> orders;
+        private IEnumerable<SnackDto> snacks;
 
         protected override void Arrange()
         {
-            orderId = 548;
-            orderDto = new ViewOrderDto();
-            service = RegisterDependencyInContainer<IOrderService>();
+            orders = new List<OrderDto>();
+            snacks = new List<SnackDto>();
 
-            When(service).IsToldTo(s => s.GetOrder(orderId)).Return(orderDto);
+            orderService = RegisterDependencyInContainer<IOrderService>();
+            snackService = RegisterDependencyInContainer<ISnackService>();
+
+            When(orderService).IsToldTo(s => s.GetMyOrders()).Return(orders);
+            When(snackService).IsToldTo(s => s.GetAllSnacks()).Return(snacks);
         }
 
         protected override IOrderController CreateSystemUnderTest()
@@ -95,25 +74,32 @@ namespace Snacks_R_Us.UnitTests.Controllers
 
         protected override void Act()
         {
-            result = sut.Detail(orderId);
+            result = sut.MyOrders();
         }
 
         [Test]
-        public void should_tell_the_service_to_get_the_order()
+        public void should_tell_the_service_to_get_my_orders()
         {
-            service.AssertWasCalled(s => s.GetOrder(orderId));
+            orderService.AssertWasCalled(s => s.GetMyOrders());
         }
 
         [Test]
-        public void should_put_orderdto_ino_the_view()
+        public void should_get_all_the_snacks_from_the_repository()
         {
-            sut.Model.ShouldBeSameAs(orderDto);
+            snackService.AssertWasCalled(s => s.GetAllSnacks());
         }
 
         [Test]
-        public void should_show_the_view()
+        public void should_show_my_orders()
         {
             result.ShouldShowView();
+        }
+
+        [Test]
+        public void should_put_my_orders_in_the_model()
+        {
+            sut.Model.ShouldBeOfType<MyOrdersDto>()
+                .Orders.ShouldBeSameAs(orders);
         }
     }
 

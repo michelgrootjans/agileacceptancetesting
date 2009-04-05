@@ -50,14 +50,23 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\OrderControllerTests.cs" />
+    <Compile Include="Controllers\SnackControllerTests.cs" />
+    <Compile Include="Mapping\CreateOrderDtoMapperTests.cs" />
+    <Compile Include="Mapping\OrderToDtoMapperTests.cs" />
+    <Compile Include="Mapping\SnackToDtoMapperTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\OrderServiceTests.cs" />
     <Compile Include="Utilities\AtionResultExtensions.cs" />
+    <Compile Include="Utilities\IEnumerableExtensions.cs" />
     <Compile Include="Utilities\InstanceContextSpecification.cs" />
     <Compile Include="Utilities\IStubSpecification.cs" />
     <Compile Include="Utilities\ObjectExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Domain\Domain.csproj">
+      <Project>{202059DB-1A13-4CFA-B45E-BC45E3C8A453}</Project>
+      <Name>Domain</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WebApp\WebApp.csproj">
       <Project>{E606776F-97C1-4423-BBA5-87F41B00DFF7}</Project>
       <Name>WebApp</Name>
