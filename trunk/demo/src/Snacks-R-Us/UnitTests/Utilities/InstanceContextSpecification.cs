@@ -1,8 +1,7 @@
 using System.Collections.Generic;
 using NUnit.Framework;
 using Rhino.Mocks;
-using Rhino.Mocks.Interfaces;
-using Snacks_R_Us.WebApp.IoC;
+using Snacks_R_Us.Domain.IoC;
 
 namespace Snacks_R_Us.UnitTests.Utilities
 {
@@ -23,16 +22,9 @@ namespace Snacks_R_Us.UnitTests.Utilities
             Act();
         }
 
-        [TearDown]
-        public void TearDown()
-        {
-            AfterEachTest();
-        }
-
         protected virtual void Arrange() {}
         protected abstract SUT CreateSystemUnderTest();
         protected virtual void Act() {}
-        protected void AfterEachTest() {}
 
         protected T Dependency<T>() where T : class
         {
