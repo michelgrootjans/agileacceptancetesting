@@ -4,37 +4,22 @@ using System.Globalization;
 using System.Security.Principal;
 using System.Web.Mvc;
 using System.Web.Security;
+using Snacks_R_Us.Domain.Etensions;
+using Snacks_R_Us.Domain.IoC;
+using Snacks_R_Us.Domain.Services;
 
 namespace Snacks_R_Us.WebApp.Controllers
 {
     [HandleError]
     public class AccountController : Controller
     {
+        private readonly IFormsAuthentication formsAuth;
+        private readonly IMembershipService membershipService;
 
-        // This constructor is used by the MVC framework to instantiate the controller using
-        // the default forms authentication and membership providers.
         public AccountController()
-            : this(null, null)
         {
-        }
-
-        // This constructor is not used by the MVC framework but is instead provided for ease
-        // of unit testing this type. See the comments at the end of this file for more
-        // information.
-        public AccountController(IFormsAuthentication formsAuth, IMembershipService service)
-        {
-            FormsAuth = formsAuth ?? new FormsAuthenticationService();
-            MembershipService = service ?? new AccountMembershipService();
-        }
-
-        private IFormsAuthentication FormsAuth
-        {
-            get; set;
-        }
-
-        private IMembershipService MembershipService
-        {
-            get; set;
+            formsAuth = Container.GetImplementationOf<IFormsAuthentication>();
+            membershipService = Container.GetImplementationOf<IMembershipService>();
         }
 
         public ActionResult LogOn()
@@ -43,18 +28,15 @@ namespace Snacks_R_Us.WebApp.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings",
-            Justification = "Needs to take same parameter type as Controller.Redirect()")]
         public ActionResult LogOn(string userName, string password, bool rememberMe, string returnUrl)
         {
-
             if (!ValidateLogOn(userName, password))
             {
                 return View();
             }
 
-            FormsAuth.SignIn(userName, rememberMe);
-            if (!String.IsNullOrEmpty(returnUrl))
+            formsAuth.SignIn(userName, rememberMe);
+            if (returnUrl.ContainsCharacters())
                 return Redirect(returnUrl);
 
             return RedirectToAction("Index", "Home");
@@ -62,34 +44,27 @@ namespace Snacks_R_Us.WebApp.Controllers
 
         public ActionResult LogOff()
         {
-
-            FormsAuth.SignOut();
+            formsAuth.SignOut();
 
             return RedirectToAction("Index", "Home");
         }
 
         public ActionResult Register()
         {
-
-            ViewData["PasswordLength"] = MembershipService.MinPasswordLength;
-
             return View();
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Register(string userName, string email, string password, string confirmPassword)
         {
-
-            ViewData["PasswordLength"] = MembershipService.MinPasswordLength;
-
             if (ValidateRegistration(userName, email, password, confirmPassword))
             {
                 // Attempt to register the user
-                var createStatus = MembershipService.CreateUser(userName, password, email);
+                var createStatus = membershipService.CreateUser(userName, password, email);
 
                 if (createStatus == MembershipCreateStatus.Success)
                 {
-                    FormsAuth.SignIn(userName, false /* createPersistentCookie */);
+                    formsAuth.SignIn(userName, false /* createPersistentCookie */);
                     return RedirectToAction("Index", "Home");
                 }
 
@@ -103,21 +78,13 @@ namespace Snacks_R_Us.WebApp.Controllers
         [Authorize]
         public ActionResult ChangePassword()
         {
-
-            ViewData["PasswordLength"] = MembershipService.MinPasswordLength;
-
             return View();
         }
 
         [Authorize]
         [AcceptVerbs(HttpVerbs.Post)]
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes",
-            Justification = "Exceptions result in password not being changed.")]
         public ActionResult ChangePassword(string currentPassword, string newPassword, string confirmPassword)
         {
-
-            ViewData["PasswordLength"] = MembershipService.MinPasswordLength;
-
             if (!ValidateChangePassword(currentPassword, newPassword, confirmPassword))
             {
                 return View();
@@ -125,7 +92,7 @@ namespace Snacks_R_Us.WebApp.Controllers
 
             try
             {
-                if (MembershipService.ChangePassword(User.Identity.Name, currentPassword, newPassword))
+                if (membershipService.ChangePassword(User.Identity.Name, currentPassword, newPassword))
                 {
                     return RedirectToAction("ChangePasswordSuccess");
                 }
@@ -153,20 +120,15 @@ namespace Snacks_R_Us.WebApp.Controllers
             }
         }
 
-        #region Validation Methods
-
         private bool ValidateChangePassword(string currentPassword, string newPassword, string confirmPassword)
         {
             if (String.IsNullOrEmpty(currentPassword))
             {
                 ModelState.AddModelError("currentPassword", "You must specify a current password.");
             }
-            if (newPassword == null || newPassword.Length < MembershipService.MinPasswordLength)
+            if (newPassword == null)
             {
-                ModelState.AddModelError("newPassword",
-                    String.Format(CultureInfo.CurrentCulture,
-                         "You must specify a new password of {0} or more characters.",
-                         MembershipService.MinPasswordLength));
+                ModelState.AddModelError("newPassword", "You must specify a password.");
             }
 
             if (!String.Equals(newPassword, confirmPassword, StringComparison.Ordinal))
@@ -187,7 +149,7 @@ namespace Snacks_R_Us.WebApp.Controllers
             {
                 ModelState.AddModelError("password", "You must specify a password.");
             }
-            if (!MembershipService.ValidateUser(userName, password))
+            if (!membershipService.ValidateUser(userName, password))
             {
                 ModelState.AddModelError("_FORM", "The username or password provided is incorrect.");
             }
@@ -205,12 +167,9 @@ namespace Snacks_R_Us.WebApp.Controllers
             {
                 ModelState.AddModelError("email", "You must specify an email address.");
             }
-            if (password == null || password.Length < MembershipService.MinPasswordLength)
+            if (password == null)
             {
-                ModelState.AddModelError("password",
-                    String.Format(CultureInfo.CurrentCulture,
-                         "You must specify a password of {0} or more characters.",
-                         MembershipService.MinPasswordLength));
+                ModelState.AddModelError("password", "You must specify a password.");
             }
             if (!String.Equals(password, confirmPassword, StringComparison.Ordinal))
             {
@@ -221,8 +180,6 @@ namespace Snacks_R_Us.WebApp.Controllers
 
         private static string ErrorCodeToString(MembershipCreateStatus createStatus)
         {
-            // See http://msdn.microsoft.com/en-us/library/system.web.security.membershipcreatestatus.aspx for
-            // a full list of status codes.
             switch (createStatus)
             {
                 case MembershipCreateStatus.DuplicateUserName:
@@ -256,76 +213,6 @@ namespace Snacks_R_Us.WebApp.Controllers
                     return "An unknown error occurred. Please verify your entry and try again. If the problem persists, please contact your system administrator.";
             }
         }
-        #endregion
     }
 
-    // The FormsAuthentication type is sealed and contains static members, so it is difficult to
-    // unit test code that calls its members. The interface and helper class below demonstrate
-    // how to create an abstract wrapper around such a type in order to make the AccountController
-    // code unit testable.
-
-    public interface IFormsAuthentication
-    {
-        void SignIn(string userName, bool createPersistentCookie);
-        void SignOut();
-    }
-
-    public class FormsAuthenticationService : IFormsAuthentication
-    {
-        public void SignIn(string userName, bool createPersistentCookie)
-        {
-            FormsAuthentication.SetAuthCookie(userName, createPersistentCookie);
-        }
-        public void SignOut()
-        {
-            FormsAuthentication.SignOut();
-        }
-    }
-
-    public interface IMembershipService
-    {
-        int MinPasswordLength { get; }
-
-        bool ValidateUser(string userName, string password);
-        MembershipCreateStatus CreateUser(string userName, string password, string email);
-        bool ChangePassword(string userName, string oldPassword, string newPassword);
-    }
-
-    public class AccountMembershipService : IMembershipService
-    {
-        private readonly MembershipProvider provider;
-
-        public AccountMembershipService()
-            : this(null)
-        {
-        }
-
-        private AccountMembershipService(MembershipProvider provider)
-        {
-            this.provider = provider ?? Membership.Provider;
-        }
-
-        public int MinPasswordLength
-        {
-            get {return provider.MinRequiredPasswordLength;}
-        }
-
-        public bool ValidateUser(string userName, string password)
-        {
-            return provider.ValidateUser(userName, password);
-        }
-
-        public MembershipCreateStatus CreateUser(string userName, string password, string email)
-        {
-            MembershipCreateStatus status;
-            provider.CreateUser(userName, password, email, null, null, true, null, out status);
-            return status;
-        }
-
-        public bool ChangePassword(string userName, string oldPassword, string newPassword)
-        {
-            var currentUser = provider.GetUser(userName, true /* userIsOnline */);
-            return currentUser.ChangePassword(oldPassword, newPassword);
-        }
-    }
 }

@@ -30,6 +30,9 @@ namespace Snacks_R_Us.WebApp
             //This is where you can switch your IoC container of choice
             var services = new List<object>();
 
+            services.Add(new AccountMembershipService());
+            services.Add(new FormsAuthenticationService());
+
             var snackRepository = new SnackRepository();
             services.Add(new OrderService(new OrderRepository(), snackRepository));
             services.Add(new SnackService(snackRepository));

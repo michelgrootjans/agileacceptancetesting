@@ -315,3 +315,8 @@ div#title
     font-weight: bold;
     color: #ff0000;
 }
+
+#Qty
+{
+    width: 20px;
+}
