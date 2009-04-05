@@ -11,14 +11,12 @@ namespace Snacks_R_Us.UnitTests.Controllers
 {
     public class when_OrderController_is_told_to_order_one_pizza : InstanceContextSpecification<IOrderController>
     {
-        private long orderId;
         private CreateOrderDto createOrderDto;
         private IOrderService service;
         private ActionResult result;
 
         protected override void Arrange()
         {
-            orderId = 8765;
             createOrderDto = new CreateOrderDto{Qty = "1", SnackId = "2"};
 
             service = RegisterDependencyInContainer<IOrderService>();

@@ -5,7 +5,6 @@
   </PropertyGroup>
   
   <Import Project="$(ToolsDir)\MSBuild\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets" />
-  <Import Project="$(ToolsDir)\MSBuild\MigratorTasks\Migrator.Targets" />
 
   <Target Name="Compile">
     <MSBuild Projects="Snacks-R-Us.sln" />
@@ -13,11 +12,11 @@
   
   <Target Name="Test">
     <ItemGroup>
-      <TestAssemblies Include="**\UnitTests.dll" />
+      <TestAssemblies Include="**\*.UnitTests.dll" />
     </ItemGroup>
 
     <Message Text="Running unit tests: @(TestAssemblies)"/>
-    <NUnit Assemblies="@(TestAssemblies)" ToolPath="$(ToolsDir)\NUnit\" DisableShadowCopy="true" />
+    <NUnit Assemblies="@(TestAssemblies)" ToolPath="$(ToolsDir)\NUnit\" DisableShadowCopy="false" />
   </Target>
   
   <Target Name="FitNesse">
