@@ -1,0 +1,45 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="CI" ToolsVersion="3.5">
+  <PropertyGroup>
+    <ToolsDir>..\tools</ToolsDir>
+    <ResultsDir>$(MSBuildProjectDirectory)\Results</ResultsDir>
+  </PropertyGroup>
+  
+  <Import Project="$(ToolsDir)\MSBuild\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets" />
+  <Import Project="$(ToolsDir)\MSBuild\MigratorTasks\Migrator.Targets" />
+
+  <Target Name="Compile">
+    <MSBuild Projects="Snacks-R-Us.sln" />
+  </Target>
+  
+  <Target Name="Test">
+    <ItemGroup>
+      <TestAssemblies Include="**\UnitTests.dll" />
+    </ItemGroup>
+
+    <Message Text="Running unit tests: @(TestAssemblies)"/>
+    <NUnit Assemblies="@(TestAssemblies)" ToolPath="$(ToolsDir)\NUnit\" DisableShadowCopy="true" />
+  </Target>
+  
+  <Target Name="FitNesse">
+    <PropertyGroup>
+      <FitNesseDir>..\FitNesse</FitNesseDir>
+      <TestRunner>$(FitNesseDir)\dotnet2\TestRunner.exe</TestRunner>
+    </PropertyGroup>
+
+    <!--If FitNesse is running from a previous session, stop it-->
+    <!--<Exec WorkingDirectory="$(FitNesseDir)" Command="Stop.bat" ContinueOnError="true" />-->
+    <Copy SourceFiles="$(FitNesseDir)\dotnet2\DEV-RENAME-TO hibernate.cfg.xml" DestinationFiles="$(FitNesseDir)\Dotnet2\hibernate.cfg.xml" />
+
+    <Copy SourceFiles="$(FitNesseDir)\FitnesseRoot\RENAME TO-properties" DestinationFiles="$(FitNesseDir)\FitnesseRoot\properties" />
+    <AsyncExec WorkingDirectory="$(FitNesseDir)" Command="run.bat" />
+    <!--<Exec ContinueOnError="false" Command="$(TestRunner) -results $(ResultsDir)\FitNesseRegressionTests.htm localhost 8888 ExpertiseSysteem.RegressieTesten" />-->
+    <Exec ContinueOnError="true" Command="$(TestRunner) -results $(ResultsDir)\FitNesseWorkInProgress.htm localhost 8888 ExpertiseSysteem" />
+    <Exec WorkingDirectory="$(FitNesseDir)" Command="Stop.bat" ContinueOnError="true" />
+
+    <!--<Message Text="##teamcity[publishArtifacts '$(ResultsDir)\FitNesseRegressionTests.htm']" />-->
+    <Message Text="##teamcity[publishArtifacts '$(ResultsDir)\FitNesseWorkInProgress.htm']" />
+    <Message Text="##teamcity[progressFinish name='Fitnesse']" />
+  </Target>
+
+  <Target Name="CI" DependsOnTargets="Compile;Test" />
+</Project>

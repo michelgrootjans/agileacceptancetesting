@@ -1,18 +1,18 @@
 using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
+using Snacks_R_Us.Domain.DataTransfer;
+using Snacks_R_Us.Domain.Services;
 using Snacks_R_Us.WebApp.Extensions;
-using Snacks_R_Us.WebApp.IoC;
-using Snacks_R_Us.WebApp.Models;
-using Snacks_R_Us.WebApp.Services;
+using Container=Snacks_R_Us.Domain.IoC.Container;
 
 namespace Snacks_R_Us.WebApp.Controllers
 {
     public interface IOrderController
     {
-        ActionResult New();
-        ActionResult Order(CreateOrderDto order);
-        ActionResult Detail(long orderId);
         object Model { get; }
+        ActionResult Order(CreateOrderDto order);
+        ActionResult MyOrders();
     }
 
     public class OrderController : Controller, IOrderController
@@ -24,21 +24,20 @@ namespace Snacks_R_Us.WebApp.Controllers
             orderService = Container.GetImplementationOf<IOrderService>();
         }
 
-        public ActionResult New()
-        {
-            return View();
-        }
-
         public ActionResult Order(CreateOrderDto order)
         {
-            var orderId = orderService.Order(order);
-
-            return RedirectToAction("Detail", orderId.ToIdRoute());
+            orderService.Order(order);
+            return RedirectToAction("MyOrders");
         }
 
-        public ActionResult Detail(long orderId)
+        public ActionResult MyOrders()
         {
-            ViewData.Model = orderService.GetOrder(orderId);
+            var model = new MyOrdersDto();
+            ViewData.Model = model;
+
+            var snackService = Container.GetImplementationOf<ISnackService>();
+            model.Orders = orderService.GetMyOrders();
+            model.Snacks = snackService.GetAllSnacks().ToSelectList();
 
             return View();
         }
