@@ -3,7 +3,7 @@ using Snacks_R_Us.Domain.Entities;
 
 namespace Snacks_R_Us.Domain.Mapping
 {
-    public class OrderToDtoMapper : IMapper<Order, OrderDto>
+    internal class OrderToDtoMapper : IMapper<Order, OrderDto>
     {
         public OrderDto Map(Order order)
         {

@@ -6,11 +6,11 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <h2>Order new snack</h2>
+    <h2>Order a new snack</h2>
     <% using (Html.BeginForm("Order", "Order")){ %>
-        <%= Html.DropDownList("SnackId", Model.Snacks) %>
         <%= Html.TextBox("Qty", "1") %>
-        <input type="submit" value="Plaats bestelling" />
+        <%= Html.DropDownList("SnackId", Model.Snacks) %>
+        <input type="submit" value="Save order" />
     <% } %>
 
     <h2>Current Orders</h2>

@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using System.Security.Principal;
 using System.Web.Security;
+using Snacks_R_Us.Domain.Entities;
 
 namespace Snacks_R_Us.Domain.Services
 {
@@ -8,6 +10,7 @@ namespace Snacks_R_Us.Domain.Services
         bool ValidateUser(string userName, string password);
         MembershipCreateStatus CreateUser(string  userName, string password, string email);
         bool ChangePassword(string userName, string oldPassword, string newPassword);
+        IPrincipal GetPrincipal(string userName);
     }
 
     public class AccountMembershipService : IMembershipService
@@ -18,8 +21,8 @@ namespace Snacks_R_Us.Domain.Services
         {
             users = new List<User>
                         {
-                            new User("pascal", "ihc", "pascal@ihc.be"),
-                            new User("michel", "ilean", "michel@ilean.be")
+                            new User("pascal", "ihc", "pascal@ihc.be", "Secretary"),
+                            new User("michel", "ilean", "michel@ilean.be", "Developer")
                         };
         }
 
@@ -46,39 +49,10 @@ namespace Snacks_R_Us.Domain.Services
 
             user.ResetPasswordTo(newPassword);
             return true;}
-    }
 
-    public class User
-    {
-        private readonly string name;
-        private string password;
-        private readonly string email;
-
-        public User(string name, string password, string email)
+        public IPrincipal GetPrincipal(string userName)
         {
-            this.name = name;
-            this.password = password;
-            this.email = email;
-        }
-
-        public string Name 
-        {
-            get {return name;}
-        }
-
-        public string Password
-        {
-            get {return password;}
-        }
-
-        public string Email
-        {
-            get {return email;}
-        }
-
-        public void ResetPasswordTo(string newPassword)
-        {
-            password = newPassword;
+            return users.Find(u => u.Name.Equals(userName)) ?? new User("Unknown user", null, null, new string[0]);
         }
     }
 }

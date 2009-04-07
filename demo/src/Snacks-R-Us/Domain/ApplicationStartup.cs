@@ -4,7 +4,7 @@ using Snacks_R_Us.Domain.Mapping;
 using Snacks_R_Us.Domain.Repositories;
 using Snacks_R_Us.Domain.Services;
 
-namespace Snacks_R_Us.WebApp
+namespace Snacks_R_Us.Domain
 {
     public static class ApplicationStartup
     {
@@ -28,6 +28,7 @@ namespace Snacks_R_Us.WebApp
         private static DictionaryContainer CreateContainer()
         {
             //This is where you can switch your IoC container of choice
+            //We've choosen poor man's dependency injection ;-)
             var services = new List<object>();
 
             services.Add(new AccountMembershipService());

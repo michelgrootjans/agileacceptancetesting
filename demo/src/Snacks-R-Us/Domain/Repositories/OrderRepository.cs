@@ -4,7 +4,7 @@ using Snacks_R_Us.Domain.Entities;
 
 namespace Snacks_R_Us.Domain.Repositories
 {
-    public class OrderRepository : IRepository<Order>
+    internal class OrderRepository : IRepository<Order>
     {
         private readonly List<Order> orders;
         

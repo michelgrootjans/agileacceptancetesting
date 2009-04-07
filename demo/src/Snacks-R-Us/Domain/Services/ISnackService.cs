@@ -11,7 +11,7 @@ namespace Snacks_R_Us.Domain.Services
         IEnumerable<SnackDto> GetAllSnacks();
     }
 
-    public class SnackService : ISnackService
+    internal class SnackService : ISnackService
     {
         private readonly IRepository<Snack> snackRepository;
 

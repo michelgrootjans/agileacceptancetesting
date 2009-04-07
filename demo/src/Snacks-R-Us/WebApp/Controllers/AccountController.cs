@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Diagnostics.CodeAnalysis;
-using System.Globalization;
 using System.Security.Principal;
 using System.Web.Mvc;
 using System.Web.Security;
@@ -13,12 +11,12 @@ namespace Snacks_R_Us.WebApp.Controllers
     [HandleError]
     public class AccountController : Controller
     {
-        private readonly IFormsAuthentication formsAuth;
+        private readonly IAuthenticationService auth;
         private readonly IMembershipService membershipService;
 
         public AccountController()
         {
-            formsAuth = Container.GetImplementationOf<IFormsAuthentication>();
+            auth = Container.GetImplementationOf<IAuthenticationService>();
             membershipService = Container.GetImplementationOf<IMembershipService>();
         }
 
@@ -35,7 +33,7 @@ namespace Snacks_R_Us.WebApp.Controllers
                 return View();
             }
 
-            formsAuth.SignIn(userName, rememberMe);
+            auth.SignIn(userName, rememberMe);
             if (returnUrl.ContainsCharacters())
                 return Redirect(returnUrl);
 
@@ -44,7 +42,7 @@ namespace Snacks_R_Us.WebApp.Controllers
 
         public ActionResult LogOff()
         {
-            formsAuth.SignOut();
+            auth.SignOut();
 
             return RedirectToAction("Index", "Home");
         }
@@ -64,7 +62,7 @@ namespace Snacks_R_Us.WebApp.Controllers
 
                 if (createStatus == MembershipCreateStatus.Success)
                 {
-                    formsAuth.SignIn(userName, false /* createPersistentCookie */);
+                    auth.SignIn(userName, false /* createPersistentCookie */);
                     return RedirectToAction("Index", "Home");
                 }
 
