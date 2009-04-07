@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationStartup.cs" />
     <Compile Include="DataTransfer\ISelectListItem.cs" />
     <Compile Include="DataTransfer\MyOrdersDto.cs" />
     <Compile Include="DataTransfer\OrderDto.cs" />
@@ -68,10 +69,12 @@
     <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Repositories\OrderRepository.cs" />
     <Compile Include="Repositories\SnackRepository.cs" />
-    <Compile Include="Services\IFormsAuthentication.cs" />
+    <Compile Include="Services\Current.cs" />
+    <Compile Include="Services\IAuthenticationService.cs" />
     <Compile Include="Services\IMembershipService.cs" />
     <Compile Include="Services\IOrderService.cs" />
     <Compile Include="Services\ISnackService.cs" />
+    <Compile Include="Entities\User.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

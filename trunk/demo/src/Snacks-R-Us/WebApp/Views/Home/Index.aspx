@@ -5,8 +5,8 @@
 </asp:Content>
 
 <asp:Content ID="indexContent" ContentPlaceHolderID="MainContent" runat="server">
-    <h2><%= Html.Encode(ViewData["Message"]) %></h2>
+    <h2>Welcome to Snacks-R-Us</h2>
     <p>
-        To learn more about ASP.NET MVC visit <a href="http://asp.net/mvc" title="ASP.NET MVC Website">http://asp.net/mvc</a>.
+    This is where you can order your late night snacks and have them delivered at the office. That way, you don't need to loose productivity by by going out to get your snacks.
     </p>
 </asp:Content>

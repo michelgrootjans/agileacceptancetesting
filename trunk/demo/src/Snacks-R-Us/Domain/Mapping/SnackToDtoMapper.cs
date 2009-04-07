@@ -3,7 +3,7 @@ using Snacks_R_Us.Domain.Entities;
 
 namespace Snacks_R_Us.Domain.Mapping
 {
-    public class SnackToDtoMapper : IMapper<Snack, SnackDto>
+    internal class SnackToDtoMapper : IMapper<Snack, SnackDto>
     {
         public SnackDto Map(Snack snack)
         {

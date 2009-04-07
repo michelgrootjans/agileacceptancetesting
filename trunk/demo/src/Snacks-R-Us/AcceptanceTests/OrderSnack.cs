@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using fit;
+using Snacks_R_Us.Domain;
 using Snacks_R_Us.Domain.DataTransfer;
 using Snacks_R_Us.Domain.IoC;
 using Snacks_R_Us.Domain.Services;
-using Snacks_R_Us.WebApp;
 
 namespace Snacks_R_Us.AcceptanceTests
 {

@@ -1,3 +1,4 @@
+<%@ Import Namespace="Snacks_R_Us.Domain.Services"%>
 <%@ Master Language="C#" Inherits="System.Web.Mvc.ViewMasterPage" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -12,7 +13,7 @@
 
         <div id="header">
             <div id="title">
-                <h1>My MVC Application</h1>
+                <h1>SNACKS-R-US</h1>
             </div>
               
             <div id="logindisplay">
@@ -23,11 +24,19 @@
             
                 <ul id="menu">              
                     <li><%= Html.ActionLink("Home", "Index", "Home")%></li>
+<% if (Request.IsAuthenticated)
+   { %>
                     <li><%= Html.ActionLink("Snacks", "Index", "Snack")%></li>
+<% if (Current.User.IsInRole("Developer"))
+   { %>                    
                     <li><%= Html.ActionLink("My orders", "MyOrders", "Order")%></li>
                     <li><%= Html.ActionLink("My credit", "MyCredit", "Credit")%></li>
+ <%} %>
+<% if (Current.User.IsInRole("Secretary"))
+   { %>                    
                     <li><%= Html.ActionLink("Todays' orders", "Today", "Orders")%></li>
-                    <li><%= Html.ActionLink("Users", "Index", "User")%></li>
+<% } %>
+<% } %>
                 </ul>
             
             </div>

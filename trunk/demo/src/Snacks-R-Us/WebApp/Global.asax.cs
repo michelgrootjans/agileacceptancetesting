@@ -1,6 +1,7 @@
 ﻿using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Snacks_R_Us.Domain;
 
 namespace Snacks_R_Us.WebApp
 {

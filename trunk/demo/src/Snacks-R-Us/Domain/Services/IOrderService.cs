@@ -13,7 +13,7 @@ namespace Snacks_R_Us.Domain.Services
         IEnumerable<OrderDto> GetMyOrders();
     }
 
-    public class OrderService : IOrderService
+    internal class OrderService : IOrderService
     {
         private readonly IRepository<Order> orderRepository;
         private readonly IRepository<Snack> snackRepository;
