@@ -13,16 +13,16 @@ namespace Snacks_R_Us.Domain.Services
 
     internal class SnackService : ISnackService
     {
-        private readonly IRepository<Snack> snackRepository;
+        private readonly IRepository repository;
 
-        public SnackService(IRepository<Snack> snackRepository)
+        public SnackService(IRepository repository)
         {
-            this.snackRepository = snackRepository;
+            this.repository = repository;
         }
 
         public IEnumerable<SnackDto> GetAllSnacks()
         {
-            var snacks = snackRepository.FindAll();
+            var snacks = repository.FindAll<Snack>();
             return Map.These(snacks).ToAListOf<SnackDto>();
         }
     }

@@ -16,5 +16,10 @@ namespace Snacks_R_Us.Domain.Etensions
         {
             return long.Parse(value);
         }
+
+        public static double ToDouble(this string value)
+        {
+            return double.Parse(value);
+        }
     }
 }

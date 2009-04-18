@@ -45,8 +45,11 @@
   <ItemGroup>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\IController.cs" />
+    <Compile Include="Controllers\ICreditController.cs" />
     <Compile Include="Controllers\IOrderController.cs" />
     <Compile Include="Controllers\ISnackController.cs" />
+    <Compile Include="Controllers\IUserController.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -60,10 +63,12 @@
   <ItemGroup>
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="Views\Credit\Edit.aspx" />
+    <Content Include="Views\Shared\MyCredit.ascx" />
     <Content Include="Views\Order\MyOrders.aspx" />
     <Content Include="Views\Order\Order.ascx" />
-    <Content Include="Views\Snack\Snack.ascx" />
-    <Content Include="Views\Snack\Index.aspx" />
+    <Content Include="Views\Order\Today.aspx" />
+    <Content Include="Views\User\List.aspx" />
     <Content Include="Web.config" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\jquery-1.3.2.js" />

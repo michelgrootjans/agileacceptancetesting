@@ -1,7 +1,9 @@
+using System;
 using System.Collections.Generic;
 using Snacks_R_Us.Domain.DataTransfer;
 using Snacks_R_Us.Domain.Entities;
 using Snacks_R_Us.Domain.Etensions;
+using Snacks_R_Us.Domain.Extensions;
 using Snacks_R_Us.Domain.Mapping;
 using Snacks_R_Us.Domain.Repositories;
 
@@ -10,32 +12,54 @@ namespace Snacks_R_Us.Domain.Services
     public interface IOrderService
     {
         void Order(CreateOrderDto order);
-        IEnumerable<OrderDto> GetMyOrders();
+        ViewOrdersDto GetMyOrders();
+        ViewOrdersDto GetTodaysOrders();
     }
 
     internal class OrderService : IOrderService
     {
-        private readonly IRepository<Order> orderRepository;
-        private readonly IRepository<Snack> snackRepository;
+        private readonly IRepository repository;
 
-        public OrderService(IRepository<Order> repository, IRepository<Snack> snackRepository)
+        public OrderService(IRepository repository)
         {
-            orderRepository = repository;
-            this.snackRepository = snackRepository;
+            this.repository = repository;
         }
 
         public void Order(CreateOrderDto orderDto)
         {
             var order = Map.This(orderDto).ToA<Order>();
-            var snack = snackRepository.Get(orderDto.SnackId.ToLong());
+            var snack = repository.Get<Snack>(orderDto.SnackId.ToLong());
+            var user = repository.Find<User>(u => u.Name.Equals(Current.UserName));
+            
             order.Snack = snack;
-            orderRepository.Save(order);
+            user.AddOrder(order);
         }
 
-        public IEnumerable<OrderDto> GetMyOrders()
+        public ViewOrdersDto GetMyOrders()
         {
-            var orders = orderRepository.FindAll();
-            return Map.These(orders).ToAListOf<OrderDto>();
+            var user = repository.Find<User>(u => u.Name.Equals(Current.UserName));
+            return Map.This(user.Orders).ToA<ViewOrdersDto>();
+        }
+
+        public ViewOrdersDto GetTodaysOrders()
+        {
+            var orders = repository.FindAll<Order>(o => o.Date.Date.Equals(DateTime.Now.Date));
+            var groupedOrders = Group(orders);
+            return Map.This(groupedOrders).ToA<ViewOrdersDto>();
+        }
+
+        private IEnumerable<Order> Group(IEnumerable<Order> orders)
+        {
+            var groupedOrders = new List<Order>();
+            foreach (var order in orders)
+            {
+                var existingOrder = groupedOrders.Find(o => o.SnackName.Equals(order.SnackName));
+                if (existingOrder.IsNotNull())
+                    existingOrder.Qty += order.Qty;
+                else
+                    groupedOrders.Add(new Order(order.Snack){Qty = order.Qty});
+            }
+            return groupedOrders;
         }
     }
 }

@@ -1,6 +1,9 @@
-!|import|
-|Snacks_R_Us.AcceptanceTests|
-
-!|Order snack|
-|Qty|Snack Name|Unit Price|Fault?|
-|1|Pizza Hawai|10|null|
+!|ActionFixture|
+|Start|Login script|
+|Enter|Username|Michel|
+|Enter|Password|blah|
+|Press|Login|
+|Check|Logged in|false|
+|Enter|Password|iLean|
+|Press|Login|
+|Check|Logged in|true|

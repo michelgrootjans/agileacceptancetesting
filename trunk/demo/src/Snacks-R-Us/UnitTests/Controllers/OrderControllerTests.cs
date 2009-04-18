@@ -20,6 +20,8 @@ namespace Snacks_R_Us.UnitTests.Controllers
             createOrderDto = new CreateOrderDto{Qty = "1", SnackId = "2"};
 
             service = RegisterDependencyInContainer<IOrderService>();
+            RegisterDependencyInContainer<ISnackService>();
+
         }
 
         protected override IOrderController CreateSystemUnderTest()
@@ -41,7 +43,7 @@ namespace Snacks_R_Us.UnitTests.Controllers
         [Test]
         public void should_redirect_to_ViewOrder_view()
         {
-            result.ShouldRedirectToAction("MyOrders");
+            result.ShouldShowView("MyOrders");
         }
     }
 
@@ -50,12 +52,12 @@ namespace Snacks_R_Us.UnitTests.Controllers
         private IOrderService orderService;
         private ISnackService snackService;
         private ActionResult result;
-        private IEnumerable<OrderDto> orders;
+        private ViewOrdersDto orders;
         private IEnumerable<SnackDto> snacks;
 
         protected override void Arrange()
         {
-            orders = new List<OrderDto>();
+            orders = new ViewOrdersDto();
             snacks = new List<SnackDto>();
 
             orderService = RegisterDependencyInContainer<IOrderService>();
@@ -90,7 +92,7 @@ namespace Snacks_R_Us.UnitTests.Controllers
         [Test]
         public void should_show_my_orders()
         {
-            result.ShouldShowView();
+            result.ShouldShowView("MyOrders");
         }
 
         [Test]
@@ -98,6 +100,48 @@ namespace Snacks_R_Us.UnitTests.Controllers
         {
             sut.ViewData.Model.ShouldBeOfType<MyOrdersDto>()
                 .Orders.ShouldBeSameAs(orders);
+        }
+    }
+
+    public class when_OrderController_is_told_to_show_orders_placed_today : InstanceContextSpecification<IOrderController>
+    {
+        private ActionResult result;
+        private IOrderService service;
+        private ViewOrdersDto orders;
+
+        protected override void Arrange()
+        {
+            orders = new ViewOrdersDto();
+            service = RegisterDependencyInContainer<IOrderService>();
+            When(service).IsToldTo(s => s.GetTodaysOrders()).Return(orders);
+        }
+
+        protected override IOrderController CreateSystemUnderTest()
+        {
+            return new OrderController();
+        }
+
+        protected override void Act()
+        {
+            result = sut.Today();
+        }
+
+        [Test]
+        public void should_ask_the_service_for_todays_orders()
+        {
+            service.AssertWasCalled(s => s.GetTodaysOrders());
+        }
+
+        [Test]
+        public void should_put_the_result_in_the_view()
+        {
+            sut.ViewData.Model.ShouldBeSameAs(orders);
+        }
+
+        [Test]
+        public void should_show_todays_view()
+        {
+            result.ShouldShowView();
         }
     }
 

@@ -25,10 +25,10 @@ namespace Snacks_R_Us.AcceptanceTests
                 orderService.Order(new CreateOrderDto{Qty = Qty.ToString(), SnackId = SnackId.ToString()});
                 var myOrders = orderService.GetMyOrders();
 
-                var order = GetItem(myOrders, 0);
+                //var order = GetItem(myOrders, 0);
 
-                UnitPrice = order.UnitPrice;
-                TotalPrice = order.TotalPrice;
+                //UnitPrice = order.UnitPrice;
+                //TotalPrice = order.TotalPrice;
 
                 Fault = null;
             }

@@ -1,57 +1,57 @@
-using System.Collections.Generic;
 using System.Security.Principal;
 using System.Web.Security;
 using Snacks_R_Us.Domain.Entities;
+using Snacks_R_Us.Domain.Extensions;
+using Snacks_R_Us.Domain.Repositories;
 
 namespace Snacks_R_Us.Domain.Services
 {
     public interface IMembershipService
     {
         bool ValidateUser(string userName, string password);
-        MembershipCreateStatus CreateUser(string  userName, string password, string email);
+        MembershipCreateStatus CreateUser(string userName, string password, string email, params string[] roles);
         bool ChangePassword(string userName, string oldPassword, string newPassword);
         IPrincipal GetPrincipal(string userName);
     }
 
     public class AccountMembershipService : IMembershipService
     {
-        private readonly List<User> users;
+        private readonly IRepository repository;
 
-        public AccountMembershipService()
+        public AccountMembershipService(IRepository repository)
         {
-            users = new List<User>
-                        {
-                            new User("pascal", "ihc", "pascal@ihc.be", "Secretary"),
-                            new User("michel", "ilean", "michel@ilean.be", "Developer")
-                        };
+            this.repository = repository;
         }
 
         public bool ValidateUser(string userName, string password)
         {
-            return users.Exists(u => u.Name.Equals(userName) && u.Password.Equals(password));
+            var user = repository.Find<User>(u => u.Name.ToLower().Equals(userName.ToLower()) && u.Password.Equals(password));
+            return user.IsNotNull();
         }
 
-        public MembershipCreateStatus CreateUser(string userName, string password, string email)
+        public MembershipCreateStatus CreateUser(string userName, string password, string email, params string[] roles)
         {
-            if (users.Exists(u => u.Name.Equals(userName)))
+            if (repository.Find<User>(u => u.Name.Equals(userName)).IsNotNull())
                 return MembershipCreateStatus.DuplicateUserName;
-            if (users.Exists(u => u.Email.Equals(email)))
-                return MembershipCreateStatus.DuplicateUserName;
+            if (repository.Find<User>(u => u.Email.Equals(email)).IsNotNull())
+                return MembershipCreateStatus.DuplicateEmail;
 
-            users.Add(new User(userName, password, email));
+            repository.Save(new User(userName, password, email, roles));
             return MembershipCreateStatus.Success;
         }
 
         public bool ChangePassword(string userName, string oldPassword, string newPassword)
         {
-            var user = users.Find(u => u.Name.Equals(userName) && u.Password.Equals(oldPassword));
+            var user = repository.Find<User>(u => u.Name.Equals(userName) && u.Password.Equals(oldPassword));
             if (user == null) return false;
 
             user.ResetPasswordTo(newPassword);
-            return true;}
+            return true;
+        }
 
         public IPrincipal GetPrincipal(string userName)
         {
+            var users = repository.FindAll<User>();
             return users.Find(u => u.Name.Equals(userName)) ?? new User("Unknown user", null, null, new string[0]);
         }
     }
