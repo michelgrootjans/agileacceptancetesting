@@ -1,5 +1,5 @@
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using NUnit.Framework;
 using Rhino.Mocks;
 using Snacks_R_Us.Domain.DataTransfer;
@@ -14,33 +14,34 @@ namespace Snacks_R_Us.UnitTests.Services
     public class when_OrderService_is_told_to_place_an_order : InstanceContextSpecification<IOrderService>
     {
         private long snackId;
-        private long orderId;
         private Order order;
         private Snack snack;
         private CreateOrderDto createOrderDto;
-        private IRepository<Order> orderRepository;
-        private IRepository<Snack> snackRepository;
+        private IRepository repository;
         private IMapper<CreateOrderDto, Order> orderMapper;
+        private User user;
 
         protected override void Arrange()
         {
-            orderId = 654;
             snackId = 6785;
-            order = new Order{Id = orderId};
-            snack = new Snack(1, "Pizza", 2.9);
+            order = new Order();
+            snack = new Snack("Pizza", 2.9);
+            user = Fixtures.Users.JoeDeveloper;
+            user.AddCredits(3);
+
             createOrderDto = new CreateOrderDto{SnackId = snackId.ToString()};
 
             orderMapper = RegisterDependencyInContainer<IMapper<CreateOrderDto, Order>>();
-            orderRepository = Dependency<IRepository<Order>>();
-            snackRepository = Dependency<IRepository<Snack>>();
+            repository = Dependency<IRepository>();
 
             When(orderMapper).IsToldTo(m => m.Map(createOrderDto)).Return(order);
-            When(snackRepository).IsToldTo(r => r.Get(snackId)).Return(snack);
+            When(repository).IsToldTo(r => r.Get<Snack>(snackId)).Return(snack);
+            When(repository).IsToldTo(r => r.Find(Arg<Predicate<User>>.Is.Anything)).Return(user);
         }
 
         protected override IOrderService CreateSystemUnderTest()
         {
-            return new OrderService(orderRepository, snackRepository);
+            return new OrderService(repository);
         }
 
         protected override void Act()
@@ -57,13 +58,13 @@ namespace Snacks_R_Us.UnitTests.Services
         [Test]
         public void should_get_the_snack_from_the_repository()
         {
-            snackRepository.AssertWasCalled(r => r.Get(snackId));
+            repository.AssertWasCalled(r => r.Get<Snack>(snackId));
         }
 
         [Test]
         public void should_save_a_new_order_to_the_repository()
         {
-            orderRepository.AssertWasCalled(r => r.Save(order));
+            repository.AssertWasCalled(r => r.Find(Arg<Predicate<User>>.Is.Anything));
         }
 
         [Test]
@@ -71,61 +72,134 @@ namespace Snacks_R_Us.UnitTests.Services
         {
             order.Snack.ShouldBeSameAs(snack);
         }
+
+        [Test]
+        public void should_add_the_order_to_the_user()
+        {
+            user.Orders.ShouldContain(order);
+        }
     }
 
     public class when_OrderService_is_told_to_get_my_order : InstanceContextSpecification<IOrderService>
     {
-        private IRepository<Order> orderRepository;
-        private IEnumerable<OrderDto> result;
-        private IMapper<Order, OrderDto> orderMapper;
+        private IRepository repository;
+        private ViewOrdersDto result;
+        private IMapper<IEnumerable<Order>, ViewOrdersDto> orderMapper;
         private Order order1;
         private Order order2;
-        private OrderDto orderDto1;
-        private OrderDto orderDto2;
+        private ViewOrderDto orderDto1;
+        private ViewOrderDto orderDto2;
+        private ViewOrdersDto ordersDto;
+        private User user;
 
         protected override void Arrange()
         {
-            orderRepository = Dependency<IRepository<Order>>();
-            orderMapper = RegisterDependencyInContainer<IMapper<Order, OrderDto>>();
+            repository = Dependency<IRepository>();
+            orderMapper = RegisterDependencyInContainer<IMapper<IEnumerable<Order>, ViewOrdersDto>>();
 
-            order1 = new Order();
-            order2 = new Order();
-            orderDto1 = new OrderDto();
-            orderDto2 = new OrderDto();
+            user = Fixtures.Users.JoeDeveloper;
+            user.AddCredits(3);
 
-            When(orderRepository).IsToldTo(r => r.FindAll()).Return(new List<Order> {order1, order2});
-            When(orderMapper).IsToldTo(m => m.Map(order1)).Return(orderDto1);
-            When(orderMapper).IsToldTo(m => m.Map(order2)).Return(orderDto2);
+            order1 = new Order(new Snack("Pizza", 2));
+            order2 = new Order(new Snack("Sandwich", 1));
+            orderDto1 = new ViewOrderDto();
+            orderDto2 = new ViewOrderDto();
+            ordersDto = new ViewOrdersDto();
+            ordersDto.Orders.Add(orderDto1);
+            ordersDto.Orders.Add(orderDto2);
+
+            user.AddOrder(order1);
+            user.AddOrder(order2);
+
+            When(repository).IsToldTo(r => r.Find(Arg<Predicate<User>>.Is.Anything)).Return(user);
+            When(orderMapper).IsToldTo(m => m.Map(user.Orders)).Return(ordersDto);
         }
 
         protected override IOrderService CreateSystemUnderTest()
         {
-            return new OrderService(orderRepository, Dependency<IRepository<Snack>>());
+            return new OrderService(repository);
         }
 
         protected override void Act()
         {
-            result = sut.GetMyOrders().ToList();
-        }
-
-        [Test]
-        public void should_get_all_orders_from_the_repository()
-        {
-            orderRepository.AssertWasCalled(r => r.FindAll());
+            result = sut.GetMyOrders();
         }
 
         [Test]
         public void should_map_all_the_orders_to_Dtos()
         {
-            orderMapper.AssertWasCalled(m => m.Map(order1));
-            orderMapper.AssertWasCalled(m => m.Map(order2));
+            orderMapper.AssertWasCalled(m => m.Map(user.Orders));
         }
 
         [Test]
         public void should_return_the_mapped_orders()
         {
-            result.ShouldContain(orderDto1);
-            result.ShouldContain(orderDto2);
+            result.Orders.ShouldContain(orderDto1);
+            result.Orders.ShouldContain(orderDto2);
+        }
+    }
+
+    public class when_OrderService_is_told_to_get_todays_orders : InstanceContextSpecification<IOrderService>
+    {
+        private IRepository repository;
+        private ViewOrdersDto result;
+        private IMapper<IEnumerable<Order>, ViewOrdersDto> mapper;
+        private Order order1;
+        private Order order2;
+        private ViewOrderDto order1Dto;
+        private ViewOrderDto order2Dto;
+        private ViewOrdersDto ordersDto;
+        private List<Order> orders;
+
+        protected override void Arrange()
+        {
+            order1 = Fixtures.Orders.OnePizza;
+            order2 = Fixtures.Orders.OnePizza;
+            orders = new List<Order>{order1, order2};
+            order1Dto = new ViewOrderDto();
+            order2Dto = new ViewOrderDto();
+            ordersDto = new ViewOrdersDto();
+            ordersDto.Orders.Add(order1Dto);
+            ordersDto.Orders.Add(order2Dto);
+
+            mapper = RegisterDependencyInContainer<IMapper<IEnumerable<Order>, ViewOrdersDto>>();
+            repository = Dependency<IRepository>();
+
+            When(repository)
+                .IsToldTo(r => r.FindAll(Arg<Predicate<Order>>.Is.Anything))
+                .Return(orders);
+
+            When(mapper).IsToldTo(m => m.Map(Arg<IEnumerable<Order>>.Is.Anything)).Return(ordersDto);
+        }
+
+        protected override IOrderService CreateSystemUnderTest()
+        {
+            return new OrderService(repository);
+        }
+
+        protected override void Act()
+        {
+            result = sut.GetTodaysOrders();
+        }
+
+        [Test]
+        public void should_get_all_orders_from_today_from_the_repostitory()
+        {
+            repository.AssertWasCalled(r => r.FindAll(Arg<Predicate<Order>>.Is.Anything));
+        }
+
+        [Test]
+        public void should_map_the_resulting_orders()
+        {
+            mapper.AssertWasCalled(m => m.Map(Arg<IEnumerable<Order>>.Is.Anything));
+        }
+
+
+        [Test]
+        public void should_return_a_list_containing_the_two_mapped_results()
+        {
+            result.ShouldContain(order1Dto);
+            result.ShouldContain(order2Dto);
         }
     }
 

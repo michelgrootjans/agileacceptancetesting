@@ -39,8 +39,13 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CreateUsers.cs" />
+    <Compile Include="GetAllUsers.cs" />
+    <Compile Include="Login.cs" />
+    <Compile Include="ManageUsersCredit.cs" />
     <Compile Include="OrderSnack.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -15,6 +15,7 @@ namespace Snacks_R_Us.Domain.Services
             Current.UserName = userName;
             FormsAuthentication.SetAuthCookie(userName, createPersistentCookie);
         }
+
         public void SignOut()
         {
             FormsAuthentication.SignOut();

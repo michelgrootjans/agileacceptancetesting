@@ -1,13 +1,15 @@
+using System;
+using System.Collections.Generic;
 using Snacks_R_Us.Domain.DataTransfer;
 using Snacks_R_Us.Domain.Entities;
 
 namespace Snacks_R_Us.Domain.Mapping
 {
-    internal class OrderToDtoMapper : IMapper<Order, OrderDto>
+    internal class OrderToDtoMapper : IMapper<IEnumerable<Order>, ViewOrdersDto>
     {
-        public OrderDto Map(Order order)
+        public ViewOrderDto Map(Order order)
         {
-            var dto = new OrderDto();
+            var dto = new ViewOrderDto();
 
             dto.Qty = order.Qty;
             dto.SnackName = order.SnackName;
@@ -15,6 +17,19 @@ namespace Snacks_R_Us.Domain.Mapping
             dto.TotalPrice = order.TotalPrice;
 
             return dto;
+        }
+
+        public ViewOrdersDto Map(IEnumerable<Order> from)
+        {
+            double total = 0;
+            var orders = new ViewOrdersDto();
+            foreach (var order in from)
+            {
+                orders.Orders.Add(Map(order));
+                total += order.TotalPrice;
+            }
+            orders.Total = total.ToString();
+            return orders;
         }
     }
 }

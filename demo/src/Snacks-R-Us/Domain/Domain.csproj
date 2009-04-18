@@ -49,32 +49,45 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationStartup.cs" />
+    <Compile Include="DataTransfer\AddCreditDto.cs" />
     <Compile Include="DataTransfer\ISelectListItem.cs" />
     <Compile Include="DataTransfer\MyOrdersDto.cs" />
     <Compile Include="DataTransfer\OrderDto.cs" />
     <Compile Include="DataTransfer\SnackDto.cs" />
+    <Compile Include="DataTransfer\ViewCreditDto.cs" />
+    <Compile Include="DataTransfer\ViewOrdersDto.cs" />
+    <Compile Include="DataTransfer\ViewUserDto.cs" />
+    <Compile Include="Entities\Credit.cs" />
+    <Compile Include="Entities\IEntity.cs" />
     <Compile Include="Entities\Order.cs" />
     <Compile Include="Entities\Snack.cs" />
+    <Compile Include="Extensions\IEnumerableExtensions.cs" />
+    <Compile Include="Extensions\ObjectExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="InsufficientCreditsException.cs" />
     <Compile Include="IoC\Container.cs" />
     <Compile Include="IoC\DictionaryContainer.cs" />
     <Compile Include="Mapping\CreateOrderDtoMapper.cs" />
+    <Compile Include="Mapping\UserToCreditDtoMapper.cs" />
     <Compile Include="Mapping\IMapper.cs" />
     <Compile Include="Mapping\Map.cs" />
     <Compile Include="DataTransfer\CreateOrderDto.cs" />
     <Compile Include="DataTransfer\ViewOrderDto.cs" />
     <Compile Include="Mapping\OrderToDtoMapper.cs" />
     <Compile Include="Mapping\SnackToDtoMapper.cs" />
+    <Compile Include="Mapping\UserToDtoMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\IRepository.cs" />
-    <Compile Include="Repositories\OrderRepository.cs" />
-    <Compile Include="Repositories\SnackRepository.cs" />
+    <Compile Include="Repositories\OrderDecoratedRepository.cs" />
     <Compile Include="Services\Current.cs" />
     <Compile Include="Services\IAuthenticationService.cs" />
+    <Compile Include="Services\ICreditService.cs" />
     <Compile Include="Services\IMembershipService.cs" />
     <Compile Include="Services\IOrderService.cs" />
     <Compile Include="Services\ISnackService.cs" />
     <Compile Include="Entities\User.cs" />
+    <Compile Include="Services\IUserService.cs" />
+    <Compile Include="Services\Query.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

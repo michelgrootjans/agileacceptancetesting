@@ -5,7 +5,7 @@ namespace Snacks_R_Us.Domain.DataTransfer
 {
     public class MyOrdersDto
     {
-        public IEnumerable<OrderDto> Orders { get; set; }
+        public ViewOrdersDto Orders { get; set; }
         public IEnumerable<SelectListItem> Snacks { get; set; }
     }
 }

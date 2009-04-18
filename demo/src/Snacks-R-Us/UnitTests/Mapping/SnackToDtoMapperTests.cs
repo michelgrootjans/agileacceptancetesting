@@ -13,7 +13,7 @@ namespace Snacks_R_Us.UnitTests.Mapping
 
         protected override void Arrange()
         {
-            snack = new Snack(1, "Pizza", 2.9);
+            snack = new Snack("Pizza", 2.9);
         }
 
         protected override IMapper<Snack, SnackDto> CreateSystemUnderTest()
@@ -35,7 +35,7 @@ namespace Snacks_R_Us.UnitTests.Mapping
         [Test]
         public void should_map_its_name()
         {
-            snackDto.Name.ShouldBeEqualTo(snack.Name);
+            snackDto.Name.ShouldBeEqualTo(string.Format("{0} (€ {1})", snack.Name, snack.Price));
         }
 
         [Test]

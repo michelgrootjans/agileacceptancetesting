@@ -11,6 +11,7 @@ namespace Snacks_R_Us.WebApp
         {
             RegisterRoutes(RouteTable.Routes);
             ApplicationStartup.Run();
+            ApplicationStartup.AddDemoData();
         }
 
         private static void RegisterRoutes(RouteCollection routes)

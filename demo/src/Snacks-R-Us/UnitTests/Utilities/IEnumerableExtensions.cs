@@ -9,5 +9,15 @@ namespace Snacks_R_Us.UnitTests.Utilities
         {
             Assert.Contains(expected, new List<T>(list));
         }
+
+        public static T GetItem<T>(this IEnumerable<T> list, int index)
+        {
+            var counter = 0;
+            foreach (var t in list)
+            {
+                if (index == counter++) return t;
+            }
+            return default(T);
+        }
     }
 }

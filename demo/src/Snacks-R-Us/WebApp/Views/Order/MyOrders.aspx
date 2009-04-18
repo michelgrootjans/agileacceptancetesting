@@ -1,11 +1,13 @@
-<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<MyOrdersDto>" %>
+<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="ViewPage<MyOrdersDto>" %>
 <%@ Import Namespace="Snacks_R_Us.Domain.DataTransfer"%>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-	MyOrders
+	My orders
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+    <%= Html.ValidationSummary("Your order was unsuccessful.") %>
+
     <h2>Order a new snack</h2>
     <% using (Html.BeginForm("Order", "Order")){ %>
         <%= Html.TextBox("Qty", "1") %>
@@ -14,8 +16,5 @@
     <% } %>
 
     <h2>Current Orders</h2>
-    <% foreach (var order in Model.Orders) { %>
-        <% Html.RenderPartial("Order", order); %> <br />
-    <% } %>
-
+    <% Html.RenderPartial("Order", Model.Orders); %>
 </asp:Content>

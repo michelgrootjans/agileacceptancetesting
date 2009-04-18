@@ -4,11 +4,10 @@ using Snacks_R_Us.Domain.Services;
 
 namespace Snacks_R_Us.WebApp.Controllers
 {
-    public interface ISnackController
+    public interface ISnackController : IController
     {
         ActionResult Index();
-        ViewDataDictionary ViewData { get; }
-    }
+   }
 
     public class SnackController : Controller, ISnackController
     {
