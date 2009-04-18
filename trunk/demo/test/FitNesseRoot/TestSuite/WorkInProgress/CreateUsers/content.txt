@@ -1,0 +1,11 @@
+!|Create users|
+|Username|Password|email|Role|Fault?|
+|Michel|iLean|michel@ilean.be|Developer|Success|
+|Pascal|ihc|pascal@ihc.be|Developer|Success|
+|Michel|iLean|michel@ilean.be|Developer|DuplicateUserName|
+|Peter|ihv|michel@ilean.be|Developer|DuplicateEmail|
+
+!|Get all users|
+|Name|Email|Credit|
+|Michel|michel@ilean.be|0|
+|Pascal|pascal@ihc.be|0|
