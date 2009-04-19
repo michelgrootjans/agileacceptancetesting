@@ -1,0 +1,11 @@
+!|import|
+|Snacks_R_Us.AcceptanceTests|
+
+!|Create users|
+|Username|Password|email|Role|Result?|
+|Michel|iLean|michel@ilean.be|Developer|Success|
+|Pascal|ihc|pascal@ihc.be|Developer|Success|
+
+!|Create Snack|
+|Name|Price|Result?|
+|Pizza Hawaii|5,3|Success|
