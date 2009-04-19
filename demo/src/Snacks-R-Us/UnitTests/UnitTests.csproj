@@ -66,6 +66,7 @@
     <Compile Include="Fixtures\Snacks.cs" />
     <Compile Include="Fixtures\Users.cs" />
     <Compile Include="Mapping\CreateOrderDtoMapperTests.cs" />
+    <Compile Include="Mapping\CreateSnackDtoMapperTests.cs" />
     <Compile Include="Mapping\CreditToDtoMapperTests.cs" />
     <Compile Include="Mapping\OrderToDtoMapperTests.cs" />
     <Compile Include="Mapping\SnackToDtoMapperTests.cs" />

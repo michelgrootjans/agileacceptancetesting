@@ -41,7 +41,7 @@ namespace Snacks_R_Us.UnitTests.Mapping
         [Test]
         public void should_map_its_snack_name()
         {
-            result.Orders[0].SnackName.ShouldBeEqualTo(snack.Name);
+            result.Orders[0].Snack.ShouldBeEqualTo(snack.Name);
         }
 
         [Test]

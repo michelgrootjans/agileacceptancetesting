@@ -42,8 +42,12 @@
     <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CreateSnack.cs" />
     <Compile Include="CreateUsers.cs" />
+    <Compile Include="Get.cs" />
     <Compile Include="GetAllUsers.cs" />
+    <Compile Include="GetTodaysOrders.cs" />
+    <Compile Include="Init.cs" />
     <Compile Include="Login.cs" />
     <Compile Include="ManageUsersCredit.cs" />
     <Compile Include="OrderSnack.cs" />

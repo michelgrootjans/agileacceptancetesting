@@ -1,31 +1,31 @@
 using System;
-using System.Linq;
 using fit;
 using Snacks_R_Us.Domain.DataTransfer;
 using Snacks_R_Us.Domain.IoC;
 using Snacks_R_Us.Domain.Services;
+using System.Linq;
 
 namespace Snacks_R_Us.AcceptanceTests
 {
-    public class GetAllUsers : RowFixture
+    public class GetTodaysOrders : RowFixture
     {
-        private readonly IUserService userService;
+        private readonly IOrderService orderService;
 
-        public GetAllUsers()
+        public GetTodaysOrders()
         {
             Init.FitNesseTests();
 
-            userService = Container.GetImplementationOf<IUserService>();
+            orderService = Container.GetImplementationOf<IOrderService>();
         }
 
         public override Type GetTargetClass()
         {
-            return typeof (ViewUserDto);
+            return typeof (ViewOrderDto);
         }
 
         public override object[] Query()
         {
-            return userService.GetAllUsers().ToArray();
+            return orderService.GetTodaysOrders().ToArray();
         }
     }
 }

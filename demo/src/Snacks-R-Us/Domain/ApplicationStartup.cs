@@ -1,10 +1,11 @@
-using System;
 using System.Collections.Generic;
+using System.Web;
 using Snacks_R_Us.Domain.Entities;
 using Snacks_R_Us.Domain.IoC;
 using Snacks_R_Us.Domain.Mapping;
 using Snacks_R_Us.Domain.Repositories;
 using Snacks_R_Us.Domain.Services;
+using Snacks_R_Us.Domain.Extensions;
 
 namespace Snacks_R_Us.Domain
 {
@@ -25,6 +26,7 @@ namespace Snacks_R_Us.Domain
 
         private static void InitializeRepository()
         {
+            //You'll probably want to switch to NHibernate here
             repository = new OrderDecoratedRepository(new InMemoryRepository());
         }
 
@@ -41,10 +43,17 @@ namespace Snacks_R_Us.Domain
             var services = new List<object>();
 
             services.Add(new AccountMembershipService(repository));
-            services.Add(new FormsAuthenticationService());
+
+            //Dirty hack
+            IAuthenticationService authenticationservice = new SimpleAuthenticationService();
+            if (HttpContext.Current.IsNotNull())
+                authenticationservice = new FormsAuthenticationService(authenticationservice);
+            
+            services.Add(authenticationservice);
 
             services.Add(new SnackService(repository));
             services.Add(new SnackToDtoMapper());
+            services.Add(new CreateSnackDtoMapper());
 
             services.Add(new OrderService(repository));
             services.Add(new CreateOrderDtoMapper());

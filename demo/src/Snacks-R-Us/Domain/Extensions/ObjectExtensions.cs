@@ -6,5 +6,10 @@ namespace Snacks_R_Us.Domain.Extensions
         {
             return target != null;
         }
+
+        public static bool IsNull(this object target)
+        {
+            return target == null;
+        }
     }
 }

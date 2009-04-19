@@ -6,27 +6,26 @@ using Snacks_R_Us.Domain.Services;
 
 namespace Snacks_R_Us.AcceptanceTests
 {
-    public class OrderSnack : ColumnFixture
+    public class CreateSnack : ColumnFixture
     {
-        private readonly IOrderService orderService;
-        
-        public double Qty { get; set; }
-        public string Snack { get; set; }
+        private readonly ISnackService snackService;
+
+        public string Name { get; set; }
+        public string Price { get; set; }
         public string Result { get; set; }
 
-        public OrderSnack()
+        public CreateSnack()
         {
             Init.FitNesseTests();
 
-            orderService = Container.GetImplementationOf<IOrderService>();
+            snackService = Container.GetImplementationOf<ISnackService>();
         }
 
         public override void Execute()
         {
             try
             {
-                var snack = Get.Snack(Snack);
-                orderService.Order(new CreateOrderDto { Qty = Qty.ToString(), SnackId = snack.Id });
+                snackService.CreateSnack(new CreateSnackDto{Name = Name, Price = Price});
                 Result = "Success";
             }
             catch (Exception e)
@@ -34,6 +33,5 @@ namespace Snacks_R_Us.AcceptanceTests
                 Result = e.Message;
             }
         }
-
     }
 }

@@ -14,7 +14,7 @@
     <% foreach (var order in Model) {%>
     <tr>
         <td><%= order.Qty %></td>
-        <td><%= order.SnackName %></td>
+        <td><%= order.Snack %></td>
         <td>€ <%= order.UnitPrice %></td>
         <td>€ <%= order.TotalPrice %></td>
     </tr>

@@ -35,7 +35,13 @@ namespace Snacks_R_Us.UnitTests.Mapping
         [Test]
         public void should_map_its_name()
         {
-            snackDto.Name.ShouldBeEqualTo(string.Format("{0} (€ {1})", snack.Name, snack.Price));
+            snackDto.Name.ShouldBeEqualTo(snack.Name);
+        }
+
+        [Test]
+        public void should_map_its_screenname()
+        {
+            snackDto.ScreenName.ShouldBeEqualTo(string.Format("{0} (€ {1})", snack.Name, snack.Price));
         }
 
         [Test]
