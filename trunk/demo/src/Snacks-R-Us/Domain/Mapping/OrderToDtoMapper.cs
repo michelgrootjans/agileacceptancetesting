@@ -1,18 +1,19 @@
-using System;
 using System.Collections.Generic;
 using Snacks_R_Us.Domain.DataTransfer;
 using Snacks_R_Us.Domain.Entities;
 
 namespace Snacks_R_Us.Domain.Mapping
 {
-    internal class OrderToDtoMapper : IMapper<IEnumerable<Order>, ViewOrdersDto>
+    internal class OrderToDtoMapper : 
+        IMapper<Order, ViewOrderDto>,
+        IMapper<IEnumerable<Order>, ViewOrdersDto>
     {
         public ViewOrderDto Map(Order order)
         {
             var dto = new ViewOrderDto();
 
             dto.Qty = order.Qty;
-            dto.SnackName = order.SnackName;
+            dto.Snack = order.SnackName;
             dto.UnitPrice = order.UnitPrice;
             dto.TotalPrice = order.TotalPrice;
 

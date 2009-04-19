@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="ApplicationStartup.cs" />
     <Compile Include="DataTransfer\AddCreditDto.cs" />
+    <Compile Include="DataTransfer\CreateSnackDto.cs" />
     <Compile Include="DataTransfer\ISelectListItem.cs" />
     <Compile Include="DataTransfer\MyOrdersDto.cs" />
     <Compile Include="DataTransfer\OrderDto.cs" />
@@ -68,6 +69,7 @@
     <Compile Include="IoC\Container.cs" />
     <Compile Include="IoC\DictionaryContainer.cs" />
     <Compile Include="Mapping\CreateOrderDtoMapper.cs" />
+    <Compile Include="Mapping\CreateSnackDtoMapper.cs" />
     <Compile Include="Mapping\UserToCreditDtoMapper.cs" />
     <Compile Include="Mapping\IMapper.cs" />
     <Compile Include="Mapping\Map.cs" />
@@ -81,6 +83,7 @@
     <Compile Include="Repositories\OrderDecoratedRepository.cs" />
     <Compile Include="Services\Current.cs" />
     <Compile Include="Services\IAuthenticationService.cs" />
+    <Compile Include="Services\IContext.cs" />
     <Compile Include="Services\ICreditService.cs" />
     <Compile Include="Services\IMembershipService.cs" />
     <Compile Include="Services\IOrderService.cs" />

@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using System.Web.Routing;
 using Snacks_R_Us.Domain;
+using Snacks_R_Us.Domain.Services;
 
 namespace Snacks_R_Us.WebApp
 {
@@ -10,6 +11,7 @@ namespace Snacks_R_Us.WebApp
         protected void Application_Start()
         {
             RegisterRoutes(RouteTable.Routes);
+            Current.Context = new WebContext();
             ApplicationStartup.Run();
             ApplicationStartup.AddDemoData();
         }
