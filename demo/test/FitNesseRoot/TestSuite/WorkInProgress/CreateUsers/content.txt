@@ -1,7 +1,5 @@
 !|Create users|
-|Username|Password|email|Role|Fault?|
-|Michel|iLean|michel@ilean.be|Developer|Success|
-|Pascal|ihc|pascal@ihc.be|Developer|Success|
+|Username|Password|email|Role|Result?|
 |Michel|iLean|michel@ilean.be|Developer|DuplicateUserName|
 |Peter|ihv|michel@ilean.be|Developer|DuplicateEmail|
 
