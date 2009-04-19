@@ -1,0 +1,14 @@
+!|ActionFixture|
+|Start|Login script|
+|Enter|Username|Michel|
+|Enter|Password|blah|
+|Press|Login|
+|Check|Logged in|false|
+|Enter|Username|mike|
+|Enter|Password|iLean|
+|Press|Login|
+|Check|Logged in|false|
+|Enter|Username|Michel|
+|Enter|Password|iLean|
+|Press|Login|
+|Check|Logged in|true|
