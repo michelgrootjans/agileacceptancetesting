@@ -1,2 +1,9 @@
-!1 Welkom op de acceptatiesite van Snacks-R-Us
-!2 Ga naar de TestSuite
+!c !1 Welcome to Snacks-R-Us
+!c !3 ''Your snack ordering solution.''
+
+|!c '''Table of Contents'''|
+|!c [[Prepared Test Suite][PreparedTestSuite]]|''The suite where acceptance tests are prepared for the next iteration(s)''|
+|!c [[Work In Progress Suite][WorkInProgressSuite]]|''The suite containing acceptance tests for the current iteration, which are in progress or not accepted yet''|
+|!c [[Acceptance Suite][AcceptanceSuite]]|''The suite containing the tests which are accepted. Failing these tests, breaks the build''| 
+
+!meta Note, acceptance tests usually start in the PreparedTestSuite, then some of them are moved to the WorkInProgressSuite when a iteration starts. After acceptance they move to the AcceptanceSuite, where they are no longer owned by the developers.
