@@ -1,0 +1,4 @@
+This is the place where Acceptance Tests get prepared in collaboration with testers, developers and functional analysts/product owners.
+These tests cover stories which will be implemented in coming iterations.
+
+!contents -R2 -g -p -f -h

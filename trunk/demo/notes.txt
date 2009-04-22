@@ -1,5 +1,6 @@
 Geen database:
-heeft invloed op de manier waarop fitnesse tests worden opgebouwd. Het is alsof de database bij elke run wordt leeggemaakt. Kan worden beschouwd als een bonus ;-)
+heeft invloed op de manier waarop fitnesse tests worden opgebouwd. 
+Het is alsof de database bij elke run wordt leeggemaakt. Kan worden beschouwd als een bonus ;-)
 
 Versie op 14 dagen <-> versie op 0 dagen
 Add to ignore: work in progress, recent changes, error logs
