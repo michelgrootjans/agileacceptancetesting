@@ -6,25 +6,22 @@ namespace Snacks_R_Us.Domain.Services
     public static class Current
     {
         public static IContext Context { get; set; }
-        private static readonly IMembershipService UserService;
-        private static readonly ICreditService CreditService;
-
-        static Current()
-        {
-            UserService = Container.GetImplementationOf<IMembershipService>();
-            CreditService = Container.GetImplementationOf<ICreditService>();
-        }
 
         public static IPrincipal User
         {
-            get { return UserService.GetPrincipal(UserName); }
+            get
+            {
+                var membershipService = Container.GetImplementationOf<IMembershipService>();
+                return membershipService.GetPrincipal(UserName);
+            }
         }
 
         public static string Credits
         {
             get 
             {
-                var credits = CreditService.GetCreditsForCurrentUser();
+                var creditService = Container.GetImplementationOf<ICreditService>();
+                var credits = creditService.GetCreditsForCurrentUser();
                 return credits.Credit;
             }
         }

@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApp", "WebApp\WebApp.csproj", "{E606776F-97C1-4423-BBA5-87F41B00DFF7}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{51D5654C-088D-404C-8954-8CF351299CDA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AcceptanceTests", "AcceptanceTests\AcceptanceTests.csproj", "{4D389D4B-75EB-4440-969E-8EE8DD0DB2C3}"
@@ -14,16 +12,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{202059DB-1A13-4CFA-B45E-BC45E3C8A453}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication", "WebApplication\WebApplication.csproj", "{383A5533-9D39-4038-8B57-7A01D77A90AF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{E606776F-97C1-4423-BBA5-87F41B00DFF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E606776F-97C1-4423-BBA5-87F41B00DFF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E606776F-97C1-4423-BBA5-87F41B00DFF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E606776F-97C1-4423-BBA5-87F41B00DFF7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{51D5654C-088D-404C-8954-8CF351299CDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{51D5654C-088D-404C-8954-8CF351299CDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{51D5654C-088D-404C-8954-8CF351299CDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -36,6 +32,10 @@ Global
 		{202059DB-1A13-4CFA-B45E-BC45E3C8A453}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{202059DB-1A13-4CFA-B45E-BC45E3C8A453}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{202059DB-1A13-4CFA-B45E-BC45E3C8A453}.Release|Any CPU.Build.0 = Release|Any CPU
+		{383A5533-9D39-4038-8B57-7A01D77A90AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{383A5533-9D39-4038-8B57-7A01D77A90AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{383A5533-9D39-4038-8B57-7A01D77A90AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{383A5533-9D39-4038-8B57-7A01D77A90AF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

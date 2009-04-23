@@ -87,9 +87,9 @@
       <Project>{202059DB-1A13-4CFA-B45E-BC45E3C8A453}</Project>
       <Name>Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\WebApp\WebApp.csproj">
-      <Project>{E606776F-97C1-4423-BBA5-87F41B00DFF7}</Project>
-      <Name>WebApp</Name>
+    <ProjectReference Include="..\WebApplication\WebApplication.csproj">
+      <Project>{383A5533-9D39-4038-8B57-7A01D77A90AF}</Project>
+      <Name>WebApplication</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
