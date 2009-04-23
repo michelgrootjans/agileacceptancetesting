@@ -16,7 +16,7 @@
     </ItemGroup>
 
     <Message Text="Running unit tests: @(TestAssemblies)"/>
-    <NUnit Assemblies="@(TestAssemblies)" ToolPath="$(ToolsDir)\NUnit\" DisableShadowCopy="false" />
+    <NUnit Assemblies="@(TestAssemblies)" ToolPath="$(ToolsDir)\NUnit\" />
   </Target>
   
   <Target Name="FitNesse">
