@@ -58,10 +58,6 @@
       <Project>{202059DB-1A13-4CFA-B45E-BC45E3C8A453}</Project>
       <Name>Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\WebApp\WebApp.csproj">
-      <Project>{E606776F-97C1-4423-BBA5-87F41B00DFF7}</Project>
-      <Name>WebApp</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
