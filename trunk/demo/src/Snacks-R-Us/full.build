@@ -1,7 +1,7 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="CI" ToolsVersion="3.5">
   <PropertyGroup>
     <ToolsDir>..\tools</ToolsDir>
-    <ResultsDir>$(MSBuildProjectDirectory)\Results</ResultsDir>
+    <ResultsDir>$(MSBuildProjectDirectory)</ResultsDir>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -30,11 +30,11 @@
     <AsyncExec WorkingDirectory="$(FitNesseDir)" Command="run.bat" />
 
     <Message Text="##teamcity[progressStart name='Work in progress']" />
-    <Exec ContinueOnError="true" Command="$(TestRunner) -results WorkInProgress.xml localhost 8888 PreparedTestSuite.WorkInProgress" />
+    <Exec ContinueOnError="true" Command="$(TestRunner) -results $(ResultsDir)\WorkInProgress.xml localhost 8888 PreparedTestSuite.WorkInProgress" />
     <Message Text="##teamcity[progressFinish name='Work in progress']" />
 
     <Message Text="##teamcity[progressStart name='Acceptance tests']" />
-    <Exec ContinueOnError="false" Command="$(TestRunner) -results AcceptanceSuite.xml localhost 8888 AcceptanceSuite" />
+    <Exec ContinueOnError="false" Command="$(TestRunner) -results $(ResultsDir)\AcceptanceSuite.xml localhost 8888 AcceptanceSuite" />
     <Message Text="##teamcity[progressFinish name='Acceptance tests']" />
     
     <CallTarget Targets="StopFitnesse" />
@@ -45,8 +45,8 @@
 
   <Target Name="StopFitnesse">
     <Message Text="##teamcity[progressStart name='Generating reports...']" />
-    <Exec ContinueOnError="true" Command="$(ResultFormatter) WorkInProgress.xml html WorkInProgress.htm localhost 8888 PreparedTestSuite.WorkInProgress" />
-    <Exec ContinueOnError="false" Command="$(ResultFormatter) AcceptanceSuite.xml html AcceptanceSuite.htm localhost 8888 EAcceptanceSuite" />
+    <Exec ContinueOnError="true" Command="$(ResultFormatter) $(ResultsDir)\WorkInProgress.xml html $(ResultsDir)\WorkInProgress.htm localhost 8888 PreparedTestSuite.WorkInProgress" />
+    <Exec ContinueOnError="false" Command="$(ResultFormatter) $(ResultsDir)\AcceptanceSuite.xml html $(ResultsDir)\AcceptanceSuite.htm localhost 8888 EAcceptanceSuite" />
     <Message Text="##teamcity[progressFinish name='Generating reports...']" />
     
     <Exec WorkingDirectory="$(FitNesseDir)" Command="Stop.bat" ContinueOnError="false" />
