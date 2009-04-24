@@ -3,7 +3,13 @@
     <ToolsDir>..\tools</ToolsDir>
     <ResultsDir>$(MSBuildProjectDirectory)\Results</ResultsDir>
   </PropertyGroup>
-  
+
+  <PropertyGroup>
+    <FitNesseDir>..\..\Test</FitNesseDir>
+    <TestRunner>$(FitNesseDir)\dotnet2\TestRunner.exe</TestRunner>
+    <ResultFormatter>java -cp $(FitNesseDir)\fitnesse.jar fitnesse.runner.FormattingOption</ResultFormatter>
+  </PropertyGroup>
+
   <Import Project="$(ToolsDir)\MSBuild\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets" />
   <UsingTask AssemblyFile="$(ToolsDir)\MSBuild\AsyncExec\AsyncExec.dll" TaskName="AsyncExec.AsyncExec" />
 
@@ -21,21 +27,16 @@
   </Target>
 
   <Target Name="FitNesse">
-    <PropertyGroup>
-      <FitNesseDir>..\..\Test</FitNesseDir>
-      <TestRunner>$(FitNesseDir)\dotnet2\TestRunner.exe</TestRunner>
-      <ResultFormatter>java -cp $(FitNesseDir)\fitnesse.jar fitnesse.runner.FormattingOption</ResultFormatter>
-    </PropertyGroup>
-
     <AsyncExec WorkingDirectory="$(FitNesseDir)" Command="run.bat" />
 
     <Message Text="##teamcity[progressStart name='Work in progress']" />
     <Exec ContinueOnError="true" Command="$(TestRunner) -results WorkInProgress.xml localhost 8888 PreparedTestSuite.WorkInProgress" />
+    <Message Text="##teamcity[progressFinish name='Work in progress']" />
 
-    <Message Text="##teamcity[progressStart name='Regression tests']" />
+    <Message Text="##teamcity[progressStart name='Acceptance tests']" />
     <Exec ContinueOnError="false" Command="$(TestRunner) -results AcceptanceSuite.xml localhost 8888 AcceptanceSuite" />
-
-    <Message Text="##teamcity[progressFinish name='Fitnesse']" />
+    <Message Text="##teamcity[progressFinish name='Acceptance tests']" />
+    
     <CallTarget Targets="StopFitnesse" />
     <OnError ExecuteTargets="StopFitnesse" />
     <!--
@@ -43,14 +44,16 @@
   </Target>
 
   <Target Name="StopFitnesse">
-    <Exec WorkingDirectory="$(FitNesseDir)" Command="Stop.bat" ContinueOnError="false" />
-
+    <Message Text="##teamcity[progressStart name='Generating reports...']" />
     <Exec ContinueOnError="true" Command="$(ResultFormatter) WorkInProgress.xml html WorkInProgress.htm localhost 8888 PreparedTestSuite.WorkInProgress" />
     <Exec ContinueOnError="false" Command="$(ResultFormatter) AcceptanceSuite.xml html AcceptanceSuite.htm localhost 8888 EAcceptanceSuite" />
-
+    <Message Text="##teamcity[progressFinish name='Generating reports...']" />
+    
+    <Exec WorkingDirectory="$(FitNesseDir)" Command="Stop.bat" ContinueOnError="false" />
+    
     <Message Text="##teamcity[publishArtifacts '$(ResultsDir)\WorkInProgress.htm']" />
     <Message Text="##teamcity[publishArtifacts '$(ResultsDir)\AcceptanceSuite.htm']" />
   </Target>
 
-  <Target Name="CI" DependsOnTargets="Compile;Test" />
+  <Target Name="CI" DependsOnTargets="Compile;Test;FitNesse" />
 </Project>
