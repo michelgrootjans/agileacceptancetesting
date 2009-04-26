@@ -55,5 +55,9 @@
     <Message Text="##teamcity[publishArtifacts '$(ResultsDir)\AcceptanceSuite.htm']" />
   </Target>
 
+  <Target Name="Run">
+    <AsyncExec Command="$(ToolsDir)\WebServer\WebDev.WebServer.exe /path:$(MSBuildProjectDirectory)\WebApplication /port:1234" />
+  </Target>
+
   <Target Name="CI" DependsOnTargets="Compile;Test;FitNesse" />
 </Project>
