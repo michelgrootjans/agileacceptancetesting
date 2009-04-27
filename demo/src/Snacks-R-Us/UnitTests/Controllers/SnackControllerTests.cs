@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
 using NUnit.Framework;
@@ -67,7 +68,7 @@ namespace Snacks_R_Us.UnitTests.Controllers
             snack = Fixtures.Snacks.Pizza;
 
             repository = Dependency<IRepository>();
-            mapper = RegisterDependencyInContainer<IMapper<CreateSnackDto, Snack>>();
+            mapper = RegisterMapper<CreateSnackDto, Snack>();
 
             When(mapper).IsToldTo(m => m.Map(createSnackDto)).Return(snack);
         }

@@ -31,7 +31,7 @@ namespace Snacks_R_Us.UnitTests.Services
 
             createOrderDto = new CreateOrderDto{SnackId = snackId.ToString()};
 
-            orderMapper = RegisterDependencyInContainer<IMapper<CreateOrderDto, Order>>();
+            orderMapper = RegisterMapper<CreateOrderDto, Order>();
             repository = Dependency<IRepository>();
 
             When(orderMapper).IsToldTo(m => m.Map(createOrderDto)).Return(order);
@@ -95,7 +95,7 @@ namespace Snacks_R_Us.UnitTests.Services
         protected override void Arrange()
         {
             repository = Dependency<IRepository>();
-            orderMapper = RegisterDependencyInContainer<IMapper<IEnumerable<Order>, ViewOrdersDto>>();
+            orderMapper = RegisterMapper<IEnumerable<Order>, ViewOrdersDto>();
 
             user = Fixtures.Users.JoeDeveloper;
             user.AddCredits(3);
@@ -162,7 +162,7 @@ namespace Snacks_R_Us.UnitTests.Services
             ordersDto.Orders.Add(order1Dto);
             ordersDto.Orders.Add(order2Dto);
 
-            mapper = RegisterDependencyInContainer<IMapper<IEnumerable<Order>, ViewOrdersDto>>();
+            mapper = RegisterMapper<IEnumerable<Order>, ViewOrdersDto>();
             repository = Dependency<IRepository>();
 
             When(repository)

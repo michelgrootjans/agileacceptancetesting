@@ -29,7 +29,7 @@ namespace Snacks_R_Us.UnitTests.Services
             user2Dto = new ViewUserDto();
             
             repository = Dependency<IRepository>();
-            mapper = RegisterDependencyInContainer<IMapper<User, ViewUserDto>>();
+            mapper = RegisterMapper<User, ViewUserDto>();
 
             When(repository).IsToldTo(r => r.FindAll<User>()).Return(new List<User> {user1, user2});
             When(mapper).IsToldTo(m => m.Map(user1)).Return(user1Dto);

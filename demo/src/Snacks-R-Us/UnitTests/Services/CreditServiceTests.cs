@@ -26,7 +26,7 @@ namespace Snacks_R_Us.UnitTests.Services
             user.Credit = credit;
             viewCreditDto = new ViewCreditDto();
             repository = Dependency<IRepository>();
-            mapper = RegisterDependencyInContainer<IMapper<User, ViewCreditDto>>();
+            mapper = RegisterMapper<User, ViewCreditDto>();
 
             When(repository).IsToldTo(r => r.Find(Arg<Predicate<User>>.Is.Anything)).Return(user);
             When(mapper).IsToldTo(m => m.Map(user)).Return(viewCreditDto);
@@ -77,7 +77,7 @@ namespace Snacks_R_Us.UnitTests.Services
             credit = new Credit(5);
             creditDto = new ViewCreditDto();
             repository = Dependency<IRepository>();
-            mapper = RegisterDependencyInContainer<IMapper<User, ViewCreditDto>>();
+            mapper = RegisterMapper<User, ViewCreditDto>();
 
             user = Fixtures.Users.JoeDeveloper;
             user.Credit = credit;
