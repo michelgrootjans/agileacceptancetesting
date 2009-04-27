@@ -55,7 +55,7 @@ namespace Snacks_R_Us.Domain.Entities
                 throw new InsufficientCreditsException(Credit.Amount, order.TotalPrice);
 
             var orderForTheSameSnackToday =
-                orders.Find(o => o.Date.Date.Equals(DateTime.Now.Date) && o.SnackName.Equals(order.SnackName));
+                orders.Find(o => o.Date.Date.Equals(DateTime.Now.Date) && o.Snack.Name.Equals(order.Snack.Name));
             if (orderForTheSameSnackToday == null)
                 orders.Add(order);
             else

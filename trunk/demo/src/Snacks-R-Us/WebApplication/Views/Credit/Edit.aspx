@@ -16,7 +16,7 @@
         <%= Html.Hidden("userId", Model.UserId) %>
         <fieldset>
             <p>
-                Current credit: € <%= Model.Credit %>
+                Current credit: € <%= Model.CreditAmount %>
             </p>
             <p>
                 <label for="Amount">Add:</label>

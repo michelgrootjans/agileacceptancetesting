@@ -1,11 +1,14 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Web;
+using AutoMapper;
+using Snacks_R_Us.Domain.DataTransfer;
 using Snacks_R_Us.Domain.Entities;
+using Snacks_R_Us.Domain.Extensions;
 using Snacks_R_Us.Domain.IoC;
 using Snacks_R_Us.Domain.Mapping;
 using Snacks_R_Us.Domain.Repositories;
 using Snacks_R_Us.Domain.Services;
-using Snacks_R_Us.Domain.Extensions;
 
 namespace Snacks_R_Us.Domain
 {
@@ -16,11 +19,12 @@ namespace Snacks_R_Us.Domain
 
         public static void Run()
         {
-            if (applicationHasBeenStarted) 
+            if (applicationHasBeenStarted)
                 return;
 
             InitializeRepository();
             InitializeContainer();
+            InitializeMappers();
             applicationHasBeenStarted = true;
         }
 
@@ -48,24 +52,40 @@ namespace Snacks_R_Us.Domain
             IAuthenticationService authenticationservice = new SimpleAuthenticationService();
             if (HttpContext.Current.IsNotNull())
                 authenticationservice = new FormsAuthenticationService(authenticationservice);
-            
+
             services.Add(authenticationservice);
 
             services.Add(new SnackService(repository));
-            services.Add(new SnackToDtoMapper());
-            services.Add(new CreateSnackDtoMapper());
 
             services.Add(new OrderService(repository));
-            services.Add(new CreateOrderDtoMapper());
-            services.Add(new OrderToDtoMapper());
 
             services.Add(new CreditService(repository));
-            services.Add(new UserToCreditDtoMapper());
 
             services.Add(new UserService(repository));
-            services.Add(new UserToDtoMapper());
 
             return new DictionaryContainer(services);
+        }
+
+        public static void InitializeMappers()
+        {
+            Mapper.CreateMap<User, ViewUserDto>();
+            Mapper.CreateMap<Order, ViewOrderDto>();
+            Mapper.CreateMap<IEnumerable<Order>, ViewOrdersDto>()
+                .ForMember(dto => dto.Total, conf => conf.MapFrom(orders => orders.Sum(o => o.TotalPrice)))
+                .ForMember(dto => dto.Orders, conf => conf.MapFrom(orders => orders));
+            Mapper.CreateMap<User, ViewCreditDto>()
+                .ForMember(dto => dto.UserId, conf => conf.MapFrom(u => u.Id))
+                .ForMember(dto => dto.UserName, conf => conf.MapFrom(u => u.Name));
+            Mapper.CreateMap<Snack, SnackDto>()
+                .ForMember(dto => dto.ScreenName,
+                           conf => conf.MapFrom(s => string.Format("{0} (€ {1})", s.Name, s.Price)));
+
+            Mapper.CreateMap<CreateSnackDto, Snack>()
+                .ConvertUsing(dto => new Snack(dto.Name, double.Parse(dto.Price)));
+            Mapper.CreateMap<CreateOrderDto, Order>()
+                .ConvertUsing(dto => new Order { Qty = double.Parse(dto.Qty) });
+
+            Mapper.AssertConfigurationIsValid();
         }
 
         public static void AddDemoData()

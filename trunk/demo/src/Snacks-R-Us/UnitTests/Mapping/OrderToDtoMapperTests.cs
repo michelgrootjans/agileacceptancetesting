@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using NUnit.Framework;
+using Snacks_R_Us.Domain;
 using Snacks_R_Us.Domain.DataTransfer;
 using Snacks_R_Us.Domain.Entities;
 using Snacks_R_Us.Domain.Mapping;
@@ -17,6 +18,8 @@ namespace Snacks_R_Us.UnitTests.Mapping
 
         protected override void Arrange()
         {
+            ApplicationStartup.InitializeMappers();
+
             snack = new Snack("Pizza", 2.9);
             order = new Order{Qty = 2, Snack = snack};
             orders = new List<Order> {order};
@@ -24,7 +27,7 @@ namespace Snacks_R_Us.UnitTests.Mapping
 
         protected override IMapper<IEnumerable<Order>, ViewOrdersDto> CreateSystemUnderTest()
         {
-            return new OrderToDtoMapper();
+            return new GenericAutoMapper<IEnumerable<Order>, ViewOrdersDto>();
         }
 
         protected override void Act()
@@ -35,25 +38,26 @@ namespace Snacks_R_Us.UnitTests.Mapping
         [Test]
         public void shold_map_its_quantity()
         {
-            result.Orders[0].Qty.ShouldBeEqualTo(order.Qty);
+            result.Orders[0].Qty.ShouldBeEqualTo(order.Qty.ToString());
         }
 
         [Test]
         public void should_map_its_snack_name()
         {
-            result.Orders[0].Snack.ShouldBeEqualTo(snack.Name);
+            result.Orders[0].SnackName.ShouldBeEqualTo(snack.Name);
         }
 
         [Test]
         public void should_map_its_unit_price()
         {
-            result.Orders[0].UnitPrice.ShouldBeEqualTo(snack.Price);
+            result.Orders[0].SnackPrice.ShouldBeEqualTo(snack.Price.ToString());
         }
 
         [Test]
         public void should_map_its_total_price()
         {
-            result.Orders[0].TotalPrice.ShouldBeEqualTo(order.Qty * snack.Price);
+            var expected = order.Qty * snack.Price;
+            result.Orders[0].TotalPrice.ShouldBeEqualTo(expected.ToString());
         }
 
         [Test]

@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using Snacks_R_Us.Domain;
 using Snacks_R_Us.Domain.DataTransfer;
 using Snacks_R_Us.Domain.Entities;
 using Snacks_R_Us.Domain.Mapping;
@@ -15,6 +16,8 @@ namespace Snacks_R_Us.UnitTests.Mapping
 
         protected override void Arrange()
         {
+            ApplicationStartup.InitializeMappers();
+
             snackName = "Pizza";
             snackPrice = 3.2;
             dto = new CreateSnackDto {Name = snackName, Price = snackPrice.ToString()};
@@ -22,7 +25,7 @@ namespace Snacks_R_Us.UnitTests.Mapping
 
         protected override IMapper<CreateSnackDto, Snack> CreateSystemUnderTest()
         {
-            return new CreateSnackDtoMapper();
+            return new GenericAutoMapper<CreateSnackDto, Snack>();
         }
 
         protected override void Act()
