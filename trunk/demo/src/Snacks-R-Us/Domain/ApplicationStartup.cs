@@ -55,12 +55,10 @@ namespace Snacks_R_Us.Domain
 
             services.Add(authenticationservice);
 
+            services.Add(new GenericMapperFactory());
             services.Add(new SnackService(repository));
-
             services.Add(new OrderService(repository));
-
             services.Add(new CreditService(repository));
-
             services.Add(new UserService(repository));
 
             return new DictionaryContainer(services);

@@ -66,10 +66,8 @@
     <Compile Include="InsufficientCreditsException.cs" />
     <Compile Include="IoC\Container.cs" />
     <Compile Include="IoC\DictionaryContainer.cs" />
-    <Compile Include="Mapping\CreateOrderDtoMapper.cs" />
-    <Compile Include="Mapping\CreateSnackDtoMapper.cs" />
-    <Compile Include="Mapping\GenericAutoMapper.cs" />
     <Compile Include="Mapping\IMapper.cs" />
+    <Compile Include="Mapping\IMapperFactory.cs" />
     <Compile Include="Mapping\Map.cs" />
     <Compile Include="DataTransfer\CreateOrderDto.cs" />
     <Compile Include="DataTransfer\ViewOrderDto.cs" />
