@@ -1,9 +1,9 @@
 using System.Collections.Generic;
-using Snacks_R_Us.Domain.IoC;
+using AutoMapper;
 
 namespace Snacks_R_Us.Domain.Mapping
 {
-    public class Map
+    public static class Map
     {
         public static Mapper<From> This<From>(From from)
         {
@@ -27,8 +27,7 @@ namespace Snacks_R_Us.Domain.Mapping
 
         public To ToA<To>()
         {
-            var mapper = Container.GetImplementationOf<IMapper<From, To>>();
-            return mapper.Map(item);
+            return Mapper.Map<From, To>(item);
         }
     }
 
@@ -43,9 +42,8 @@ namespace Snacks_R_Us.Domain.Mapping
 
         public IEnumerable<To> ToAListOf<To>()
         {
-            var mapper = Container.GetImplementationOf<IMapper<From, To>>();
             foreach (var item in source)
-                yield return mapper.Map(item);
+                yield return Mapper.Map<From, To>(item);
         }
     }
 }

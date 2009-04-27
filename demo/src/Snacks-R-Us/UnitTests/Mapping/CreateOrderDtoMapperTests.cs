@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using Snacks_R_Us.Domain;
 using Snacks_R_Us.Domain.DataTransfer;
 using Snacks_R_Us.Domain.Entities;
 using Snacks_R_Us.Domain.Mapping;
@@ -14,13 +15,15 @@ namespace Snacks_R_Us.UnitTests.Mapping
 
         protected override void Arrange()
         {
+            ApplicationStartup.InitializeMappers();
+
             requestedQuantity = 5;
             createOrderDto = new CreateOrderDto {Qty = requestedQuantity.ToString(), SnackId = "886"};
         }
 
         protected override IMapper<CreateOrderDto, Order> CreateSystemUnderTest()
         {
-            return new CreateOrderDtoMapper();
+            return new GenericAutoMapper<CreateOrderDto, Order>();
         }
 
         protected override void Act()

@@ -22,7 +22,7 @@ namespace Snacks_R_Us.Domain.Services
             {
                 var creditService = Container.GetImplementationOf<ICreditService>();
                 var credits = creditService.GetCreditsForCurrentUser();
-                return credits.Credit;
+                return credits.CreditAmount;
             }
         }
 

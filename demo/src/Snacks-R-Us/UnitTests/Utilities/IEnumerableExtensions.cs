@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using NUnit.Framework;
 
@@ -18,6 +19,12 @@ namespace Snacks_R_Us.UnitTests.Utilities
                 if (index == counter++) return t;
             }
             return default(T);
+        }
+
+        public static void ForEach<T>(this IEnumerable<T> list, Action<T> action)
+        {
+            foreach (var item in list)
+                action(item);
         }
     }
 }

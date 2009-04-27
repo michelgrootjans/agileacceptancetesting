@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using Snacks_R_Us.Domain;
 using Snacks_R_Us.Domain.DataTransfer;
 using Snacks_R_Us.Domain.Entities;
 using Snacks_R_Us.Domain.Mapping;
@@ -13,13 +14,14 @@ namespace Snacks_R_Us.UnitTests.Mapping
 
         protected override void Arrange()
         {
+            ApplicationStartup.InitializeMappers();
             user = Fixtures.Users.JoeDeveloper;
             user.AddCredits(5.5);
         }
 
         protected override IMapper<User, ViewUserDto> CreateSystemUnderTest()
         {
-            return new UserToDtoMapper();
+            return new GenericAutoMapper<User, ViewUserDto>();
         }
 
         protected override void Act()
@@ -48,7 +50,7 @@ namespace Snacks_R_Us.UnitTests.Mapping
         [Test]
         public void should_map_its_credit()
         {
-            result.Credit.ShouldBeEqualTo(user.Credit.Amount.ToString());
+            result.CreditAmount.ShouldBeEqualTo(user.Credit.Amount.ToString());
         }
     }
 

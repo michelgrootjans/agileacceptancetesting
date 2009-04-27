@@ -23,8 +23,6 @@ namespace Snacks_R_Us.Domain.Entities
             Snack = snack;
         }
 
-        public string SnackName { get { return Snack.Name; } }
-        public double UnitPrice { get { return Snack.Price; } }
         public double TotalPrice { get { return Snack.Price * Qty; } }
     }
 }

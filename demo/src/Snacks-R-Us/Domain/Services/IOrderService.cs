@@ -53,7 +53,7 @@ namespace Snacks_R_Us.Domain.Services
             var groupedOrders = new List<Order>();
             foreach (var order in orders)
             {
-                var existingOrder = groupedOrders.Find(o => o.SnackName.Equals(order.SnackName));
+                var existingOrder = groupedOrders.Find(o => o.Snack.Name.Equals(order.Snack.Name));
                 if (existingOrder.IsNotNull())
                     existingOrder.Qty += order.Qty;
                 else

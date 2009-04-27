@@ -21,7 +21,7 @@
             <td><%= Html.Encode(userDto.Name) %></td>
             <td><%= Html.Encode(userDto.Email) %></td>
             <td>
-                € <%= Html.Encode(userDto.Credit) %>
+                € <%= Html.Encode(userDto.CreditAmount) %>
                 <%= Html.ActionLink("Add...", "Edit", "Credit", new { id = userDto.Id }, null) %>
             </td>
         </tr>
