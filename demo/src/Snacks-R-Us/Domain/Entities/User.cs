@@ -67,5 +67,15 @@ namespace Snacks_R_Us.Domain.Entities
         {
             Credit.AddAmount(amount);
         }
+
+        public void ClearOrders()
+        {
+            orders.Clear();
+        }
+
+        public void ClearCredits()
+        {
+            Credit.Clear();
+        }
     }
 }

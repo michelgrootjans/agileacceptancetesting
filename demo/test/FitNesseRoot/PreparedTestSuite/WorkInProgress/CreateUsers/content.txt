@@ -1,9 +1,14 @@
+!|Get all users|
+|Name|Email|Credit Amount|
+|michel|michel@ilean.be|0|
+|pascal|pascal@ihc.be|0|
+
 !|Create users|
 |Username|Password|email|Role|Result?|
-|Michel|iLean|michel@ilean.be|Developer|DuplicateUserName|
-|Peter|ihv|michel@ilean.be|Developer|DuplicateEmail|
+|michel|iLean|michel@ilean.be|Developer|DuplicateUserName|
+|peter|ihv|michel@ilean.be|Developer|DuplicateEmail|
 
 !|Get all users|
-|Name|Email|Credit|
-|Michel|michel@ilean.be|0|
-|Pascal|pascal@ihc.be|0|
+|Name|Email|Credit Amount|
+|michel|michel@ilean.be|0|
+|pascal|pascal@ihc.be|0|

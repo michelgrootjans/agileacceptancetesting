@@ -13,5 +13,10 @@ namespace Snacks_R_Us.Domain.Entities
         {
             Amount += amt;
         }
+
+        public void Clear()
+        {
+            Amount = 0;
+        }
     }
 }

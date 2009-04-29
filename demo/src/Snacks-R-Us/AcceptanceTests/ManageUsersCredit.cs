@@ -11,7 +11,7 @@ namespace Snacks_R_Us.AcceptanceTests
 
         public ManageUsersCredit()
         {
-            Init.FitNesseTests();
+            Fitnesse.Init();
 
             creditService = Container.GetImplementationOf<ICreditService>();
         }

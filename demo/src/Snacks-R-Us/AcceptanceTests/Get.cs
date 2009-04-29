@@ -12,7 +12,7 @@ namespace Snacks_R_Us.AcceptanceTests
 
         static Get()
         {
-            Init.FitNesseTests();
+            Fitnesse.Init();
 
             SnackService = Container.GetImplementationOf<ISnackService>();
             UserService = Container.GetImplementationOf<IUserService>();

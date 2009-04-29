@@ -15,37 +15,37 @@ namespace Snacks_R_Us.Domain
     public static class ApplicationStartup
     {
         private static bool applicationHasBeenStarted;
-        private static IRepository repository;
 
         public static void Run()
         {
             if (applicationHasBeenStarted)
                 return;
 
-            InitializeRepository();
-            InitializeContainer();
+            var repository = InitializeRepository();
+            InitializeContainer(repository);
             InitializeMappers();
             applicationHasBeenStarted = true;
         }
 
-        private static void InitializeRepository()
+        private static IRepository InitializeRepository()
         {
             //You'll probably want to switch to NHibernate here
-            repository = new OrderDecoratedRepository(new InMemoryRepository());
+            return new OrderDecoratedRepository(new InMemoryRepository());
         }
 
-        private static void InitializeContainer()
+        private static void InitializeContainer(IRepository repository)
         {
-            var container = CreateContainer();
+            var container = CreateContainer(repository);
             Container.InitializeWith(container);
         }
 
-        private static IContainer CreateContainer()
+        private static IContainer CreateContainer(IRepository repository)
         {
             //This is where you can switch your IoC container of choice
             //We've choosen poor man's dependency injection ;-)
             var services = new List<object>();
 
+            services.Add(repository);
             services.Add(new AccountMembershipService(repository));
 
             //Dirty hack
@@ -88,23 +88,21 @@ namespace Snacks_R_Us.Domain
 
         public static void AddDemoData()
         {
-            InitUsers();
-            InitSnacks();
+            var repository = Container.GetImplementationOf<IRepository>();
+
+            AddDemoUsers(repository);
+            AddDemoSnacks(repository);
         }
 
-        private static void InitUsers()
+        internal static void AddDemoUsers(IRepository repository)
         {
-            var pascal = new User("pascal", "ihc", "pascal@ihc.be", "Secretary");
-            var michel = new User("michel", "ilean", "michel@ilean.be", "Developer");
-            michel.AddCredits(20);
-
-            repository.Save(pascal);
-            repository.Save(michel);
+            repository.Save(new User("pascal", "ihc", "pascal@ihc.be", "Secretary"));
+            repository.Save(new User("michel", "ilean", "michel@ilean.be", "Developer"));
         }
 
-        private static void InitSnacks()
+        internal static void AddDemoSnacks(IRepository repository)
         {
-            repository.Save(new Snack("Pizza Hawaii", 5.5));
+            repository.Save(new Snack("Pizza Hawaii", 5.3));
             repository.Save(new Snack("Club Sandwich", 3.5));
             repository.Save(new Snack("Ceasar's Salad", 4.2));
             repository.Save(new Snack("Tiramisu", 4.5));
