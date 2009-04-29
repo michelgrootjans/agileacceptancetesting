@@ -14,5 +14,11 @@ namespace Snacks_R_Us.Domain.Extensions
         {
             return new List<T>(list).Find(predicate);
         }
+
+        public static void ForEach<T>(this IEnumerable<T> list, Action<T> action)
+        {
+            foreach (var t in list)
+                action(t);
+        }
     }
 }

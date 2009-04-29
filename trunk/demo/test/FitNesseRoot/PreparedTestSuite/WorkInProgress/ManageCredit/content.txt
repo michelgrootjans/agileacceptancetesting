@@ -1,4 +1,4 @@
 !|Manage users credit|
-|Check|Credits for user|Pascal|is|0|
-|Add|10|Credits for|Pascal|
-|Check|Credits for user|Pascal|is|10|
+|Check|Credits for user|pascal|is|0|
+|Add|10|Credits for|pascal|
+|Check|Credits for user|pascal|is|10|

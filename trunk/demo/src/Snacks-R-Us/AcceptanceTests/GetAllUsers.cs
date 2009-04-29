@@ -13,7 +13,7 @@ namespace Snacks_R_Us.AcceptanceTests
 
         public GetAllUsers()
         {
-            Init.FitNesseTests();
+            Fitnesse.Init();
 
             userService = Container.GetImplementationOf<IUserService>();
         }

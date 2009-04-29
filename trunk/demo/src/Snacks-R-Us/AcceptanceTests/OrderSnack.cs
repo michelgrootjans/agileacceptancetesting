@@ -16,7 +16,7 @@ namespace Snacks_R_Us.AcceptanceTests
 
         public OrderSnack()
         {
-            Init.FitNesseTests();
+            Fitnesse.Init();
 
             orderService = Container.GetImplementationOf<IOrderService>();
         }

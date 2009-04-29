@@ -1,2 +1,6 @@
 !|import|
 |Snacks_R_Us.AcceptanceTests|
+
+!|Reset|
+|Check|Credits|OK|
+|Check|Orders|OK|

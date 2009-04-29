@@ -15,7 +15,7 @@ namespace Snacks_R_Us.AcceptanceTests
 
         public LogInScript()
         {
-            Init.FitNesseTests();
+            Fitnesse.Init();
 
             membershipService = Container.GetImplementationOf<IMembershipService>();
             authenticationService = Container.GetImplementationOf<IAuthenticationService>();

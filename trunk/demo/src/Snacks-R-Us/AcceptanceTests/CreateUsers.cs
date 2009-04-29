@@ -16,7 +16,7 @@ namespace Snacks_R_Us.AcceptanceTests
 
         public CreateUsers()
         {
-            Init.FitNesseTests();
+            Fitnesse.Init();
 
             membershipService = Container.GetImplementationOf<IMembershipService>();
         }

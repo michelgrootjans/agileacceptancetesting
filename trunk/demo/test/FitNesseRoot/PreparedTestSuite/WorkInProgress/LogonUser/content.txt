@@ -1,6 +1,6 @@
 !|ActionFixture|
 |Start|Login script|
-|Enter|Username|Michel|
+|Enter|Username|michel|
 |Enter|Password|blah|
 |Press|Login|
 |Check|Logged in|false|
@@ -8,7 +8,7 @@
 |Enter|Password|iLean|
 |Press|Login|
 |Check|Logged in|false|
-|Enter|Username|Michel|
-|Enter|Password|iLean|
+|Enter|Username|michel|
+|Enter|Password|ilean|
 |Press|Login|
 |Check|Logged in|true|
