@@ -29,5 +29,11 @@ namespace Snacks_R_Us.AcceptanceTests
         {
             Thread.Sleep(5000);
         }
+
+        public static void AddDemoData()
+        {
+            Reset();
+            ApplicationStartup.AddDemoData();
+        }
     }
 }

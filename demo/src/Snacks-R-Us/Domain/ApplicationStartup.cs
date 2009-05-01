@@ -96,6 +96,9 @@ namespace Snacks_R_Us.Domain
         {
             repository.Save(new User("pascal", "ihc", "pascal@ihc.be", "Secretary"));
             repository.Save(new User("michel", "ilean", "michel@ilean.be", "Developer"));
+            var user = new User("W. Fall", "bigdesignupfront", "wouter@BDUF.com", "CEO");
+            user.AddCredits(1000);
+            repository.Save(user);
         }
 
         internal static void AddDemoSnacks(IRepository repository)
