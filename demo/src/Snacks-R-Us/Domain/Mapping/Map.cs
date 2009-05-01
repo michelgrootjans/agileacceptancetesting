@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using AutoMapper;
 using Snacks_R_Us.Domain.IoC;
 
 namespace Snacks_R_Us.Domain.Mapping

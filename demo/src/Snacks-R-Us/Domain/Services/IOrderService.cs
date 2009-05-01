@@ -31,6 +31,9 @@ namespace Snacks_R_Us.Domain.Services
             var snack = repository.Get<Snack>(orderDto.SnackId.ToLong());
             var user = repository.Find<User>(u => u.Name.Equals(Current.UserName));
             
+            if(user.IsNull())
+                throw new ArgumentException("Unkown user. Pleaser register.");
+
             order.Snack = snack;
             user.AddOrder(order);
         }

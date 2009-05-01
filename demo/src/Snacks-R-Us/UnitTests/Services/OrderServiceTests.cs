@@ -7,41 +7,49 @@ using Snacks_R_Us.Domain.Entities;
 using Snacks_R_Us.Domain.Mapping;
 using Snacks_R_Us.Domain.Repositories;
 using Snacks_R_Us.Domain.Services;
+using Snacks_R_Us.UnitTests.Fixtures;
 using Snacks_R_Us.UnitTests.Utilities;
 
 namespace Snacks_R_Us.UnitTests.Services
 {
-    public class when_OrderService_is_told_to_place_an_order : InstanceContextSpecification<IOrderService>
+    public class OrderServiceTest : InstanceContextSpecification<IOrderService>
     {
-        private long snackId;
-        private Order order;
-        private Snack snack;
-        private CreateOrderDto createOrderDto;
-        private IRepository repository;
-        private IMapper<CreateOrderDto, Order> orderMapper;
-        private User user;
+        protected long snackId;
+        protected Order order;
+        protected Snack snack;
+        protected CreateOrderDto createOrderDto;
+        protected IRepository repository;
+        protected IMapper<CreateOrderDto, Order> orderMapper;
+        protected User user;
 
         protected override void Arrange()
         {
             snackId = 6785;
             order = new Order();
             snack = new Snack("Pizza", 2.9);
-            user = Fixtures.Users.JoeDeveloper;
+            user = Users.JoeDeveloper;
             user.AddCredits(3);
 
-            createOrderDto = new CreateOrderDto{SnackId = snackId.ToString()};
+            createOrderDto = new CreateOrderDto {SnackId = snackId.ToString()};
 
             orderMapper = RegisterMapper<CreateOrderDto, Order>();
             repository = Dependency<IRepository>();
-
-            When(orderMapper).IsToldTo(m => m.Map(createOrderDto)).Return(order);
-            When(repository).IsToldTo(r => r.Get<Snack>(snackId)).Return(snack);
-            When(repository).IsToldTo(r => r.Find(Arg<Predicate<User>>.Is.Anything)).Return(user);
         }
 
         protected override IOrderService CreateSystemUnderTest()
         {
             return new OrderService(repository);
+        }
+    }
+
+    public class when_OrderService_is_told_to_place_an_order : OrderServiceTest
+    {
+        protected override void Arrange()
+        {
+            base.Arrange();
+            When(orderMapper).IsToldTo(m => m.Map(createOrderDto)).Return(order);
+            When(repository).IsToldTo(r => r.Get<Snack>(snackId)).Return(snack);
+            When(repository).IsToldTo(r => r.Find(Arg<Predicate<User>>.Is.Anything)).Return(user);
         }
 
         protected override void Act()
@@ -80,6 +88,24 @@ namespace Snacks_R_Us.UnitTests.Services
         }
     }
 
+    public class when_OrderService_is_told_to_place_an_order_with_an_unknown_user : OrderServiceTest
+    {
+        private Action orderSnack;
+
+        protected override void Act()
+        {
+            orderSnack = () => sut.Order(createOrderDto);
+        }
+
+        [Test]
+        public void should_throw_an_UnknownUserException()
+        {
+            orderSnack.ShouldThrow<ArgumentException>()
+                .Message.ShouldBeEqualTo("Unkown user. Pleaser register.");
+        }
+    }
+
+
     public class when_OrderService_is_told_to_get_my_order : InstanceContextSpecification<IOrderService>
     {
         private IRepository repository;
@@ -97,7 +123,7 @@ namespace Snacks_R_Us.UnitTests.Services
             repository = Dependency<IRepository>();
             orderMapper = RegisterMapper<IEnumerable<Order>, ViewOrdersDto>();
 
-            user = Fixtures.Users.JoeDeveloper;
+            user = Users.JoeDeveloper;
             user.AddCredits(3);
 
             order1 = new Order(new Snack("Pizza", 2));
@@ -153,9 +179,9 @@ namespace Snacks_R_Us.UnitTests.Services
 
         protected override void Arrange()
         {
-            order1 = Fixtures.Orders.OnePizza;
-            order2 = Fixtures.Orders.OnePizza;
-            orders = new List<Order>{order1, order2};
+            order1 = Orders.OnePizza;
+            order2 = Orders.OnePizza;
+            orders = new List<Order> {order1, order2};
             order1Dto = new ViewOrderDto();
             order2Dto = new ViewOrderDto();
             ordersDto = new ViewOrdersDto();
@@ -202,5 +228,4 @@ namespace Snacks_R_Us.UnitTests.Services
             result.ShouldContain(order2Dto);
         }
     }
-
 }

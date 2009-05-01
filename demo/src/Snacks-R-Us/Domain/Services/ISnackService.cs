@@ -1,6 +1,8 @@
+using System;
 using System.Collections.Generic;
 using Snacks_R_Us.Domain.DataTransfer;
 using Snacks_R_Us.Domain.Entities;
+using Snacks_R_Us.Domain.Extensions;
 using Snacks_R_Us.Domain.Mapping;
 using Snacks_R_Us.Domain.Repositories;
 
@@ -10,6 +12,7 @@ namespace Snacks_R_Us.Domain.Services
     {
         IEnumerable<SnackDto> GetAllSnacks();
         void CreateSnack(CreateSnackDto createSnackDto);
+        SnackDto GetSnack(string snackName);
     }
 
     internal class SnackService : ISnackService
@@ -31,6 +34,11 @@ namespace Snacks_R_Us.Domain.Services
         {
             var snack = Map.This(createSnackDto).ToA<Snack>();
             repository.Save(snack);
+        }
+
+        public SnackDto GetSnack(string snackName)
+        {
+            return GetAllSnacks().Find(s => s.Name.Equals(snackName));
         }
     }
 }
