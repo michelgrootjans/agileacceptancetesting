@@ -62,18 +62,22 @@ namespace Snacks_R_Us.Domain
         {
             Mapper.CreateMap<User, ViewUserDto>();
             Mapper.CreateMap<Order, ViewOrderDto>();
+            
             Mapper.CreateMap<IEnumerable<Order>, ViewOrdersDto>()
                 .ForMember(dto => dto.Total, conf => conf.MapFrom(orders => orders.Sum(o => o.TotalPrice)))
                 .ForMember(dto => dto.Orders, conf => conf.MapFrom(orders => orders));
+            
             Mapper.CreateMap<User, ViewCreditDto>()
                 .ForMember(dto => dto.UserId, conf => conf.MapFrom(u => u.Id))
                 .ForMember(dto => dto.UserName, conf => conf.MapFrom(u => u.Name));
+            
             Mapper.CreateMap<Snack, SnackDto>()
                 .ForMember(dto => dto.ScreenName,
                            conf => conf.MapFrom(s => string.Format("{0} (€ {1})", s.Name, s.Price)));
 
             Mapper.CreateMap<CreateSnackDto, Snack>()
                 .ConvertUsing(dto => new Snack(dto.Name, double.Parse(dto.Price)));
+            
             Mapper.CreateMap<CreateOrderDto, Order>()
                 .ConvertUsing(dto => new Order { Qty = double.Parse(dto.Qty) });
 

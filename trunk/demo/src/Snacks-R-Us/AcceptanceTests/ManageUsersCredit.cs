@@ -8,24 +8,26 @@ namespace Snacks_R_Us.AcceptanceTests
     public class ManageUsersCredit : DoFixture
     {
         private readonly ICreditService creditService;
+        private IUserService userService;
 
         public ManageUsersCredit()
         {
             Fitnesse.Init();
 
             creditService = Container.GetImplementationOf<ICreditService>();
+            userService = Container.GetImplementationOf<IUserService>();
         }
 
         public string CreditsForUserIs(string userName)
         {
-            var user = new Get().User(userName);
+            var user = userService.GetUser(userName);
             return creditService.GetCreditsForUser(user.Id).CreditAmount;
         }
 
         public void AddCreditsFor(string credit, string userName)
         {
-            var user = new Get().User(userName);
-            creditService.AddCredit(new AddCreditDto {Amount = credit, UserId = user.Id});
+            var user = userService.GetUser(userName);
+            creditService.AddCredit(new AddCreditDto { Amount = credit, UserId = user.Id });
         }
     }
 }

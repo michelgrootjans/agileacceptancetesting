@@ -1,22 +1,18 @@
-!|ActionFixture|
-|Start|Login script|
-|Enter|Username|michel|
-|Enter|Password|ilean|
-|Press|Login|
-|Check|Logged in|true|
-
 !|Order Snack|
-|Qty|Snack|Result?|
-|1|Pizza Hawaii|You don't have enough cedit. You need €5,3 extra.|
+|Qty|Snack|For user|Result?|
+|1|Pizza Hawaii|michel|You don't have enough cedit. You need €5,3 extra.|
 
 !|Manage users credit|
 |Add|10|Credits for|michel|
 
 !|Order Snack|
-|Qty|Snack|Result?|
-|1|Pizza Hawaii|Success|
-|1|Pizza Hawaii|You don't have enough cedit. You need €0,6 extra.|
+|Qty|Snack|For user|Result?|
+|1|Pizza Hawaii|michel|Success|
+|1|Pizza Hawaii|michel|You don't have enough cedit. You need €0,6 extra.|
 
 !|Get todays orders|
 |Qty|Snack Name|Snack Price|Total Price|
 |1|Pizza Hawaii|5,3|5,3|
+
+!|Manage users credit|
+|Check|Credits for user|michel|is|4,7|
