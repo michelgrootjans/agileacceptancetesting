@@ -28,7 +28,12 @@ namespace Snacks_R_Us.Domain.Services
 
         public object this[string key]
         {
-            get { return values[key]; }
+            get
+            {
+                if (values.ContainsKey(key))
+                    return values[key];
+                return null;
+            }
             set { values[key] = value; }
         }
     }

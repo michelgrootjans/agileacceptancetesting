@@ -26,7 +26,7 @@ namespace Snacks_R_Us.Domain.Services
             }
         }
 
-        internal static string UserName
+        public static string UserName
         {
             get { return (Context["userName"] ?? "") as string; }
             set { Context["userName"] = value; }
