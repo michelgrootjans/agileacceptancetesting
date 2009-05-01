@@ -5,27 +5,27 @@ using Snacks_R_Us.Domain.Services;
 
 namespace Snacks_R_Us.AcceptanceTests
 {
-    public static class Get
+    public class Get
     {
-        private static readonly IUserService UserService;
-        private static readonly ISnackService SnackService;
+        private readonly IUserService userService;
+        private readonly ISnackService snackService;
 
-        static Get()
+        public Get()
         {
             Fitnesse.Init();
 
-            SnackService = Container.GetImplementationOf<ISnackService>();
-            UserService = Container.GetImplementationOf<IUserService>();
+            snackService = Container.GetImplementationOf<ISnackService>();
+            userService = Container.GetImplementationOf<IUserService>();
         }
 
-        internal static SnackDto Snack(string snackName)
+        internal SnackDto Snack(string snackName)
         {
-            return SnackService.GetAllSnacks().Find(s => s.Name.Equals(snackName));
+            return snackService.GetAllSnacks().Find(s => s.Name.Equals(snackName));
         }
 
-        internal static ViewUserDto User(string userName)
+        internal ViewUserDto User(string userName)
         {
-            return UserService.GetAllUsers().Find(u => u.Name.Equals(userName));
+            return userService.GetAllUsers().Find(u => u.Name.Equals(userName));
         }
     }
 }

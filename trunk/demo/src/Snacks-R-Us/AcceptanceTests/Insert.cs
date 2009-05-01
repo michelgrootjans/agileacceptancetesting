@@ -1,4 +1,3 @@
-using System;
 using fitlibrary;
 using Snacks_R_Us.Domain;
 using Snacks_R_Us.Domain.IoC;
@@ -9,37 +8,31 @@ namespace Snacks_R_Us.AcceptanceTests
     public class Insert : DoFixture
     {
         private readonly IRepository repository;
+        private const string OK = "OK";
 
         public Insert()
         {
-            Fitnesse.Init();
+            Fitnesse.Reset();
             repository = Container.GetImplementationOf<IRepository>();
         }
 
+        public string SampleData()
+        {
+            SampleUsers();
+            SampleSnacks();
+            return OK;
+        }
+        
         public string SampleUsers()
         {
-            try
-            {
-                ApplicationStartup.AddDemoUsers(repository);
-                return "OK";
-            }
-            catch (Exception e)
-            {
-                return e.ToString();
-            }
+            ApplicationStartup.AddDemoUsers(repository);
+            return OK;
         }
 
         public string SampleSnacks()
         {
-            try
-            {
-                ApplicationStartup.AddDemoSnacks(repository);
-                return "OK";
-            }
-            catch (Exception e)
-            {
-                return e.ToString();
-            }
+            ApplicationStartup.AddDemoSnacks(repository);
+            return OK;
         }
     }
 }

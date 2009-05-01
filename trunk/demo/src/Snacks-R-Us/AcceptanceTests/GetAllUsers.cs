@@ -14,7 +14,6 @@ namespace Snacks_R_Us.AcceptanceTests
         public GetAllUsers()
         {
             Fitnesse.Init();
-
             userService = Container.GetImplementationOf<IUserService>();
         }
 

@@ -18,15 +18,14 @@ namespace Snacks_R_Us.AcceptanceTests
 
         public string CreditsForUserIs(string userName)
         {
-            var user = Get.User(userName);
+            var user = new Get().User(userName);
             return creditService.GetCreditsForUser(user.Id).CreditAmount;
         }
 
         public void AddCreditsFor(string credit, string userName)
         {
-            var user = Get.User(userName);
-            creditService.AddCredit(new AddCreditDto{Amount = credit, UserId = user.Id});
+            var user = new Get().User(userName);
+            creditService.AddCredit(new AddCreditDto {Amount = credit, UserId = user.Id});
         }
-
     }
 }

@@ -25,7 +25,7 @@ namespace Snacks_R_Us.AcceptanceTests
         {
             try
             {
-                var snack = Get.Snack(Snack);
+                var snack = new Get().Snack(Snack);
                 orderService.Order(new CreateOrderDto { Qty = Qty.ToString(), SnackId = snack.Id });
                 Result = "Success";
             }

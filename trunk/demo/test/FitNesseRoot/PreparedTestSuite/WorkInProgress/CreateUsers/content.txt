@@ -1,14 +1,20 @@
+!1 The setup of this test will add two demo users:
 !|Get all users|
 |Name|Email|Credit Amount|
 |michel|michel@ilean.be|0|
 |pascal|pascal@ihc.be|0|
+
+!1 Add one new valid user and two invalid users
 
 !|Create users|
 |Username|Password|email|Role|Result?|
 |michel|iLean|michel@ilean.be|Developer|DuplicateUserName|
 |peter|ihv|michel@ilean.be|Developer|DuplicateEmail|
+|scott|tiger|scott@oracle.com|Developer|Success|
 
+!1 Only the new user should appear in the list of users
 !|Get all users|
 |Name|Email|Credit Amount|
 |michel|michel@ilean.be|0|
 |pascal|pascal@ihc.be|0|
+|scott|scott@oracle.com|0|

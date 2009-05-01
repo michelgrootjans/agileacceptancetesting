@@ -1,20 +1,23 @@
 using System.Collections.Generic;
-using System.Threading;
 using Snacks_R_Us.Domain;
 using Snacks_R_Us.Domain.Services;
 
 namespace Snacks_R_Us.AcceptanceTests
 {
-    public static class Fitnesse
+    internal static class Fitnesse
     {
         private static bool fitNesseHasBeenInitialized;
 
         internal static void Init()
         {
-            if(fitNesseHasBeenInitialized) 
+            if (fitNesseHasBeenInitialized)
                 return;
 
-            Thread.Sleep(5000);
+            Reset();
+        }
+
+        internal static void Reset()
+        {
             Current.Context = new StaticContext(new Dictionary<string, object>());
             ApplicationStartup.Run();
 

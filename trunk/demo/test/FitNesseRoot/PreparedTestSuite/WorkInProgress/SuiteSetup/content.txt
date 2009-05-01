@@ -1,6 +1,0 @@
-!|import|
-|Snacks_R_Us.AcceptanceTests|
-
-!|Insert|
-|Check|Sample Users|OK|
-|Check|Sample Snacks|OK|

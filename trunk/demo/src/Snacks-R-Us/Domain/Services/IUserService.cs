@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Snacks_R_Us.Domain.DataTransfer;
 using Snacks_R_Us.Domain.Entities;
@@ -12,7 +11,7 @@ namespace Snacks_R_Us.Domain.Services
         IEnumerable<ViewUserDto> GetAllUsers();
     }
 
-    class UserService : IUserService
+    internal class UserService : IUserService
     {
         private readonly IRepository repository;
 

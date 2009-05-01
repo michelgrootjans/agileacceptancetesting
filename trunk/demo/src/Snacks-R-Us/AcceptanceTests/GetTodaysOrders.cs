@@ -14,7 +14,6 @@ namespace Snacks_R_Us.AcceptanceTests
         public GetTodaysOrders()
         {
             Fitnesse.Init();
-
             orderService = Container.GetImplementationOf<IOrderService>();
         }
 
