@@ -14,7 +14,7 @@ namespace Snacks_R_Us.Domain.Services
         IPrincipal GetPrincipal(string userName);
     }
 
-    public class AccountMembershipService : IMembershipService
+    internal class AccountMembershipService : IMembershipService
     {
         private readonly IRepository repository;
 

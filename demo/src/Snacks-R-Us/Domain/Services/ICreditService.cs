@@ -1,4 +1,3 @@
-using System;
 using Snacks_R_Us.Domain.DataTransfer;
 using Snacks_R_Us.Domain.Entities;
 using Snacks_R_Us.Domain.Etensions;
@@ -14,7 +13,7 @@ namespace Snacks_R_Us.Domain.Services
         void AddCredit(AddCreditDto addCreditDto);
     }
 
-    class CreditService : ICreditService
+    internal class CreditService : ICreditService
     {
         private readonly IRepository repository;
 

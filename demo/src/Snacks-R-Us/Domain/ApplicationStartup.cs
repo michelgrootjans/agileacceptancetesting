@@ -14,17 +14,11 @@ namespace Snacks_R_Us.Domain
 {
     public static class ApplicationStartup
     {
-        private static bool applicationHasBeenStarted;
-
         public static void Run()
         {
-            if (applicationHasBeenStarted)
-                return;
-
             var repository = InitializeRepository();
             InitializeContainer(repository);
             InitializeMappers();
-            applicationHasBeenStarted = true;
         }
 
         private static IRepository InitializeRepository()

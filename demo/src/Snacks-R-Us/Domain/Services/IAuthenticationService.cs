@@ -8,7 +8,7 @@ namespace Snacks_R_Us.Domain.Services
         void SignOut();
     }
 
-    public class FormsAuthenticationService : IAuthenticationService
+    internal class FormsAuthenticationService : IAuthenticationService
     {
         private readonly IAuthenticationService authenticationService;
 
@@ -30,7 +30,7 @@ namespace Snacks_R_Us.Domain.Services
         }
     }
 
-    public class SimpleAuthenticationService : IAuthenticationService
+    internal class SimpleAuthenticationService : IAuthenticationService
     {
         public void SignIn(string userName, bool createPersistentCookie)
         {

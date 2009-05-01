@@ -43,7 +43,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Insert.cs" />
-    <Compile Include="Reset.cs" />
     <Compile Include="CreateSnack.cs" />
     <Compile Include="CreateUsers.cs" />
     <Compile Include="Get.cs" />
