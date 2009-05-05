@@ -1,6 +1,6 @@
 !|Order Snack|
 |Qty|Snack|For user|Result?|
-|1|Pizza Hawaii|michel|You don't have enough cedit. You need €5,3 extra.|
+|1|Pizza Hawaii|michel|You don't have enough credit. You need €5,3 extra.|
 
 !|Manage users credit|
 |Add|10|Credits for|michel|
@@ -8,7 +8,7 @@
 !|Order Snack|
 |Qty|Snack|For user|Result?|
 |1|Pizza Hawaii|michel|Success|
-|1|Pizza Hawaii|michel|You don't have enough cedit. You need €0,6 extra.|
+|1|Pizza Hawaii|michel|You don't have enough credit. You need €0,6 extra.|
 
 !|Get todays orders|
 |Qty|Snack Name|Snack Price|Total Price|
