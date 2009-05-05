@@ -3,6 +3,7 @@
 |Name|Email|Credit Amount|
 |michel|michel@ilean.be|0|
 |pascal|pascal@ihc.be|0|
+|W. Fall|wouter@BDUF.com|1000|
 
 !1 Add one new valid user and two invalid users
 
@@ -18,3 +19,4 @@
 |michel|michel@ilean.be|0|
 |pascal|pascal@ihc.be|0|
 |scott|scott@oracle.com|0|
+|W. Fall|wouter@BDUF.com|1000|
