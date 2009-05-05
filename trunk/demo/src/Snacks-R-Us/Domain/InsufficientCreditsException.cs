@@ -15,7 +15,7 @@ namespace Snacks_R_Us.Domain
 
         public override string Message
         {
-            get { return string.Format("You don't have enough cedit. You need €{0} extra.", creditsNecessary - creditsLeft); }
+            get { return string.Format("You don't have enough credit. You need €{0} extra.", creditsNecessary - creditsLeft); }
         }
     }
 }
