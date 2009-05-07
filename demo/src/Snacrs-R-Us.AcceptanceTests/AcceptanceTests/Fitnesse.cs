@@ -25,15 +25,9 @@ namespace Snacks_R_Us.AcceptanceTests
             fitNesseHasBeenInitialized = true;
         }
 
-        public static void WaitASecond()
+        internal static void WaitASecond()
         {
             Thread.Sleep(5000);
-        }
-
-        public static void AddDemoData()
-        {
-            Reset();
-            ApplicationStartup.AddDemoData();
         }
     }
 }

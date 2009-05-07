@@ -13,7 +13,8 @@ namespace Snacks_R_Us.WebApp
             RegisterRoutes(RouteTable.Routes);
             Current.Context = new WebContext();
             ApplicationStartup.Run();
-            ApplicationStartup.AddDemoData();
+            DemoData.AddDemoUsers();
+            DemoData.AddDemoSnacks();
         }
 
         private static void RegisterRoutes(RouteCollection routes)

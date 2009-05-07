@@ -83,31 +83,5 @@ namespace Snacks_R_Us.Domain
 
             Mapper.AssertConfigurationIsValid();
         }
-
-        public static void AddDemoData()
-        {
-            var repository = Container.GetImplementationOf<IRepository>();
-
-            AddDemoUsers(repository);
-            AddDemoSnacks(repository);
-        }
-
-        internal static void AddDemoUsers(IRepository repository)
-        {
-            repository.Save(new User("pascal", "ihc", "pascal@ihc.be", "Secretary"));
-            repository.Save(new User("michel", "ilean", "michel@ilean.be", "Developer"));
-            var user = new User("W. Fall", "bigdesignupfront", "wouter@BDUF.com", "CEO");
-            user.AddCredits(1000);
-            repository.Save(user);
-        }
-
-        internal static void AddDemoSnacks(IRepository repository)
-        {
-            repository.Save(new Snack("Pizza Hawaii", 5.3));
-            repository.Save(new Snack("Club Sandwich", 3.5));
-            repository.Save(new Snack("Ceasar's Salad", 4.2));
-            repository.Save(new Snack("Tiramisu", 4.5));
-            repository.Save(new Snack("Big Mac", 5.7));
-        }
     }
 }
