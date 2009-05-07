@@ -27,13 +27,15 @@ namespace Snacks_R_Us.Domain.Services
 
         public void Order(CreateOrderDto orderDto)
         {
-            var order = Map.This(orderDto).ToA<Order>();
             var snack = repository.Get<Snack>(orderDto.SnackId.ToLong());
+            if(snack.IsNull())
+                throw new ArgumentException("Unkown snack.");
+
             var user = repository.Find<User>(u => u.Name.Equals(Current.UserName));
-            
             if(user.IsNull())
                 throw new ArgumentException("Unkown user. Pleaser register.");
 
+            var order = Map.This(orderDto).ToA<Order>();
             order.Snack = snack;
             user.AddOrder(order);
         }
