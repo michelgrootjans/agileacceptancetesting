@@ -56,6 +56,7 @@
     <Compile Include="DataTransfer\ViewCreditDto.cs" />
     <Compile Include="DataTransfer\ViewOrdersDto.cs" />
     <Compile Include="DataTransfer\ViewUserDto.cs" />
+    <Compile Include="DemoData.cs" />
     <Compile Include="Entities\Credit.cs" />
     <Compile Include="Entities\IEntity.cs" />
     <Compile Include="Entities\Order.cs" />
