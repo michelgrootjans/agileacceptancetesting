@@ -1,3 +1,11 @@
+!1 Manage Credit:
+Credits can be added and deducted for a user.
+After creating a user, the credit is 0.
+
+!1 Examples:
+In the examples below the user pascal is created in setup, resulting in no credit.
+Then 10 credits are added for the user.
+
 !|Manage users credit|
 |Check|Credits for user|pascal|is|0|
 |Add|10|Credits for|pascal|
