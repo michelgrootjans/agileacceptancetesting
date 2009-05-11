@@ -2,5 +2,5 @@
 |Snacks_R_Us.AcceptanceTests|
 
 !|Insert|
-|Check|Sample Users|OK|
-|Check|Sample Snacks|OK|
+|Check|Sample Users|Ok|
+|Check|Sample Snacks|Ok|

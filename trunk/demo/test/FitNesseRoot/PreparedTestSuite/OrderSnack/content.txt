@@ -1,3 +1,12 @@
+!1 Order Snack:
+Developers who have enough credit can order a snack. The price of the snack gets deducted from their credit.
+Credits can't be negative.
+
+!1 Examples:
+In the examples below michel tries to order a snack, while having no credit.
+After adding 10 credits, michel can order his snack. An attemp is made to make the credits go negative, but that fails.
+Afterwards the orders of that day get shown, and the balance of the credits on michel's account get checked. 
+
 !|Order Snack|
 |Qty|Snack|For user|Result?|
 |1|Pizza Hawaii|michel|You don't have enough credit. You need €5,3 extra.|

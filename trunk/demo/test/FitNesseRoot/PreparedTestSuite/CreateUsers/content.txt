@@ -1,11 +1,18 @@
-!1 The setup of this test will add two demo users:
+!1 User Management:
+Users have always an unique username and email. 
+When creating a user, that new user how no credit yet.
+
+!1 Examples:
+In the examples below 3 demo users are created in the test setup. Then the rules about the duplicate username and password are checked.
+
+!2 The setup of this test will add three demo users:
 !|Get all users|
 |Name|Email|Credit Amount|
 |michel|michel@ilean.be|0|
 |pascal|pascal@ihc.be|0|
 |W. Fall|wouter@BDUF.com|1000|
 
-!1 Add one new valid user and two invalid users
+!2 Add one new valid user and two invalid users
 
 !|Create users|
 |Username|Password|email|Role|Result?|
@@ -13,7 +20,7 @@
 |peter|ihv|michel@ilean.be|Developer|DuplicateEmail|
 |scott|tiger|scott@oracle.com|Developer|Success|
 
-!1 Only the new user should appear in the list of users
+!2 Only the new user should appear in the list of users
 !|Get all users|
 |Name|Email|Credit Amount|
 |michel|michel@ilean.be|0|
