@@ -92,6 +92,12 @@ namespace Snacks_R_Us.UnitTests.Services
     {
         private Action orderSnack;
 
+		protected override void Arrange()
+		{
+			base.Arrange();
+			When(repository).IsToldTo(r => r.Get<Snack>(snackId)).Return(snack);
+		}
+
         protected override void Act()
         {
             orderSnack = () => sut.Order(createOrderDto);
