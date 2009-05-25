@@ -107,7 +107,7 @@ namespace Snacks_R_Us.UnitTests.Services
         public void should_throw_an_UnknownUserException()
         {
             orderSnack.ShouldThrow<ArgumentException>()
-                .Message.ShouldBeEqualTo("Unkown user. Pleaser register.");
+                .Message.ShouldBeEqualTo("Unkown user. Please register.");
         }
     }
 

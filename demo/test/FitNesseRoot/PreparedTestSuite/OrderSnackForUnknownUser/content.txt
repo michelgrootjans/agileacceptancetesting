@@ -1,9 +1,0 @@
-!1 Order Snack for an unknown user:
-Unknown users can't order snacks. They get a message to register them.
-
-!1 Examples:
-In the example below a snack gets ordered for an unknown user.
-
-!|Order Snack|
-|Qty|Snack|For user|Result?|
-|1|Pizza Hawaii|George W. Bush|Unkown user. Pleaser register.|
