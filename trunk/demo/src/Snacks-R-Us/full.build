@@ -30,7 +30,7 @@
     <AsyncExec WorkingDirectory="$(FitNesseDir)" Command="run.bat" />
 
     <Message Text="##teamcity[progressStart name='Work in progress']" />
-    <Exec ContinueOnError="true" Command="$(TestRunner) -results $(ResultsDir)\WorkInProgress.xml localhost 8888 PreparedTestSuite.WorkInProgress" />
+    <Exec ContinueOnError="true" Command="$(TestRunner) -results $(ResultsDir)\WorkInProgressSuite.xml localhost 8888 WorkInProgressSuite" />
     <Message Text="##teamcity[progressFinish name='Work in progress']" />
 
     <Message Text="##teamcity[progressStart name='Acceptance tests']" />
@@ -45,13 +45,13 @@
 
   <Target Name="StopFitnesse">
     <Message Text="##teamcity[progressStart name='Generating reports...']" />
-    <Exec ContinueOnError="true" Command="$(ResultFormatter) $(ResultsDir)\WorkInProgress.xml html $(ResultsDir)\WorkInProgress.htm localhost 8888 PreparedTestSuite.WorkInProgress" />
+    <Exec ContinueOnError="true" Command="$(ResultFormatter) $(ResultsDir)\WorkInProgressSuite.xml html $(ResultsDir)\WorkInProgressSuite.htm localhost 8888 WorkInProgressSuite" />
     <Exec ContinueOnError="false" Command="$(ResultFormatter) $(ResultsDir)\AcceptanceSuite.xml html $(ResultsDir)\AcceptanceSuite.htm localhost 8888 AcceptanceSuite" />
     <Message Text="##teamcity[progressFinish name='Generating reports...']" />
     
     <Exec WorkingDirectory="$(FitNesseDir)" Command="Stop.bat" ContinueOnError="false" />
     
-    <Message Text="##teamcity[publishArtifacts '$(ResultsDir)\WorkInProgress.htm']" />
+    <Message Text="##teamcity[publishArtifacts '$(ResultsDir)\WorkInProgressSuite.htm']" />
     <Message Text="##teamcity[publishArtifacts '$(ResultsDir)\AcceptanceSuite.htm']" />
   </Target>
 

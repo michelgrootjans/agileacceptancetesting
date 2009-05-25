@@ -1,0 +1,15 @@
+!1 Order Snack for an unknown user:
+Unknown users can't order snacks. They get a message to register them.
+
+!3 Given
+George W. Bush is an unknown user and Pizza Hawaii is a valid snack.
+
+!|Insert|
+|Add Snack|Pizza Hawaii|with price|3,5|
+
+!3 When - Then
+When he tries to Order a valid snack, then he gets an error message.
+
+!|Order Snack|
+|Qty|Snack|For user|Result?|
+|1|Pizza Hawaii|George W. Bush|Unkown user. Please register.|

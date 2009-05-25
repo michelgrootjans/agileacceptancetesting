@@ -33,7 +33,7 @@ namespace Snacks_R_Us.Domain.Services
 
             var user = repository.Find<User>(u => u.Name.Equals(Current.UserName));
             if(user.IsNull())
-                throw new ArgumentException("Unkown user. Pleaser register.");
+                throw new ArgumentException("Unkown user. Please register.");
 
             var order = Map.This(orderDto).ToA<Order>();
             order.Snack = snack;
