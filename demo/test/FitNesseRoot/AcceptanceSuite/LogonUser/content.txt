@@ -6,7 +6,7 @@ User 'michel' with password 'ilean' is a valid combination.
 !|Insert|
 |Add User|michel|with password|ilean|
 !3 When - Then
-When 'michel' tries to log in with a wrong password, he can't log in. 
+When 'michel' tries to log in with a wrong password, he can't log in.
 !|ActionFixture|
 |Start|Login script|
 |Enter|Username|michel|
@@ -14,7 +14,7 @@ When 'michel' tries to log in with a wrong password, he can't log in.
 |Press|Login|
 |Check|Logged in|false|
 
-When 'mike', an unknown user, tries to log in, it also fails. 
+When 'mike', an unknown user, tries to log in, it also fails.
 !|ActionFixture|
 |Start|Login script|
 |Enter|Username|mike|
