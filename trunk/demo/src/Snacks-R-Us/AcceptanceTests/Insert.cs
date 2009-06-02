@@ -40,5 +40,10 @@ namespace Snacks_R_Us.AcceptanceTests
 		{
 			DemoData.AddDeveloper(userName, password, null, 0);
 		}
+
+		public void AddUserWithCredit(string userName, double credit)
+		{
+			DemoData.AddDeveloper(userName, null, null, credit);
+		}
 	}
 }
