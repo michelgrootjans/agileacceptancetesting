@@ -11,10 +11,11 @@ User 'pascal' is created with no credit.
 When 10 credits are added to his account, he has 1O credits.
 !|Manage users credit|
 |Check|Credits for user|pascal|is|0|
-|Add|10|Credits for|pascal|
+|Add|10|Credits for|pascal||
 |Check|Credits for user|pascal|is|10|
 
 When 5 credits are deducted from his account, he has 5 credits left.
 !|Manage users credit|
 |Deduct|5|Credits for|pascal|
 |Check|Credits for user|pascal|is|5|
+
