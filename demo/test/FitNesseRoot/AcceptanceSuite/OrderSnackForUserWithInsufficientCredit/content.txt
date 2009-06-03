@@ -1,17 +1,17 @@
-!1 Order Snack:
+!1 Order Snack For User With Insufficient Credit:
 Users can't place orders that would exceed their credit.
 
 !3 Given:
-Michel is an existing user with €5 credit.
+Joe is an existing user with €5 credit.
 Pizza Hawaii is a valid snack of €5,3 euro.
 
 !|Insert|
 |Add Snack|Pizza Hawaii|with price|5,3|
-|Add User|michel|with credit|5|
+|Add User|Joe|with credit|5|
 
 !3 When - then:
-When Michel tries to order a Pizza Hawaii, he get's an error message.
+When Joe tries to order a Pizza Hawaii, he gets an error message.
 
 !|Order Snack|
 |Qty|Snack|For user|Result?|
-|1|Pizza Hawaii|michel|You don't have enough credit. You need €0,3 extra.|
+|1|Pizza Hawaii|Joe|You don't have enough credit. You need €0,3 extra.|
