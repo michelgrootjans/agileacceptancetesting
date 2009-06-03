@@ -1,0 +1,36 @@
+Positief:
+- goed om er eens mee te beginnen
+- leuk om dit in .NET te zien
+- drempel verlagend om er zelf mee te beginnen
+- heel leuk dat je aandacht had voor de niet-technische mensen
+- De open dialoog tussen de twee sprekers was aangenaam om volgen
+- Het opsplitsen van de twee rollen was een goed idee
+
+Negatief
+- Opzetten van de ontwikkelomgeving zou sneller moeten: voor de technische mensen wel drempelverlagend, voor de niet technische-mensen was het afschrikwekkend
+- Indien mogelijk wat meer op één doelgroep focussen?
+- De wiki notatie kwam toch soms complex over
+- Er bleef wat vraag over de meer complexe testsituaties: concurrency, automatische jobs, mails, data exports, ...
+
+Heel goed:
+- heel mooie presentatie & voorbereiding
+- prachtig scenario
+- rode en groene kaarten voor monitoring
+- voldoende tijd genomen om alles op te stellen
+- Pascal: rustig overkomen
+- Michel: aantrekkelijke humor
+
+De sessie zou beter kunnen worden door:
+- maak een half A-4 tje met URL naar source code om uit te delen op het eind (met nog wat andere info...)
+- kondig in  het begin aan: "dit is programmeren: alles loopt eerst fout. Dan pas wordt het plezant..."
+- het specifications voorbeeld niet onmiddellijk in fitnesse formaat zetten - eerder in logische scenario taal en bij het einde dit voorbeeld te tonen - evt de deelnemers hun test in zulke taal laten omvormen.
+- verwarrend: PreparedTests -> Order Snack
+- Heb zelf een kopie klaar van de verschillende stappen (zodat je specifieke files kan kopiëren bij problemen)
+- Maak duidelijk wie wat hiermee doet: als je iets schrijft wat een developer doet (Michel), als je iets doet wat een po/klant aanmaakt (Pascal)
+- Probleem met router 2
+- monitor timing
+
+Andere ideeën:
+- lange setup procedure: overwegen om een ready to use setup te kopiëren en de setup-stappen die jullie voorbereid hebben in ppt te zetten
+- groep opsplitsen in aktievelingen (meer stappen - setup in detail) <> minder technici/aktievelingen (=copy after every step)
+- background colors verschillend voor technici <> niet technici
