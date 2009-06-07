@@ -1,0 +1,26 @@
+Positief:
+- Goed voorbereidde sessie.
+- Essentie komt aan bod.
+- De feedback van de eerste keer is heel goed verwerkt. (viibiliteit developer/tester, setup, formaat voorbeeld specificatie,...)
+- Specification Workshop liep vanzelf, oa door gewoon het formaat aan te passen.
+- Het is fun!
+
+Negatief:
+- Graag meer aandacht in de slides voor de integratie in de build procedure.
+- Na de installatie viel de interactie met het publiek weg.
+- De sessie is niet schaalbaar genoeg (xp days > 30 man):
+	- hoe meer deelnemers hoe moeilijker het wordt om iedereen mee te krijgen
+	- hoe meer deelnemers, des te meer problemen
+	- hoe meer deelnemers, hoe trager het kopiëren wordt.
+- Met het resultaat van de iteration workshop wordt er verder niets meer gedaan.
+- Het afsluiten van de sessie (vóór de retrospective) kon beter.
+	
+De sessie zou beter kunnen worden door:
+- Voor de life setup de zip files reeds upfront unzippen. Dit duurde te lang.
+- Het publiek aanspreken bij "What's in it for you?"
+- Laat de laptops van de deelnemers voor wat ze zijn, en pair met mensen uit het publiek op de 2 PC's vooraan (korte pomodoro's, telkens andere mensen).
+- Hou een "iteration workshop" aan het begin voor elke iteratie. (dit illusteert ook direct de iteration flow slide)
+	- iteratie 1: implementatie 1e story
+	- iteratie 2: implementatie 2e story
+	- gebruik de gemaakte examples om te implementeren tijdens deze iteraties.
+- Developers de setup laten volgen, terwijl niet developers iets anders doen. (bvb iteration workflow)
