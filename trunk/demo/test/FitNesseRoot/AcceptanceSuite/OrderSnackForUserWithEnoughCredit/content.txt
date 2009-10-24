@@ -2,34 +2,23 @@
 When a developer orders a snack, the price of the snack gets deducted from his credit.
 
 !3 Given:
-Joe is a user with €10 credit.
-John is a user with €10 credit.
-Tiramisu is a snack costing €4,2.
-Pizza Hawaii is a snack costing €5,3.
+!|Given|
+|A user|Joe|with credit|10|
+|A snack|Pizza Hawaii|with price|5,3|
 
-!|insert|
-|Add user|Joe|with credit|10|
-|Add user|John|with credit|10|
-|Add snack|Pizza Hawaii|with price|5,3|
-|Add snack|Tiramisu|with price|4,2|
-
-!3 When - then:
-When ordering snacks...
-
+!3 When:
+... ordering a snack
 !|Order Snack|
-|Qty|Snack|For user|Result?|
-|1|Pizza Hawaii|Joe|Success|
-|1|Tiramisu|Joe|Success|
-|1|Pizza Hawaii|John|Success|
+|Qty|Snack|For user|
+|1|Pizza Hawaii|Joe|
 
-...their orders appear on the "today's orders" list.
+!3 Then 
+... the order appears on the "today's orders" list.
 !|Get todays orders|
-|Qty|Snack Name|Snack Price|Total Price|
-|2|Pizza Hawaii|5,3|10,6|
-|1|Tiramisu|4,2|4,2|
+|Qty|Snack Name|Snack Price|
+|1|Pizza Hawaii|5,3|
 
-...and both their credits are deducted.
+...and his credit is deducted.
 !|Manage users credit|
-|Check|Credits for user|Joe|is|0,5|
-|Check|Credits for user|John|is|4,7|
+|Check|Credits for user|Joe|is|4,7|
 
