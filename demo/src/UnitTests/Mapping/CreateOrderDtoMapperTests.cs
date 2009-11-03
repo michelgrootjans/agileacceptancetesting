@@ -18,7 +18,7 @@ namespace Snacks_R_Us.UnitTests.Mapping
             ApplicationStartup.InitializeMappers();
 
             requestedQuantity = 5;
-            createOrderDto = new CreateOrderDto {Qty = requestedQuantity.ToString(), SnackId = "886"};
+            createOrderDto = new CreateOrderDto {Qty = requestedQuantity.ToString(), SnackName = "Club Sandwich"};
         }
 
         protected override IMapper<CreateOrderDto, Order> CreateSystemUnderTest()

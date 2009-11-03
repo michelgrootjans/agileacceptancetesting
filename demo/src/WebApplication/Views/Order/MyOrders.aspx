@@ -11,7 +11,7 @@
     <h2>Order a new snack</h2>
     <% using (Html.BeginForm("Order", "Order")){ %>
         <%= Html.TextBox("Qty", "1") %>
-        <%= Html.DropDownList("SnackId", Model.Snacks) %>
+        <%= Html.DropDownList("SnackName", Model.Snacks) %>
         <input type="submit" value="Save order" />
     <% } %>
 

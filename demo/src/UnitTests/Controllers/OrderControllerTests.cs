@@ -17,7 +17,7 @@ namespace Snacks_R_Us.UnitTests.Controllers
 
         protected override void Arrange()
         {
-            createOrderDto = new CreateOrderDto{Qty = "1", SnackId = "2"};
+            createOrderDto = new CreateOrderDto{Qty = "1", SnackName = "Club Sandwich"};
 
             service = RegisterDependencyInContainer<IOrderService>();
             RegisterDependencyInContainer<ISnackService>();

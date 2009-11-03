@@ -14,23 +14,23 @@ namespace Snacks_R_Us.UnitTests.Services
 {
     public class OrderServiceTest : InstanceContextSpecification<IOrderService>
     {
-        protected long snackId;
         protected Order order;
         protected Snack snack;
         protected CreateOrderDto createOrderDto;
         protected IRepository repository;
         protected IMapper<CreateOrderDto, Order> orderMapper;
         protected User user;
+        private string snackName;
 
         protected override void Arrange()
         {
-            snackId = 6785;
+            snackName = "Club Sandwich";
             order = new Order();
             snack = new Snack("Pizza", 2.9);
             user = Users.JoeDeveloper;
             user.AddCredits(3);
 
-            createOrderDto = new CreateOrderDto {SnackId = snackId.ToString()};
+            createOrderDto = new CreateOrderDto {SnackName = snackName};
 
             orderMapper = RegisterMapper<CreateOrderDto, Order>();
             repository = Dependency<IRepository>();
@@ -48,7 +48,7 @@ namespace Snacks_R_Us.UnitTests.Services
         {
             base.Arrange();
             When(orderMapper).IsToldTo(m => m.Map(createOrderDto)).Return(order);
-            When(repository).IsToldTo(r => r.Get<Snack>(snackId)).Return(snack);
+            When(repository).IsToldTo(r => r.Find<Snack>(null)).IgnoreArguments().Return(snack);
             When(repository).IsToldTo(r => r.Find(Arg<Predicate<User>>.Is.Anything)).Return(user);
         }
 
@@ -66,7 +66,7 @@ namespace Snacks_R_Us.UnitTests.Services
         [Test]
         public void should_get_the_snack_from_the_repository()
         {
-            repository.AssertWasCalled(r => r.Get<Snack>(snackId));
+            repository.AssertWasCalled(r => r.Find<Snack>(Arg<Predicate<Snack>>.Is.Anything));
         }
 
         [Test]
@@ -95,7 +95,7 @@ namespace Snacks_R_Us.UnitTests.Services
 		protected override void Arrange()
 		{
 			base.Arrange();
-			When(repository).IsToldTo(r => r.Get<Snack>(snackId)).Return(snack);
+			When(repository).IsToldTo(r => r.Find<Snack>(null)).IgnoreArguments().Return(snack);
 		}
 
         protected override void Act()

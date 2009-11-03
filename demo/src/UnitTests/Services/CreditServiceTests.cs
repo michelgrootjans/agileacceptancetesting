@@ -6,6 +6,7 @@ using Snacks_R_Us.Domain.Entities;
 using Snacks_R_Us.Domain.Mapping;
 using Snacks_R_Us.Domain.Repositories;
 using Snacks_R_Us.Domain.Services;
+using Snacks_R_Us.UnitTests.Fixtures;
 using Snacks_R_Us.UnitTests.Utilities;
 
 namespace Snacks_R_Us.UnitTests.Services
@@ -22,7 +23,7 @@ namespace Snacks_R_Us.UnitTests.Services
         protected override void Arrange()
         {
             credit = new Credit(0);
-            user = Fixtures.Users.JoeDeveloper;
+            user = Users.JoeDeveloper;
             user.Credit = credit;
             viewCreditDto = new ViewCreditDto();
             repository = Dependency<IRepository>();
@@ -79,7 +80,7 @@ namespace Snacks_R_Us.UnitTests.Services
             repository = Dependency<IRepository>();
             mapper = RegisterMapper<User, ViewCreditDto>();
 
-            user = Fixtures.Users.JoeDeveloper;
+            user = Users.JoeDeveloper;
             user.Credit = credit;
             When(repository).IsToldTo(r => r.Get<User>(userId)).Return(user);
             When(mapper).IsToldTo(m => m.Map(user)).Return(creditDto);
@@ -98,7 +99,7 @@ namespace Snacks_R_Us.UnitTests.Services
         [Test]
         public void should_get_the_user_from_the_repository()
         {
-            repository.AssertWasCalled(r => r.Get<User>(userId));   
+            repository.AssertWasCalled(r => r.Get<User>(userId));
         }
 
         [Test]
@@ -117,20 +118,20 @@ namespace Snacks_R_Us.UnitTests.Services
     public class when_CreditService_is_told_to_add_credtis_to_a_user : InstanceContextSpecification<ICreditService>
     {
         private IRepository repository;
-        private long userId;
         private AddCreditDto addCreditDto;
         private double amount;
         private User user;
+        private string userName;
 
         protected override void Arrange()
         {
-            userId = 654;
+            userName = "Joe";
             amount = 20.6;
-            addCreditDto = new AddCreditDto{UserId = userId.ToString(), Amount = amount.ToString()};
+            addCreditDto = new AddCreditDto {UserName = userName, Amount = amount.ToString()};
             repository = Dependency<IRepository>();
-            user = Fixtures.Users.JoeDeveloper;
+            user = Users.JoeDeveloper;
 
-            When(repository).IsToldTo(r => r.Get<User>(userId)).Return(user);
+            When(repository).IsToldTo(r => r.Find<User>(null)).IgnoreArguments().Return(user);
         }
 
         protected override ICreditService CreateSystemUnderTest()
@@ -146,7 +147,7 @@ namespace Snacks_R_Us.UnitTests.Services
         [Test]
         public void should_get_the_user_from_the_repository()
         {
-            repository.AssertWasCalled(r => r.Get<User>(userId));
+            repository.AssertWasCalled(r => r.Find(Arg<Predicate<User>>.Is.Anything));
         }
 
         [Test]
@@ -155,5 +156,4 @@ namespace Snacks_R_Us.UnitTests.Services
             user.Credit.Amount.ShouldBeEqualTo(amount);
         }
     }
-
 }
