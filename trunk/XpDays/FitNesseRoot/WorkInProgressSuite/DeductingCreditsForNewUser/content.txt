@@ -1,9 +1,0 @@
-!2 Given
-!|Given|
-|A User|Joe|with credits|0|
-
-!2 When
-!|Manage users credit|
-|Check|Credits for user|Joe|is|0|
-|Check|Deduct|10|Credits for|Joe|You only have €0 credits.|
-|Check|Credits for user|Joe|is|0|

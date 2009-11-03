@@ -1,40 +1,47 @@
+using System;
 using fitlibrary;
 using Snacks_R_Us.Domain.DataTransfer;
 using Snacks_R_Us.Domain.IoC;
 using Snacks_R_Us.Domain.Services;
-using Snacks_R_Us.Domain.Etensions;
 
 namespace Snacks_R_Us.AcceptanceTests
 {
     public class ManageUsersCredit : DoFixture
     {
-        private readonly ICreditService creditService;
-        private IUserService userService;
-
-        public ManageUsersCredit()
-        {
-            Fitnesse.Init();
-
-            creditService = Container.GetImplementationOf<ICreditService>();
-            userService = Container.GetImplementationOf<IUserService>();
-        }
-
         public string CreditsForUserIs(string userName)
         {
-            var user = userService.GetUser(userName);
-            return creditService.GetCreditsForUser(user.Id).CreditAmount;
+            var userService = Container.GetImplementationOf<IUserService>();
+            return userService.GetUser(userName).CreditAmount;
         }
 
-        public void AddCreditsFor(string credit, string userName)
+        public string AddCreditsFor(string amount, string userName)
         {
-            var user = userService.GetUser(userName);
-            creditService.AddCredit(new AddCreditDto { Amount = credit, UserId = user.Id });
+            var creditService = Container.GetImplementationOf<ICreditService>();
+            var addCreditDto = new AddCreditDto{Amount = amount, UserName = userName};
+            try
+            {
+                creditService.AddCredit(addCreditDto);
+                return "Ok";
+            }
+            catch (Exception exception)
+            {
+                return exception.Message;
+            }
         }
 
-		public void DeductCreditsFor(string credit, string userName)
-		{
-			var user = userService.GetUser(userName);
-			creditService.AddCredit(new AddCreditDto { Amount = (credit.ToDouble() * -1).ToString(), UserId = user.Id });
-		}
+        public string DeductCreditsFor(string amount, string userName)
+        {
+            var creditService = Container.GetImplementationOf<ICreditService>();
+            var addCreditDto = new AddCreditDto { Amount = "-" + amount, UserName = userName };
+            try
+            {
+                creditService.AddCredit(addCreditDto);
+                return "Ok";
+            }
+            catch (Exception exception)
+            {
+                return exception.Message;
+            }
+        }
     }
 }

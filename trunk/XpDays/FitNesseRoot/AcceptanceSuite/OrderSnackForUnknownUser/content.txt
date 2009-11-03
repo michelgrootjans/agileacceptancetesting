@@ -1,8 +1,0 @@
-!3 Given:
-!|Given|
-|A snack|Pizza Hawaii|with price|5,3|
-
-!3 When:
-!|Ordering a snack|
-|Qty|Snack|For user|Result?|
-|1|Pizza Hawaii|Joe|Unkown user. Please register.|
