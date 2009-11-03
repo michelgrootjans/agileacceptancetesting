@@ -1,6 +1,0 @@
-!path dotnet\*.dll
-!path SnakcsRUs\*.dll
-
-!define COMMAND_PATTERN {%m %p}
-!define TEST_RUNNER {dotnet\FitServer.exe}
-!define PATH_SEPARATOR {;}
