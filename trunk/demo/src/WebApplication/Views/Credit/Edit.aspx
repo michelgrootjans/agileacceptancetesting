@@ -13,7 +13,7 @@
 
     <% using (Html.BeginForm("Update", "Credit")) {%>
 
-        <%= Html.Hidden("userId", Model.UserId) %>
+        <%= Html.Hidden("userName", Model.UserName) %>
         <fieldset>
             <p>
                 Current credit: € <%= Model.CreditAmount %>

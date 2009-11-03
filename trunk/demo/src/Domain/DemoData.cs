@@ -25,7 +25,7 @@ namespace Snacks_R_Us.Domain
         public static void AddDemoUsers()
         {
             AddSecretary("pascal", "ihc", "pascal@ihc.be", 0);
-            AddDeveloper("michel", "ilean", "michel@ilean.be", 0);
+            AddDeveloper("michel", "ilean", "michel@ilean.be", 15);
             AddDeveloper("W. Fall", "bigdesignupfront", "wouter@BDUF.com", 1000);
         }
 

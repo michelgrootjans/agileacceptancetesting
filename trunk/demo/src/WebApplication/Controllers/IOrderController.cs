@@ -48,7 +48,7 @@ namespace Snacks_R_Us.WebApp.Controllers
 
             var snackService = Container.GetImplementationOf<ISnackService>();
             model.Orders = orderService.GetMyOrders();
-            model.Snacks = snackService.GetAllSnacks().ToSelectList(s => s.Id, s => s.ScreenName);
+            model.Snacks = snackService.GetAllSnacks().ToSelectList(s => s.Name, s => s.ScreenName);
 
             return model;
         }
