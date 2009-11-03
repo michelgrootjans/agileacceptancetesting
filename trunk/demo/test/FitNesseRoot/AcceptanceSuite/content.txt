@@ -1,8 +1,0 @@
-This suite contains the acceptance tests which are implemented and accepted.
-These tests are the life documentation of how the system works.
-
-These tests also are run in the automated build. Failing a test, causes the build to break.
-
-None of the tests in this suite may be changed without communication with the product owner or testers about the issue.
-
-!contents -R2 -g -p -f -h
