@@ -1,2 +1,0 @@
-!|import|
-|Snacks_R_Us.AcceptanceTests|
