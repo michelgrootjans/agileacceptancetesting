@@ -1,2 +1,2 @@
-call C:\WINDOWS\Microsoft.NET\Framework\v3.5\MSBuild.exe Snacks-R-Us\full.build
+call C:\WINDOWS\Microsoft.NET\Framework\v3.5\MSBuild.exe src\full.build
 pause
