@@ -1,4 +1,0 @@
-When an iteration starts, the prepared Acceptance Tests for the stories in this iteration move from the PreparedTestSuite to here.
-You can easily track progress in the iteration by running these tests.
-
-!contents -R2 -g -p -f -h
