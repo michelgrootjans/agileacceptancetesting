@@ -27,7 +27,7 @@ namespace Snacks_R_Us.Domain.Services
 
         public void Order(CreateOrderDto orderDto)
         {
-            var snack = repository.Get<Snack>(orderDto.SnackId.ToLong());
+            var snack = repository.Find<Snack>(s => s.Name.Equals(orderDto.SnackName));
             if(snack.IsNull())
                 throw new ArgumentException("Unkown snack.");
 

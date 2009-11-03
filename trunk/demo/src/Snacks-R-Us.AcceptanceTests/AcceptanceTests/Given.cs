@@ -15,7 +15,7 @@ namespace Snacks_R_Us.AcceptanceTests
             Fitnesse.Init();
         }
 
-        public void AUserWithCredit(string userName, double credit)
+        public void AUserWithCredits(string userName, double credit)
         {
             DemoData.AddDeveloper(userName, null, null, credit);
         }

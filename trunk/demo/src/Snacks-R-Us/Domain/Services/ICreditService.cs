@@ -36,7 +36,7 @@ namespace Snacks_R_Us.Domain.Services
 
         public void AddCredit(AddCreditDto addCreditDto)
         {
-            var user = repository.Get<User>(addCreditDto.UserId.ToLong());
+            var user = repository.Find<User>(u => u.Name.Equals(addCreditDto.UserName));
             user.AddCredits(addCreditDto.Amount.ToDouble());
         }
     }

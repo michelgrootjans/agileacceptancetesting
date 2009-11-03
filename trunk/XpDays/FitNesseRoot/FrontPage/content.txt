@@ -1,7 +1,13 @@
-!1 Welcome to Fitnesse
-!3 ''The fully integrated stand-alone acceptance testing framework and wiki.''
+!c !1 Welcome to Snacks-R-Us
+!c !3 ''Your snack ordering solution.''
 
-# Here is a good place to add your first page (WikiWord). For example, MyTopLevelApplicationPage
-To add your first "page", click the [[Edit][FrontPage?edit]] button and add a [[!-WikiWord-!][FitNesse.UserGuide.WikiWord]] to the page.
+|!c '''Table of Contents'''|
+|!c [[Prepared Test Suite][PreparedTestSuite]]|''The suite where acceptance tests are prepared for the next iteration(s)''|
+|!c [[Work In Progress Suite][WorkInProgressSuite]]|''The suite containing acceptance tests for the current iteration, which are in progress or not accepted yet''|
+|!c [[Acceptance Suite][AcceptanceSuite]]|''The suite containing the tests which are accepted. Failing these tests, breaks the build''|
+
+!meta Note, acceptance tests usually start in the PreparedTestSuite, then some of them are moved to the WorkInProgressSuite when a iteration starts. After acceptance they move to the AcceptanceSuite, where they are no longer owned by the developers.
+
+!lastmodified
 
 !note Release v20090818

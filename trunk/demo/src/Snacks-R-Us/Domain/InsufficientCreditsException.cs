@@ -13,9 +13,22 @@ namespace Snacks_R_Us.Domain
             this.creditsNecessary = creditsNecessary;
         }
 
+        public InsufficientCreditsException(double creditsLeft)
+        {
+            this.creditsLeft = creditsLeft;
+        }
+
         public override string Message
         {
-            get { return string.Format("You don't have enough credit. You need €{0} extra.", creditsNecessary - creditsLeft); }
+            get
+            {
+                if (creditsNecessary != 0)
+                    return string.Format(
+                        "You don't have enough credit. You need €{0} extra.",
+                        creditsNecessary - creditsLeft);
+
+                return string.Format("You only have €{0} credits.", creditsLeft);
+            }
         }
     }
 }

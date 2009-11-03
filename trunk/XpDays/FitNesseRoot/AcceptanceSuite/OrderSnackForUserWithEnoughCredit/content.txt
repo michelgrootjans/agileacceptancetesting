@@ -1,0 +1,22 @@
+!1 Order Snacks for users with enough credit:
+When a developer orders a snack, the price of the snack gets deducted from his credit.
+
+!3 Given:
+!|Given|
+|A user|Joe|with credits|10|
+|A snack|Pizza Hawaii|with price|5,3|
+
+!3 When:
+!|Ordering a snack|
+|Qty|Snack|For user|
+|1|Pizza Hawaii|Joe|
+
+!3 Then 
+... the order appears on the "today's orders" list.
+!|Get todays orders|
+|Qty|Snack Name|Snack Price|
+|1|Pizza Hawaii|5,3|
+
+...and his credit is deducted.
+!|Manage users credit|
+|Check|Credits for user|Joe|is|4,7|

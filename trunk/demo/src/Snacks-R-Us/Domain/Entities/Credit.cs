@@ -9,9 +9,11 @@ namespace Snacks_R_Us.Domain.Entities
             Amount = originalValue;
         }
 
-        public void AddAmount(double amt)
+        public void AddAmount(double amount)
         {
-            Amount += amt;
+            if(Amount + amount < 0)
+                throw new InsufficientCreditsException(Amount);
+            Amount += amount;
         }
 
         public void Clear()
