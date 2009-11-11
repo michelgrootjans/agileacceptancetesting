@@ -12,7 +12,7 @@ namespace Snacks_R_Us.Domain.Entities
         public void AddAmount(double amount)
         {
             if (Amount + amount < 0)
-                throw new InsufficientCreditsException(Amount, amount);
+                throw new InsufficientCreditsException(Amount);
             Amount += amount;
         }
 
