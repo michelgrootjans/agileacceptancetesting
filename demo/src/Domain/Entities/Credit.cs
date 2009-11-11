@@ -11,14 +11,16 @@ namespace Snacks_R_Us.Domain.Entities
 
         public void AddAmount(double amount)
         {
-            if(Amount + amount < 0)
-                throw new InsufficientCreditsException(Amount);
+            if (Amount + amount < 0)
+                throw new InsufficientCreditsException(Amount, amount);
             Amount += amount;
         }
 
-        public void Clear()
+        internal void Pay(Order order)
         {
-            Amount = 0;
+            if (order.TotalPrice > Amount)
+                throw new InsufficientCreditsException(Amount, order.TotalPrice);
+            AddAmount(-order.TotalPrice);
         }
     }
 }

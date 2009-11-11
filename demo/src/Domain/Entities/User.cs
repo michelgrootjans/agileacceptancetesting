@@ -51,16 +51,8 @@ namespace Snacks_R_Us.Domain.Entities
 
         public void AddOrder(Order order)
         {
-            if (order.TotalPrice > Credit.Amount)
-                throw new InsufficientCreditsException(Credit.Amount, order.TotalPrice);
-
-            var orderForTheSameSnackToday =
-                orders.Find(o => o.Date.Date.Equals(DateTime.Now.Date) && o.Snack.Name.Equals(order.Snack.Name));
-            if (orderForTheSameSnackToday == null)
-                orders.Add(order);
-            else
-                orderForTheSameSnackToday.Qty += order.Qty;
-            Credit.AddAmount(-order.TotalPrice);
+            Credit.Pay(order);
+            AddToOrders(order);
         }
 
         public void AddCredits(double amount)
@@ -68,14 +60,14 @@ namespace Snacks_R_Us.Domain.Entities
             Credit.AddAmount(amount);
         }
 
-        public void ClearOrders()
+        private void AddToOrders(Order order)
         {
-            orders.Clear();
-        }
-
-        public void ClearCredits()
-        {
-            Credit.Clear();
+            var orderForTheSameSnackToday =
+                orders.Find(o => o.Date.Date.Equals(DateTime.Now.Date) && o.Snack.Name.Equals(order.Snack.Name));
+            if (orderForTheSameSnackToday == null)
+                orders.Add(order);
+            else
+                orderForTheSameSnackToday.Qty += order.Qty;
         }
     }
 }
