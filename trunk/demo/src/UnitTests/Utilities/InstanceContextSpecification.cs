@@ -7,31 +7,22 @@ using Snacks_R_Us.Domain.Mapping;
 namespace Snacks_R_Us.UnitTests.Utilities
 {
     [TestFixture]
-    public abstract class InstanceContextSpecification<SUT>
+    public abstract class StaticContextSpecification
     {
-        protected SUT sut;
         private List<object> dependencies;
         private IMapperFactory mapperFactory;
 
         [SetUp]
-        public void SetUp()
+        public virtual void SetUp()
         {
             dependencies = new List<object>();
             Container.InitializeWith(new DictionaryContainer(dependencies));
             mapperFactory = RegisterDependencyInContainer<IMapperFactory>();
 
             Arrange();
-            sut = CreateSystemUnderTest();
-            Act();
         }
 
         protected virtual void Arrange()
-        {
-        }
-
-        protected abstract SUT CreateSystemUnderTest();
-
-        protected virtual void Act()
         {
         }
 
@@ -57,6 +48,24 @@ namespace Snacks_R_Us.UnitTests.Utilities
             var mapper = Dependency<IMapper<From, To>>();
             When(mapperFactory).IsToldTo(f => f.GetMapper<From, To>()).Return(mapper);
             return mapper;
+        }
+    }
+
+    public abstract class InstanceContextSpecification<SUT> : StaticContextSpecification
+    {
+        protected SUT sut;
+
+        public override void SetUp()
+        {
+            base.SetUp();
+            sut = CreateSystemUnderTest();
+            Act();
+        }
+
+        protected abstract SUT CreateSystemUnderTest();
+
+        protected virtual void Act()
+        {
         }
     }
 }

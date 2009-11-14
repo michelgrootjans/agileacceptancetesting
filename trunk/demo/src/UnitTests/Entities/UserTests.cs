@@ -7,6 +7,16 @@ using Snacks_R_Us.UnitTests.Utilities;
 
 namespace Snacks_R_Us.UnitTests.Entities
 {
+    public class UserTest : StaticContextSpecification
+    {
+        [Test]
+        public void user_can_be_instantiated_with_null_role()
+        {
+            new User("name", "password", "email", null);
+        }
+
+    }
+
     public class when_an_order_is_added_to_a_user_with_enough_credits : InstanceContextSpecification<User>
     {
         private Order order;
