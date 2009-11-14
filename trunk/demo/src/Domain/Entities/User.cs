@@ -37,7 +37,7 @@ namespace Snacks_R_Us.Domain.Entities
 
         public bool IsInRole(string role)
         {
-            return roles.Contains(role);
+            return roles.Exists(r => r.Equals(role, StringComparison.OrdinalIgnoreCase));
         }
 
         public IIdentity Identity
