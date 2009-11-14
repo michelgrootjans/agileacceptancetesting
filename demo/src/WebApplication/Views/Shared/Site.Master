@@ -25,18 +25,15 @@
             
                 <ul id="menu">              
                     <li><%= Html.ActionLink("Home", "Index", "Home")%></li>
-<% if (Request.IsAuthenticated)
-   { %>
-<% if (Current.User.IsInRole("Developer"))
-   { %>                    
+                    <% if (Request.IsAuthenticated){ %>
+                    <% if (Current.User.IsInRole("Developer")){ %>                    
                     <li><%= Html.ActionLink("My orders", "MyOrders", "Order")%></li>
- <%} %>
-<% if (Current.User.IsInRole("Secretary"))
-   { %>                    
+                    <%} %>
+                    <% if (Current.User.IsInRole("Secretary")){ %>                    
                     <li><%= Html.ActionLink("Todays' orders", "Today", "Order")%></li>
                     <li><%= Html.ActionLink("Users", "List", "User")%></li>
-<% } %>
-<% } %>
+                    <% } %>
+                    <% } %>
                 </ul>
             
             </div>

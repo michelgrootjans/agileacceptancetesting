@@ -20,6 +20,7 @@ namespace Snacks_R_Us.WebApp.Controllers
             membershipService = Container.GetImplementationOf<IMembershipService>();
         }
 
+        [AcceptVerbs(HttpVerbs.Get)]
         public ActionResult LogOn()
         {
             return View();
@@ -40,13 +41,14 @@ namespace Snacks_R_Us.WebApp.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        [AcceptVerbs(HttpVerbs.Get)]
         public ActionResult LogOff()
         {
             authenticationService.SignOut();
-
             return RedirectToAction("Index", "Home");
         }
 
+        [AcceptVerbs(HttpVerbs.Get)]
         public ActionResult Register()
         {
             return View();
@@ -58,7 +60,7 @@ namespace Snacks_R_Us.WebApp.Controllers
             if (ValidateRegistration(userName, email, password, confirmPassword))
             {
                 // Attempt to register the user
-                var createStatus = membershipService.CreateUser(userName, password, email, null);
+                var createStatus = membershipService.CreateUser(userName, password, email, "Developer");
 
                 if (createStatus == MembershipCreateStatus.Success)
                 {
