@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Security.Principal;
+using Snacks_R_Us.Domain.Extensions;
 
 namespace Snacks_R_Us.Domain.Entities
 {
@@ -10,7 +11,7 @@ namespace Snacks_R_Us.Domain.Entities
     {
         private static long idCounter;
 
-        public long Id { get; private set;}
+        public long Id { get; private set; }
         public string Name { get; private set; }
         public string Password { get; private set; }
         public string Email { get; private set; }
@@ -24,7 +25,7 @@ namespace Snacks_R_Us.Domain.Entities
             Name = name;
             Password = password;
             Email = email;
-            this.roles = new List<string>(roles);
+            this.roles = roles.IsNull() ? new List<string>() : new List<string>(roles);
             orders = new List<Order>();
             Credit = new Credit(0);
         }
