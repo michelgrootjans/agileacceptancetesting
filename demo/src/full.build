@@ -14,23 +14,34 @@
   <UsingTask AssemblyFile="$(ToolsDir)\MSBuild\AsyncExec\AsyncExec.dll" TaskName="AsyncExec.AsyncExec" />
 
   <Target Name="Compile">
+    <Message Text="**********************"/>
+    <Message Text="Compiling solution ..."/>
+    <Message Text="**********************"/>
     <MSBuild Projects="Snacks-R-Us.sln" />
   </Target>
   
   <Target Name="Test">
     <ItemGroup>
-      <TestAssemblies Include="**\*.UnitTests.dll" Exclude="**\obj\**" />
+      <TestAssemblies Include="**\*Tests.dll" Exclude="**\obj\**" />
     </ItemGroup>
 
-    <Message Text="Running unit tests: @(TestAssemblies)"/>
+    <Message Text="**********************"/>
+    <Message Text="Running unit tests ..."/>
+    <Message Text="- @(TestAssemblies)"/>
+    <Message Text="**********************"/>
+
     <NUnit Assemblies="@(TestAssemblies)" ToolPath="$(ToolsDir)\NUnit\" />
   </Target>
 
   <Target Name="FitNesse">
+    <Message Text="********************"/>
+    <Message Text="Running FitNesse ..."/>
+    <Message Text="********************"/>
+
     <AsyncExec WorkingDirectory="$(FitNesseDir)" Command="run.bat" />
 
     <Message Text="Pinging localhost to give the fitnesse server enough time to start ..."/>
-	<Exec Command="ping localhost" />
+    <Exec Command="ping localhost" />
 
 	<!--
     <Exec ContinueOnError="true" Command="$(TestRunner) -results WorkInProgressSuite.xml localhost 8888 WorkInProgressSuite" />
