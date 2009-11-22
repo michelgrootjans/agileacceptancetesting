@@ -6,7 +6,7 @@
 |!c [[Work In Progress Suite][WorkInProgressSuite]]|''The suite containing acceptance tests for the current iteration, which are in progress or not accepted yet''|
 |!c [[Acceptance Suite][AcceptanceSuite]]|''The suite containing the tests which are accepted. Failing these tests, breaks the build''|
 
-!meta Note, acceptance tests usually start in the PreparedTestSuite, then some of them are moved to the WorkInProgressSuite when a iteration starts. After acceptance they move to the AcceptanceSuite, where they are no longer owned by the developers.
+!meta Note, acceptance tests usually start in the PreparedTestSuite, then some of them are moved to the WorkInProgressSuite when an iteration starts. After acceptance they move to the AcceptanceSuite, where they are no longer owned by the developers.
 
 !lastmodified
 
