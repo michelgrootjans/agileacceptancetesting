@@ -24,5 +24,10 @@ namespace Snacks_R_Us.AcceptanceTests
         {
             DemoData.AddSnack(snackName, price);
         }
+
+        public void ASnackThatCostsCredits(string snackName, double price)
+        {
+            DemoData.AddSnack(snackName, price);
+        }
     }
 }
