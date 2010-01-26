@@ -1,23 +1,31 @@
 using System;
-using fit;
+using System.Collections.Generic;
+using System.Linq;
 using Snacks_R_Us.Domain.DataTransfer;
 using Snacks_R_Us.Domain.IoC;
 using Snacks_R_Us.Domain.Services;
-using System.Linq;
 
 namespace Snacks_R_Us.AcceptanceTests
 {
-    public class GetTodaysOrders : RowFixture
+    public class GetTodaysOrders
     {
-        public override Type GetTargetClass()
+        public Type GetTargetClass()
         {
             return typeof(ViewOrderDto);
         }
-
-        public override object[] Query()
+		
+		public List<Object> Query()
         {
             var orderService = Container.GetImplementationOf<IOrderService>();
-            return orderService.GetTodaysOrders().ToArray();
+			List<ViewOrderDto> viewOrderDtos = orderService.GetTodaysOrders().ToList();
+			
+			//todo: get this cleaner
+			var results = new List<object>();
+			foreach (ViewOrderDto viewOrderDto in viewOrderDtos)
+			{
+				results.Add(ReflectionHelper.AddObjectToQueryResult(viewOrderDto));
+			}
+			return results;
         }
     }
 }

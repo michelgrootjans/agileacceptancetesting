@@ -1,19 +1,18 @@
 using System;
-using fit;
 using Snacks_R_Us.Domain.DataTransfer;
 using Snacks_R_Us.Domain.IoC;
 using Snacks_R_Us.Domain.Services;
 
 namespace Snacks_R_Us.AcceptanceTests
 {
-    public class OrderingASnack : ColumnFixture
+    public class OrderingASnack
     {
         public string Qty { get; set; }
         public string Snack { get; set; }
         public string ForUser { get; set; }
         public string Result { get; set; }
 
-        public override void Execute()
+        public void Execute()
         {
             Current.UserName = ForUser;
             var orderservice = Container.GetImplementationOf<IOrderService>();
