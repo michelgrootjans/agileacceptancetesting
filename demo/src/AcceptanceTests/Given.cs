@@ -1,15 +1,8 @@
-using fitlibrary;
 using Snacks_R_Us.Domain;
 
 namespace Snacks_R_Us.AcceptanceTests
 {
-    public class Given : DoFixture
-    {
-        public Given(object theSystemUnderTest) : base(theSystemUnderTest)
-        {
-            Fitnesse.Init();
-        }
-
+    public class Given     {
         public Given()
         {
             Fitnesse.Init();

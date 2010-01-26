@@ -1,12 +1,11 @@
 using System;
-using fitlibrary;
 using Snacks_R_Us.Domain.DataTransfer;
 using Snacks_R_Us.Domain.IoC;
 using Snacks_R_Us.Domain.Services;
 
 namespace Snacks_R_Us.AcceptanceTests
 {
-    public class ManageUsersCredit : DoFixture
+    public class ManageUsersCredit
     {
         public string CreditsForUserIs(string userName)
         {

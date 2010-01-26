@@ -3,16 +3,16 @@ Users can't place orders that would exceed their credit.
 
 !3 Given:
 
-!|Given|
+|Script|Given|
 |A Snack|Pizza Hawaii|with price|5,3|
 |A User|Joe|with credits|5|
 
 !3 When - then:
 When Joe tries to order a Pizza Hawaii, he gets an error message.
 
-!|Ordering a snack|
+|Ordering a snack|
 |Qty|Snack|For user|Result?|
 |1|Pizza Hawaii|Joe|You don't have enough credit. You need €0,3 extra.|
 
-!|Get todays orders|
-|Qty|Snackname|Snack Price|Total price|
+|Query:Get todays orders|
+|Qty|!-SnackName-!|!-SnackPrice-!|Total price|
