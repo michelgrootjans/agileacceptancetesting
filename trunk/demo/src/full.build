@@ -1,6 +1,8 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="CI" ToolsVersion="3.5">
   <PropertyGroup>
     <ToolsDir>..\tools</ToolsDir>
+	<DoubleQuote>&quot;</DoubleQuote>
+	<Ampersand>&amp;</Ampersand>
   </PropertyGroup>
 
   <Import Project="$(ToolsDir)\MSBuild\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets" />
@@ -30,8 +32,6 @@
   <PropertyGroup>
     <FitNesseDir>..\..\FitNesse</FitNesseDir>
     <ResultsDir>..\FitNesseResults</ResultsDir>
-    <TestRunner>$(FitNesseDir)\dotnet\TestRunner.exe</TestRunner>
-    <ResultFormatter>java -cp $(FitNesseDir)\fitnesse.jar fitnesse.runner.FormattingOption</ResultFormatter>
   </PropertyGroup>
 
   <Target Name="FitNesse">
@@ -39,25 +39,8 @@
     <Message Text="Running FitNesse ..."/>
     <Message Text="********************"/>
 
-<!-- Uncomment if you want to start fitnesse from the build
-    <AsyncExec WorkingDirectory="$(FitNesseDir)" Command="run.bat" />
-
-    <Message Text="Pinging localhost to give the fitnesse server enough time to start ..."/>
-    <Exec Command="ping localhost" />
--->
-    <Exec ContinueOnError="true" Command="$(TestRunner) -results $(ResultsDir)\WorkInProgressSuite.xml localhost 8888 WorkInProgressSuite" />
-    <Exec ContinueOnError="false" Command="$(TestRunner) -results $(ResultsDir)\AcceptanceSuite.xml localhost 8888 AcceptanceSuite" />
-    
-    <CallTarget Targets="StopFitnesse" />
-    <OnError ExecuteTargets="StopFitnesse" />	
-  </Target>
-
-  <Target Name="StopFitnesse">
-    <Exec ContinueOnError="true" Command="$(ResultFormatter) $(ResultsDir)\WorkInProgressSuite.xml html $(ResultsDir)\WorkInProgressSuite.htm localhost 8888 WorkInProgressSuite" />
-    <Exec ContinueOnError="false" Command="$(ResultFormatter) $(ResultsDir)\AcceptanceSuite.xml html $(ResultsDir)\AcceptanceSuite.htm localhost 8888 AcceptanceSuite" />
-<!-- Uncomment if you want to start fitnesse from the build
-    <Exec WorkingDirectory="$(FitNesseDir)" Command="Stop.bat" />
--->    
+	<Exec ContinueOnError="true" Command="java -jar fitnesse.jar -c $(DoubleQuote)WorkInProgressSuite?suite$(Ampersand)format=xml$(DoubleQuote)" WorkingDirectory="$(FitNesseDir)" />
+    <Exec ContinueOnError="false" Command="java -jar fitnesse.jar -c $(DoubleQuote)AcceptanceSuite?suite$(Ampersand)format=xml$(DoubleQuote)" WorkingDirectory="$(FitNesseDir)" />	
   </Target>
 
   <Target Name="Run">
