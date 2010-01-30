@@ -79,6 +79,7 @@
     <Compile Include="Services\CreditServiceTests.cs" />
     <Compile Include="Services\OrderServiceTests.cs" />
     <Compile Include="Services\UserServiceTests.cs" />
+    <Compile Include="Slim\RowFixtureTests.cs" />
     <Compile Include="Utilities\ActionExtensions.cs" />
     <Compile Include="Utilities\AtionResultExtensions.cs" />
     <Compile Include="Utilities\IEnumerableExtensions.cs" />
@@ -87,6 +88,10 @@
     <Compile Include="Utilities\ObjectExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AcceptanceTests\AcceptanceTests.csproj">
+      <Project>{4D389D4B-75EB-4440-969E-8EE8DD0DB2C3}</Project>
+      <Name>AcceptanceTests</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Domain\Domain.csproj">
       <Project>{202059DB-1A13-4CFA-B45E-BC45E3C8A453}</Project>
       <Name>Domain</Name>

@@ -42,9 +42,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\IEnumerableExtensions.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Given.cs" />
     <Compile Include="GetTodaysOrders.cs" />
-    <Compile Include="Fitnesse.cs" />
+    <Compile Include="Initialize.cs" />
     <Compile Include="ManageUsersCredit.cs" />
     <Compile Include="OrderingASnack.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
