@@ -6,4 +6,4 @@
 |Script|Manage users credit|
 |Check|Credits for user|Joe|is|0|
 |Add|10|Credits for|Joe|
-|Check|Credits for user|Joe|is|10|
+|check|Credits for user|Joe|is|10|

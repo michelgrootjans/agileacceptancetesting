@@ -46,7 +46,7 @@
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Given.cs" />
     <Compile Include="GetTodaysOrders.cs" />
-    <Compile Include="Initialize.cs" />
+    <Compile Include="Fitnesse.cs" />
     <Compile Include="ManageUsersCredit.cs" />
     <Compile Include="OrderingASnack.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
