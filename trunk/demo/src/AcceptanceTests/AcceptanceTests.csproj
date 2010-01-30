@@ -43,6 +43,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions\IEnumerableExtensions.cs" />
+    <Compile Include="Extensions\RowFixture.cs" />
+    <Compile Include="Extensions\RowFixtureItemHelper.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Given.cs" />
     <Compile Include="GetTodaysOrders.cs" />
