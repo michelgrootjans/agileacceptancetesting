@@ -14,7 +14,7 @@ When a developer orders a snack, the price of the snack gets deducted from his c
 !3 Then 
 ... the order appears on the "today's orders" list.
 |Query:Get todays orders|
-|Qty|!-SnackName-!|!-SnackPrice-!|
+|Qty|Snack name|Snack price|
 |1|Pizza Hawaii|5,3|
 
 ...and his credit is deducted.
