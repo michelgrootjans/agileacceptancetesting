@@ -1,5 +1,5 @@
 !|import|
 |Snacks_R_Us.AcceptanceTests|
 
-|Script:Initialize|
-|FitNesse|
+!|Script|Fitnesse|
+|Init|
