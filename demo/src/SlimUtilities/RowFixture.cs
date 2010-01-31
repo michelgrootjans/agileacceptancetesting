@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Snacks_R_Us.AcceptanceTests.Extensions
+namespace SlimUtilities
 {
     public interface IRowFixture<T>
     {
@@ -31,7 +31,7 @@ namespace Snacks_R_Us.AcceptanceTests.Extensions
             var result = new List<object>();
             foreach (var t in list)
             {
-                result.Add(new RowFixtureItemHelper<T>(t, customConverters).Properties);
+                result.Add(new RowFixtureItem<T>(t, customConverters).Properties);
             }
             return result;
         }
