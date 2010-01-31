@@ -1,9 +1,8 @@
 using System;
 using System.Collections.Generic;
 using NUnit.Framework;
-using Snacks_R_Us.AcceptanceTests.Extensions;
 
-namespace Snacks_R_Us.UnitTests.Slim
+namespace SlimUtilities
 {
     [TestFixture]
     public class RowFixtureTests

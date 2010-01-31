@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{4D389D4B-75EB-4440-969E-8EE8DD0DB2C3}</ProjectGuid>
+    <ProjectGuid>{C5A4093C-85D5-414C-8720-8D30228125E5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Snacks_R_Us.AcceptanceTests</RootNamespace>
-    <AssemblyName>Snacks-R-Us.AcceptanceTests</AssemblyName>
+    <RootNamespace>SlimUtilities</RootNamespace>
+    <AssemblyName>SlimUtilities</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -17,7 +17,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\..\FitNesse\SnakcsRUs\</OutputPath>
+    <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -31,34 +31,22 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="nunit.framework, Version=2.4.8.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\nunit.framework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
-    <Reference Include="System.Web" />
-    <Reference Include="TestDriven.Framework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=50ecb853f8c6b8d2">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\TestDriven\TestDriven.Framework.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Given.cs" />
-    <Compile Include="GetTodaysOrders.cs" />
-    <Compile Include="Fitnesse.cs" />
-    <Compile Include="ManageUsersCredit.cs" />
-    <Compile Include="OrderingASnack.cs" />
+    <Compile Include="IEnumerableExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ReflectionHelper.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Domain\Domain.csproj">
-      <Project>{202059DB-1A13-4CFA-B45E-BC45E3C8A453}</Project>
-      <Name>Domain</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SlimUtilities\SlimUtilities.csproj">
-      <Project>{C5A4093C-85D5-414C-8720-8D30228125E5}</Project>
-      <Name>SlimUtilities</Name>
-    </ProjectReference>
+    <Compile Include="RowFixture.cs" />
+    <Compile Include="RowFixtureItem.cs" />
+    <Compile Include="RowFixtureTests.cs" />
+    <Compile Include="StringExtensions.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

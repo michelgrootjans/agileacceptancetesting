@@ -2,17 +2,19 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace Snacks_R_Us.AcceptanceTests.Extensions
+namespace SlimUtilities
 {
-    internal class RowFixtureItemHelper<T>
+    internal class RowFixtureItem<T>
     {
         private readonly IDictionary<string, Func<T, object>> customConverters;
         private readonly List<object> propertyValues = new List<object>();
+        private readonly T item;
 
-        public RowFixtureItemHelper(T item, IDictionary<string, Func<T, object>> customConverters)
+        public RowFixtureItem(T item, IDictionary<string, Func<T, object>> customConverters)
         {
             this.customConverters = customConverters;
-            CalculateProperties(item);
+            this.item = item;
+            CalculateProperties();
         }
 
         public List<Object> Properties
@@ -20,38 +22,36 @@ namespace Snacks_R_Us.AcceptanceTests.Extensions
             get { return propertyValues; }
         }
 
-        private void CalculateProperties(T theObject)
+        private void CalculateProperties()
         {
-            AddDefaultColumns(theObject);
-            AddCustomColumns(theObject);
+            AddDefaultColumns();
+            AddCustomColumns();
         }
 
-        private void AddDefaultColumns(T theObject)
+        private void AddDefaultColumns()
         {
-            var objectProperties = theObject.GetType().GetProperties();
+            var objectProperties = item.GetType().GetProperties();
 
             foreach (var currentInfo in objectProperties)
             {
                 var getterProperty = currentInfo.GetGetMethod();
                 // Remove the 'get_' prefix from the property name.
                 var propertyName = getterProperty.Name.Substring(4);
-                var propertyValue = GetPropertyValue(getterProperty, theObject);
+                var propertyValue = GetPropertyValue(getterProperty);
 
                 AddProperty(propertyName, propertyValue);
             }
         }
 
-        private void AddCustomColumns(T theObject)
+        private void AddCustomColumns()
         {
             foreach (var converter in customConverters)
-            {
-                AddProperty(converter.Key, converter.Value(theObject).ToString());
-            }
+                AddProperty(converter.Key, converter.Value(item).ToString());
         }
 
-        private string GetPropertyValue(MethodInfo getterProperty, object theObject)
+        private string GetPropertyValue(MethodInfo getterProperty)
         {
-            var propertyValue = getterProperty.Invoke(theObject, null);
+            var propertyValue = getterProperty.Invoke(item, null);
 
             // TODO: Determine if Slim handles a NULL or not
             // If so, is there a special keyword?

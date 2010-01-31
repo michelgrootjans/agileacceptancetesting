@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Snacks_R_Us.AcceptanceTests.Extensions
+namespace SlimUtilities
 {
     public static class IEnumerableExtensions
     {
