@@ -8,16 +8,16 @@ namespace SlimUtilities
     public class RowFixtureTests
     {
         private List<RowFixtureTestClass> sut;
-        private const int TestAge = 21;
-        private const string TestFirstName = "FirstName";
-        private const string TestName = "Name";
+        private const int TEST_AGE = 21;
+        private const string TEST_FIRST_NAME = "FirstName";
+        private const string TEST_NAME = "Name";
 
         [SetUp]
         public void SetUp()
         {
             sut = new List<RowFixtureTestClass>
                       {
-                          new RowFixtureTestClass {Name = TestName, FirstName = TestFirstName, Age = TestAge}
+                          new RowFixtureTestClass {Name = TEST_NAME, FirstName = TEST_FIRST_NAME, Age = TEST_AGE}
                       };
         }
 
@@ -25,42 +25,42 @@ namespace SlimUtilities
         public void ReadStringProperty()
         {
             sut.ToRowFixture()
-                .ShouldContainColumn("Name", TestName)
-                .ShouldContainColumn("FirstName", TestFirstName)
-                .ShouldContainColumn("Age", TestAge.ToString());
+                .ShouldContainColumn("Name", TEST_NAME)
+                .ShouldContainColumn("FirstName", TEST_FIRST_NAME)
+                .ShouldContainColumn("Age", TEST_AGE);
         }
 
         [Test]
         public void ReadLowercaseProperty()
         {
             sut.ToRowFixture()
-                .ShouldContainColumn("name", TestName)
-                .ShouldContainColumn("firstname", TestFirstName)
-                .ShouldContainColumn("age", TestAge.ToString());
+                .ShouldContainColumn("name", TEST_NAME)
+                .ShouldContainColumn("firstname", TEST_FIRST_NAME)
+                .ShouldContainColumn("age", TEST_AGE);
         }
 
         [Test]
         public void ReadPropertyWithSpaces()
         {
-            sut.ToRowFixture().ShouldContainColumn("First Name", TestFirstName);
+            sut.ToRowFixture().ShouldContainColumn("First Name", TEST_FIRST_NAME);
         }
 
         [Test]
         public void ReadTilteCaseWithSpaces()
         {
-            sut.ToRowFixture().ShouldContainColumn("first name", TestFirstName);
+            sut.ToRowFixture().ShouldContainColumn("first name", TEST_FIRST_NAME);
         }
 
         [Test]
         public void ReadLowerCaseWithSpaces()
         {
-            sut.ToRowFixture().ShouldContainColumn("First name", TestFirstName);
+            sut.ToRowFixture().ShouldContainColumn("First name", TEST_FIRST_NAME);
         }
 
         [Test]
         public void Read_Custom_FullName_Column()
         {
-            var expectedFullName = TestName + TestFirstName;
+            var expectedFullName = TEST_NAME + TEST_FIRST_NAME;
             sut.ToRowFixture()
                 .AddColumn("FullName", dto => dto.Name + dto.FirstName)
                 .ShouldContainColumn("FullName", expectedFullName)
@@ -74,10 +74,10 @@ namespace SlimUtilities
         {
             sut.ToRowFixture()
                 .AddColumn("IsAdult", dto => dto.Age >= 21)
-                .ShouldContainColumn("IsAdult", "True")
-                .ShouldContainColumn("Is Adult", "True")
-                .ShouldContainColumn("Is adult", "True")
-                .ShouldContainColumn("is adult", "True");
+                .ShouldContainColumn("IsAdult", true)
+                .ShouldContainColumn("Is Adult", true)
+                .ShouldContainColumn("Is adult", true)
+                .ShouldContainColumn("is adult", true);
         }
     }
 
