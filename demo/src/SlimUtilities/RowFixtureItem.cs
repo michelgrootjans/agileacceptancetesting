@@ -46,33 +46,27 @@ namespace SlimUtilities
         private void AddCustomColumns()
         {
             foreach (var converter in customConverters)
-                AddProperty(converter.Key, converter.Value(item).ToString());
+                AddProperty(converter.Key, converter.Value(item));
         }
 
-        private string GetPropertyValue(MethodInfo getterProperty)
+        private object GetPropertyValue(MethodInfo getterProperty)
         {
-            var propertyValue = getterProperty.Invoke(item, null);
-
-            // TODO: Determine if Slim handles a NULL or not
-            // If so, is there a special keyword?
-            return (propertyValue == null)
-                       ? "null"
-                       : propertyValue.ToString();
+            return getterProperty.Invoke(item, null);
         }
 
-        private void AddProperty(string propertyName, string propertyValueString)
+        private void AddProperty(string propertyName, object propertyValue)
         {
-            propertyValues.Add(GetPropertyNameAndValue(propertyName, propertyValueString));
-            propertyValues.Add(GetPropertyNameAndValue(propertyName.ToLower(), propertyValueString));
-            propertyValues.Add(GetPropertyNameAndValue(propertyName.ToTitle(), propertyValueString));
+            propertyValues.Add(GetPropertyNameAndValue(propertyName, propertyValue));
+            propertyValues.Add(GetPropertyNameAndValue(propertyName.ToLower(), propertyValue));
+            propertyValues.Add(GetPropertyNameAndValue(propertyName.ToTitle(), propertyValue));
 
             var propertyNamesWithSpaces = propertyName.ToSentence();
-            propertyValues.Add(GetPropertyNameAndValue(propertyNamesWithSpaces, propertyValueString));
-            propertyValues.Add(GetPropertyNameAndValue(propertyNamesWithSpaces.ToLower(), propertyValueString));
-            propertyValues.Add(GetPropertyNameAndValue(propertyNamesWithSpaces.ToTitle(), propertyValueString));
+            propertyValues.Add(GetPropertyNameAndValue(propertyNamesWithSpaces, propertyValue));
+            propertyValues.Add(GetPropertyNameAndValue(propertyNamesWithSpaces.ToLower(), propertyValue));
+            propertyValues.Add(GetPropertyNameAndValue(propertyNamesWithSpaces.ToTitle(), propertyValue));
         }
 
-        private static List<object> GetPropertyNameAndValue(string propertyName, string propertyValueString)
+        private static List<object> GetPropertyNameAndValue(string propertyName, object propertyValueString)
         {
             return new List<object> { propertyName, propertyValueString };
         }
