@@ -2,7 +2,7 @@
 When a developer orders a snack, the price of the snack gets deducted from his credit.
 
 !3 Given:
-|script|Given|
+#|script|Given|
 |A user|Joe|with credits|10|
 |A snack|Pizza Hawaii|with price|5,3|
 
