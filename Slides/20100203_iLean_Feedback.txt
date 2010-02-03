@@ -1,0 +1,67 @@
+Keep Doing
+=========
+- concrete voorbeelden
+- de vrolijke noot waarmee de presentators het brachten
+- voorbeeld is duidelijk en verstaanbaar
+- theorie gekoppeld aan praktijk
+- timing was goed
+- sketch van Nancy en Joe
+- workshop concept
+- het snack voorbeeld
+- interactie met het publiek
+- interactie tussen de presentators
+- life coding
+- het uitschrijven van testen door het publiek
+- praktische en interactieve aanpak
+- mensen zelf laten doen + keet it simple: was ok
+- introduction into the user story
+- building from scrum + examples
+- hands-on interactief
+
+Stop Doing
+==========
+- iets meer mogelijkheden van FitNesse uitleggen (technisch)
+- lettertype van de code was te klein
+- voorlopig niets
+- pruik en petje
+- sketch nogal amateuristisch
+- interactivity on PC is not really needed
+
+Start Doing
+===========
+- Vervolgsessie voor gevorderden
+- Opzetten FitNesse systeem
+- Algemene inleiding. Wat in praktijk?
+- Wat is FitNesse + SLIM/FIT
+- How to set up?
+- Verschil tussen SLIM/FIT uitleggen.
+- Meer technisch detail
+- Iets motiverends om vooraan te komen (pintjes :-))
+- Situatieschets van wie en hoe gebruiken
+- Koppeling met Hudson / CI Systeem
+- Setup FitNesse + SLIM of FIT
+- Iets meer uitleg over de context van FitNesse
+- Demo van het opzetten van FitNesse
+- Small introduction on FitNesse itself + Setup
+- Plaats van Fit in de test chain
+- Did not hear about Fixtures
+- Elaborate on the coding part
+
+What's in it for you?
+=======================
+- Overview van FitNesse en hoe te zien als tester
+- Nieuwe functionaliteiten van SLIM
+- Dringend meer in detail bekijken
+- Functionele testen hoeven niet moeilijk of zwaar te zijn
+- FitNesse kan uitgebreider gebruikt worden dan nu gekend
+- Opzetten van FitNesse als voorbeeld voor studenten
+- Nadenken over testen helpt om stories volledig te specifiëren
+- Betrokkenheid van alle rollen wordt automatisch veel groter
+- Soms makkelijker met bepaalde tools door conceptueel boodschap over te brengen
+- Zit net op een project waar FitNesse gebruikt wordt
+- Kennis van nieuw systeem. Als dev nog niet meteen bruikbaar, maar we hebben nood aan een beter testsysteem. -> aftasten van de mogelijkheden
+- Basisfunctionaliteiten automatisch testen (minder testers nodig)
+- Vergelijking met eigen automatisatie. Snelle start/introductie.
+- Vooreerst ben ik geen developer. Zal voor mij moeilijk zijn om te gebruiken, maar heb vandaag veel bijgeleerd. Heb nu een globaal idee van hoe het werkt en kan het eventueel aan anderen doorvertellen.
+- Evolutie FIT in communitie -> SLIM gaan we zeker bekijken.
+- start trying / find out how FitNesse can be used in the company.
