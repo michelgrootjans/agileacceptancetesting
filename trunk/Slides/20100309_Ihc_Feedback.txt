@@ -1,0 +1,32 @@
+Keep doing
+============
+- Interactief + voorbeelden
+- Hands-on + retrospective
+- Start from the beginning (full process)
+- interactief + toepassen op bedrijf en zijn werking
+- Handson exercise iteration 1 & 2
+- Interactieve sessie (ook code door anderen laten schrijven)
+
+Start Doing
+===========
+- kennis van publiek & ervaring + ruimte voor discussie
+- korte samenvatting van alle soorten fixtures
+- meer syntax uitleg
+- hoe debuggen? wat wanneer de code gerefactord wordt? tests breken? bv namen van methods wijzigen.
+- uitleg (meer focus) cheat sheet (Query/Check/...). Debugging.
+- Alle voorbeelden werken op string => wekt de indruk dat dit zo moet.
+
+Stop Doing
+==========
+- Detail installatie
+- Q&A vroeger?
+- Comic over continuous integration met dat oud vrouwtje
+
+Whats in it for me?
+===================
+- FitNesse (wiki) + Specification Workshop
+- Opbouw FitTest in Given/When/Then formaat
+- Resources eens verder bekijken
+- Volledig FIT concept (wiki,build script)
+- Testen moeten input van 3 opzichten bekijken (analist,developer,tester)
+- Suites met tests voorbereiding = handig
