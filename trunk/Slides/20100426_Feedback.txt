@@ -1,0 +1,34 @@
+What's in it for you?
+=====================
+- Spec driven from the start -> enhance communication
+- Given-when-then concept voor beschrijven van testen
+- Overview FitNesse
+- De vraag is gerezen of FitNesse toepasbaar is voor Drupal -> uitzoeken
+- Learning syntax for development and your trained way of working
+- Uitgebreid tonen van de FitNesse UI
+- Aftesten Business Rules en inzicht in testtooling
+- Hoe je gluecode maakt en wat daarbij komt kijken
+- Tester comes first, then designer
+
+What's missing?
+===============
+- .Net kennis nodig voor het implementeren van testen?
+- dieper inzicht in andere talen of bestaande coding frameworks
+- How to add FitNesse to the build
+- How to use FitNesse for Agile testing and planning
+- Integratie met build
+- Real World Example
+- Integratie in build process
+- hoe houdt FitNesse zich in grote projecten
+- tracability FitNesse test
+
+What will you do tomorow with what you learned in this session?
+===============================================================
+- Nog niets
+- Introductie Given/When/Then aan team
+- Make distinction Work in progress/Acceptance
+- Uitzoeken of er grote projecten zijn die FitNesse gebruiken
+- Get your sample working for our codebase
+- Get discussion going in team
+- Toepasbaarheid onderzoeken
+- Nothinh, voor de toekomst: toepassing definitie tests
